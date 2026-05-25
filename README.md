@@ -48,7 +48,7 @@ Funcionalidades e características:
 - CSS por blocos `<style>` e `<link>` com carregamento condicional
 - Geração de favicons e manifest.json
 
-O sistema utiliza MySQL na maior parte da estrutura e armazenamento em arquivos quando isso faz sentido.
+O sistema utiliza banco de dados na maior parte da estrutura e armazenamento em arquivos quando isso faz sentido.
 Sem extremismos: cada abordagem existe por utilidade prática. 
 
 
@@ -56,8 +56,8 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 - PHP 8.1+ (Testado com PHP 8.3)
 - MySQL 8.0+ ou MariaDB 10.5+
 Apache/Nginx:
-- O Opus Core é utilizado atualmente em ambiente Apache com HTTPS habilitado.
-  - Compatibilidade com Nginx ainda não foi oficialmente testada.
+- O Opus Core é utilizado atualmente em ambiente Apache.
+    - Compatibilidade com Nginx ainda não foi oficialmente testada.
 - Em **produção**, HTTPS é considerado requisito devido à segurança e compatibilidade com recursos modernos da web.
 
 Extensões PHP necessárias:
@@ -67,8 +67,6 @@ Extensões PHP necessárias:
 - ZIP
 - DOM
 - Zend OPcache: É altamente recomendado que o PHP OPCache esteja habilitado para manter a alta performance que o Opus proporciona
-
-O Opus Core foi projetado para uso com HTTPS habilitado.
 
 
 ## Instalação
@@ -82,10 +80,12 @@ Ainda não existe um instalador por interface visual. De qualquer forma, a cria�
 6. Os arquivos `scheme.sql` e `config.php` ficam na raiz do arquivo `opuscore-{version}.zip`.
 7. Após isso o site já estará funcionando com o Old Begin enviado junto ao pacote e ativo por padrão.
 8. Login provisório do painel:
-  1. URL: http://seusite.ext/dashboard
-  2. Nome: Administrator do Sistema
-  3. E-mail: admin@localhost.ext
-  4. Senha: Admin123
+
+    1. URL: http://seusite.ext/dashboard
+    2. Nome: Administrator do Sistema
+    3. E-mail: admin@localhost.ext
+    4. Senha: Admin123
+
 9. No Opus Core, Administradores e Usuários são totalmente separados, incluindo tabelas e regras próprias.
 10. Vá até Configurações → E-mail e defina as credenciais de e-mail do sistema.
 11. Depois disso, crie um novo administrador com um e-mail válido. Será necessário acessar a URL enviada por e-mail para definir a senha da conta.
@@ -94,12 +94,12 @@ O administrador provisório pode ser usado em ambiente de desenvolvimento. Apena
 
 
 ## Estrutura do sistema
-`/dashboard` → painel de administração
-`/dist` → núcleo compartilhado
-`/storage` → dados armazenados em arquivos e cachê
-`/templates` → diretório base de templates
-`/uploads` → arquivos carregados por administradores e usuários
-`/web`  → gerador para a saída pública
+- `/dashboard` → painel de administração
+- `/dist` → núcleo compartilhado
+- `/storage` → dados armazenados em arquivos e cachê
+- `/templates` → diretório base de templates
+- `/uploads` → arquivos carregados por administradores e usuários
+- `/web`  → gerador para a saída pública
 
 Os ambientes `/dashboard` e `/web` são separados por constantes
 
@@ -121,7 +121,7 @@ Nada nasce do vazio:
 nem linguagens,
 nem frameworks,
 nem sistemas,
-nem mesmo a inteligência artificial.
+nem mesmo inteligência artificial.
 
 Tudo nasce da necessidade.
 
@@ -131,10 +131,9 @@ Não se trata de ser “inovador” no sentido superficial, mas de um sistema on
 
 O objetivo não é competir com outros CMSs, mas existir como alternativa baseada em simplicidade e controle.
 
-Nenhuma arquitetura substitui critério técnico.
-
 Simplificar é evoluir quando reduz complexidade acidental sem remover complexidade necessária.
 
+_Tendo sempre em mente que nenhuma arquitetura substitui critério técnico._
 
 ## Versionamento
 Software também acumula coisas desnecessárias, crescer não é apenas adicionar funcionalidades.
