@@ -117,6 +117,7 @@ Covered Software is provided under this License on an “AS IS” basis, without
 
 Contributors are not liable for any damages, including, without limitation, direct, indirect, special, incidental, or consequential damages, arising out of the use or inability to use Covered Software.
 
+
 6. Commons Clause Restriction
 
 Commons Clause
