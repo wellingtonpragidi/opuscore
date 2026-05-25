@@ -1,0 +1,139 @@
+
+.ob-home-page h2 {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+#intro {
+    margin: 85px 0;
+}
+#intro h2 {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+#intro article .image {
+    width: 400px;
+    max-width: 100%;
+    margin: auto;
+}
+#intro .summary {
+    font-style: italic;
+}
+
+
+#news h2 {
+    font-size: 1.2em;
+}
+
+#news article div {
+    padding: 18px 0;
+    border-top: 1px solid #333;
+}
+#news article div:last-child {
+    border-bottom: 1px solid #333;
+}
+#news article b {
+    color: #ff5722;
+    display: block;
+}
+
+#news aside {
+    margin-top: 50px;
+}
+#news aside a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 13px;
+    transition: 0.3s;
+}
+#news aside .thumbnail {
+    width: 90px;
+    height: 62px;
+    background: #444;
+    border-left: 3px solid #2196f3;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+#news aside .thumbnail img {
+    padding: 1px;
+    padding-left: 0;
+}
+#news aside a:hover {
+    transform: translateX(8px);
+}
+#news aside a:hover .thumbnail {
+    border-color: #ff5722;
+    filter: brightness(1.2);
+}
+
+@media( width >= 500px ) {
+    #news article div {
+        gap: 20px;
+        display: flex;
+        align-items: center;
+    }
+    #news article a {
+        order: 2;
+    }
+    #news article b {
+        min-width: 70px;
+        order: 1;
+    }
+}
+
+@media( width >= 768px ) {
+    #intro .summary {
+        font-size: 1.1em;
+    }
+
+    #news {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 10px;
+    }
+
+    #news aside {
+        margin-top: 0;
+    }
+    #news aside h2 {
+        text-align: center;
+    }
+}
+
+@media( width >= 1024px ) {
+    #intro article::before, #intro article::after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+    #intro article .image {
+        float: left;
+        margin: 15px 25px 0 0;
+    }
+
+    #news {
+        grid-template-columns: 1fr 400px;
+        gap: 60px;
+    }
+    #news article div {
+        padding-right: 30px;
+    }
+}
+
+@media( width >= 1280px ) {
+    #intro {
+        margin: 100px 0;
+    }
+    #intro .summary {
+        font-size: 1.25em;
+    }
+
+    #news {
+        gap: 100px;
+    }
+    #news article div {
+        padding-right: 80px;
+    }
+}

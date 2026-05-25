@@ -1,0 +1,180 @@
+/**
+ * `assests/css/block/is-categories.css` sho eh vinculado ao documento 
+ *  quando a rota retornar true para listagem de Categorias
+ */
+
+#content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* --- GRID DO FEED (Duas colunas de posts) --- */
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+#master-title {
+    grid-column: 1 / -1;
+}
+
+#cats-count {
+    display: block;
+    grid-column: 1 / -1;
+    padding-left: 5px;
+    color: #b1b1b1;
+}
+
+/* --- ESTILIZACAO DO ARTIGO (O Card) --- */
+article {
+    background-color: #161616;
+    border: 1px solid #333;
+    border-radius: 4px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+article > a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+article img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s;
+}
+article > a:hover img {
+    filter: brightness(1.15);
+}
+article h2 {
+    font-size: 1.3rem;
+    padding: 15px 20px 5px 20px;
+    margin: 0;
+    line-height: 1.3;
+    transition: color 0.3s;
+}
+article > a:hover h2 {
+    color: #2196f3; 
+}
+/* Resumo */
+.summary {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #a0a0a0;
+    padding: 0 20px;
+    transition: color 0.3s;
+}
+article > a:hover ~ .summary {
+    color: #ccc; 
+}
+
+aside {
+    margin: 0 auto; 
+}
+aside h2 {
+    margin: 0 0; 
+    font-weight: 600;
+    padding: 7px 0;
+    font-size: 1.25rem;
+    color: #b1b1b1;
+    border-bottom: 1px solid #262626;
+    text-align: center;
+    text-transform: uppercase;
+}
+aside section {
+    margin-bottom: 30px;
+    background-color: #161616;
+    border: 1px solid #333;
+}
+aside section:last-child {
+    margin-bottom: 0;
+}
+
+aside img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#list-posts-recents li {
+    border-bottom: 1px solid #262626;
+}
+#list-posts-recents li:last-child {
+    border-bottom: none;
+}
+#list-posts-recents li {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 0 5px;
+    padding: 5px;
+}
+#list-posts-recents .thumbnail {
+    display: block;
+    flex: 0 0 75px;
+    width: 75px;
+    height: 50px;
+    border: 1px solid #363636;
+    border-radius: 2px;
+    overflow: hidden;
+}
+#list-posts-recents li {
+    position: relative;
+    height: 64px;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+#list-posts-recents li:hover {
+    opacity: 1;
+    filter: brightness(1.2);
+}
+#list-posts-recents li:hover .thumbnail {
+    border-color: #666;
+}
+#list-posts-recents a {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+#list-posts-recents h3 {
+    margin: 0 0;
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+@media (width >= 768px) {
+    #content {
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+    }
+
+    main {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    aside {
+        margin: 0 0;
+    }
+}
+
+
+@media (width >= 992px) {
+    #content {
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
+    }
+
+    main {
+        gap: 30px;
+        margin-top: 0;
+    }
+}
