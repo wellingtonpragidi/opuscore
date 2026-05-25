@@ -1,23 +1,25 @@
+<img src="https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white">
+<img src="https://img.shields.io/badge/status-active-2ea44f">
+<img src="https://img.shields.io/badge/release-v1.0.0-blue">
+<img src="https://img.shields.io/badge/license-MPL--2.0%20%2B%20Commons%20Clause-lightgrey">
+
 <div align="center">
 
 <h1><img src="./dist/assets/img/opuscore-access-logo.svg" width="180" alt="Opus Core"></h1>
-
-<br>
 
 <p>
   Sistema gerenciador web/CMS desenvolvido em PHP puro, com foco em simplicidade, clareza estrutural, baixo acoplamento e controle explícito da aplicação.
 </p>
 
-<br>
-
 <a href="https://opuscore.dev/docs">
   Explorar documentação »
 </a>
 
-<br>
 </div>
 
+<br>
 <hr>
+<br>
 
 ## Sobre
 
