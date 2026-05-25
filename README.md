@@ -7,8 +7,8 @@
 </p>
 
 [![Release](https://img.shields.io/github/v/release/wellingtonpragidi/opuscore)]()
-[![License](https://img.shields.io/badge/license-MPL--2.0%20%2B%20Commons%20Clause-yellow)]()
 [![PHP 8.1+](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white)]()
+[![License](https://img.shields.io/badge/license-MPL--2.0%20%2B%20Commons%20Clause-yellow)]()
 [![Status](https://img.shields.io/badge/status-active-2ea44f)]()
 
 <p>
