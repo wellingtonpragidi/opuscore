@@ -4,24 +4,23 @@
 
 <br>
 
-<a href="https://opuscore.dev/docs">
-  Explorar documentação do Opus Core »
-</a>
-
-<br>
-<br>
-
-<h1>Opus Core</h1>
-
 <p>
   Sistema gerenciador web/CMS desenvolvido em PHP puro,<br>
   com foco em simplicidade, clareza estrutural,<br>
   baixo acoplamento e controle explícito da aplicação.
 </p>
 
+<a href="https://opuscore.dev/docs">
+  Explorar documentação do Opus Core »
+</a>
+
+<br>
 </div>
 
 <hr>
+
+# Opus Core
+
 
 ## Sobre
 
