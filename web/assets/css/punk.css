@@ -1,0 +1,44 @@
+.cn__x__, .cn___x_, .cn_x___, .cn_x_x_ {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+}
+.cn__x__ > div p, 
+.cn___x_ > div p, 
+.cn_x___ > div p, 
+.cn_x_x_ > div p {
+    margin: 0 0;
+    padding: 0 0;
+}
+@media( min-width: 768px ) {
+    .cn__x__ {
+        grid-template-columns: 1fr 1fr;
+    }
+    .cn___x_ {
+        grid-template-columns: 2fr 1fr;
+    }
+    .cn_x___ {
+        grid-template-columns: 1fr 2fr;
+    }
+    .cn_x_x_ {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.embed {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.embed::before {
+    padding-top: 56.25%;
+    display: block;
+    content: "";
+}
+.embed iframe {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
