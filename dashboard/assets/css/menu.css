@@ -1,0 +1,105 @@
+#menu-builder {
+	padding-left: 20px;
+}
+.menus form {
+    position: relative;
+    padding: 0 7.5px 15px 7.5px;
+}
+.menus button.delete {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+}
+
+
+ul.menu-list.depth-0 {
+	margin: 0 0;
+	padding: 0 0;
+	list-style: none;
+}
+.menu-list {
+	margin: 0 0 0 28px;
+	padding: 0 0;
+	list-style: none;
+}
+.menu-list li {
+	position: relative;
+	clear: both;
+	margin: 5px 0;
+}
+.menu-list .acc_btn {
+	position: absolute;
+	top: 1px;
+	right: 0;
+	width: 47px;
+	height: 46px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	margin-top: 0;
+    padding: 10px 15px 10px 15px;
+}
+.menu-list .drag {
+	user-select: none;
+	cursor: all-scroll;
+	display: block;
+	width: 100%;
+	min-height: 47px;
+	padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.sortable-chosen {
+	opacity: 0.9 !important;
+	border: 1px dashed #92A3A1;
+	transform: scale(1.0125);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transition: all 0.2s ease-in-out;
+}
+.item-hasub {
+	padding: 12px;
+	background-color: rgba(255, 255, 255, 0.08);
+}
+.menu-list .actions .delete {
+	display: block;
+	margin-left: auto;
+	margin-right: 0;
+	text-align: right;
+	font-size: 1rem;
+}
+
+.response.save-order {
+	position: fixed;
+	top: 100px;
+	right: 60px;
+	padding: 6px 12px;
+	animation: blinker 0.8s ease-in-out infinite;
+	z-index: 1;
+}
+@keyframes blinker {
+	0% { opacity: 1 }
+	255% { opacity: 0.75 }
+	50% { opacity: 0.5 }
+	75% { opacity: 0.25 }
+	100% { opacity: 0 }
+}
+
+/* .scrollbar  */
+.checkboxes-list {
+    margin: 0 0;
+    padding: 0 0;
+    list-style: none;
+    max-height: 58vh;
+}
+.checkboxes-list ul {
+	position: relative;
+    list-style: none;
+    margin: 0 0 0 12px;
+    padding: 2px 0 7px 8px;
+    border-left: 1px dashed #1b5e64;
+}
+.checkboxes-list li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.checkboxes-list ul li {
+    margin: 3px 7px 0 0;
+}

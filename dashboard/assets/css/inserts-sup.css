@@ -1,0 +1,69 @@
+#insert-title-before {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.80);
+    z-index: 98889;
+}
+#insert-title-before form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1024px;
+    max-width: 100%;
+    margin: auto auto;
+    padding: 0 15px;
+}
+#insert-title-before .the-title {
+    border: 2px solid rgba(128, 128, 128, 0.30);
+    padding: 3px;
+    border-radius: 2px;
+}
+#insert-title-before .the-title input {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 90px;
+    font-family: var(--fontSystem);
+    font-weight: 300;
+    font-size: 48px;
+    padding: 12px 20px;
+    color: #8B888C;
+    background-color: rgba(128, 128, 128, 0.30);
+    border: 2px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.25) inset;
+    text-align: center;
+}
+#insert-title-before .the-title input::placeholder {
+    font-size: 48px;
+}
+#insert-title-before button[type=submit] {
+    display: block;
+    text-align: right;
+    margin-left: auto;
+    margin-top: 17px;
+    opacity: .7;
+    font-family: var(--fontSystem);
+    padding: 11px 21px 11.5px 21px;
+    font-size: 1.6rem;
+    transition: .4s;
+    letter-spacing: 1.2px;
+    color: #9F8E8B;
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 
+        0 0 2px 1px #000,0 -2px 3px rgba(156, 156, 156, 0.25) inset,
+        0 0 10px rgba(255, 255, 255, 0.05) inset;
+    border: none;
+    border-radius: 2px;
+}
+
+#insert-title-before #go-back {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    font-size: 15px;
+    padding: 12px;
+}

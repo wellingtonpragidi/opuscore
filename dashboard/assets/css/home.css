@@ -1,0 +1,58 @@
+
+#metrics-shortcuts [class*=cn_] > div {
+	border: 1px solid #31a9b4;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 20px;
+	text-align: center;
+}
+#metrics-shortcuts [class*=cn_] a {
+	text-decoration: none !important;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#metrics-shortcuts [class*=cn_] h4 {
+	text-transform: uppercase;
+}
+#metrics-shortcuts [class*=cn_] h3 {
+	font-weight: 900;
+	font-size: 4rem;
+	padding: 15px 0;
+}
+
+#stats-chart > div, #server-report > div, #maintenance {
+    position: relative;
+    margin: 25px 10px 0;
+    padding: 15px 10px 10px;
+    background-color: rgba(160, 146, 119, 0.10);
+    border: 1px solid rgba(160, 146, 119, 0.25);
+}
+#server-report > div {
+    padding: 15px 15px;
+}
+#server-report h3 {
+	font-size: 1.23rem;
+}
+#server-report h4 {
+	font-size: 1.12rem;
+}
+#server-report > div p:nth-of-type(1) {
+	font-size: 1.12rem;
+	filter: brightness(1.12);
+}
+#server-report > div p:nth-of-type(2), #server-report > div .images p {
+    font-style: italic;
+    font-size: 1rem;
+	filter: brightness(1);
+}
+#server-report [icon=check] .ico.check, #server-report [icon=question] .ico.question {
+	width: 27px;
+	color: #00A4B3;
+	top: 7px;
+}
+#server-report [icon=close] .ico.close {
+	width: 32px;
+	color: #FF0000;
+	top: 9px;
+}

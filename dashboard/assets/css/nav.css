@@ -1,0 +1,108 @@
+#nav {
+	position: absolute;
+	height: 100%;
+	min-height: 100vh;
+	background-color: #10383c;
+	background-image: linear-gradient(to right, #0b1d28, #0b2628);
+}
+#nav > ul {
+	padding-bottom: 250px;
+}
+#nav ul {
+	list-style: none;
+	margin: 0 0;
+	padding: 0 0;
+}
+#nav li:last-child {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+#nav a {
+	display: block;
+	font-size: 1.08rem;
+	font-family: 'Muli', var(--fontSystem);
+	letter-spacing: 0.7px;
+	color: #31a9b4;
+	padding: 5px 10px 6px 10px;
+	border-top: 1px solid rgba(255, 255, 255, 0.04);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.40);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+#nav a:hover, #nav a:focus, #nav a:active, 
+#nav .current a, #nav .hasub.opendown > a, .hasub.isubopen > a {
+	color: #afe4e9;
+	background-image: linear-gradient(to right, #10383c, #102b3c, #10383c);
+	text-decoration: none;
+}
+.hasub.isubopen.opendown > a {
+	color: #31a9b4 !important;
+}
+#nav .isub a {
+	padding: 4px 11px 5px 11px;
+	font-size: 0.96rem;
+}
+#nav .hasub {
+	position: relative;
+}
+#nav .isub {
+	position: absolute;
+	top: 0;
+	left: 180px;
+	background-image: linear-gradient(to right, #0b1d28, #0b2628);
+	/* z-index: 8888; */
+	z-index: 888;
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.40);
+	display: none;
+}
+#nav .hasub:hover .isub {
+	display: block;
+}
+#nav .isub.opened {
+	position: relative;
+	display: block;
+	top: auto;
+	left: auto;
+	border-radius: 0 2px 2px 0;
+	background-image: linear-gradient(to right, rgba(16, 56, 60, 0.50), rgba(16, 43, 60, 0.50), rgba(16, 56, 60, 0.50));
+	box-shadow: none;
+}
+#nav .isub.opened a {
+	padding: 3px 7px 4px 16px;
+}
+
+#nav .isub li:first-child a::before {
+	position: absolute;
+    content: "◀";
+    top: 7.5px;
+    left: -14px;
+    display: block;
+    color: #0A1A24;
+    transform: scale(1.4);
+    /* z-index: 8889; */
+    z-index: 889;
+}
+#nav .isub.opened::before {
+	display: none;
+}
+.bullet {
+	position: relative;
+	display: inline-block;
+	float: right;
+	top: 2px;
+	color: #92A3A1;
+    background-color: #154c51;
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    font-size: .95rem;
+    line-height: 1.45;
+    letter-spacing: -0.6px;
+    text-align: center;
+    filter: brightness(106%);
+	transition: .3s;
+}
+#nav a:hover .bullet {
+	filter: brightness(140%);
+	transition: .3s;
+}

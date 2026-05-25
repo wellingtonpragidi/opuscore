@@ -1,0 +1,234 @@
+#toolbar {
+    position: relative;
+    height: 42px;
+    padding: 5px;
+    white-space: nowrap;
+}
+#toolbar.toolbar_hidden button, #toolbar.toolbar_hidden span {
+    opacity: 0;
+}
+#toolbar > div {
+    position: relative;
+    display: inline-block;
+}
+#toolbar button {
+    font-family: 'Muli';
+    position: relative;
+    display: block;
+    font-size: 1.17rem;
+    margin: 0 3px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: #716741;
+    background-color: transparent;
+    border: none;
+    transition: 0.2s;
+}
+#toolbar button[ico]::before {
+    font-size: 1.1rem;
+}
+#toolbar .block button, #toolbar .inline button {
+    padding: 2px 8px;
+    top: -0.5px;
+    font-size: 1.2rem;
+}
+#toolbar .quote button[ico] {
+    color: #716741;
+}
+#toolbar button:hover {
+    filter: brightness(150%);
+    transition: 0.2s;
+}
+#toolbar button.active, #toolbar button.action {
+    filter: brightness(180%);
+    transition: 0.2s;
+}
+#toolbar button.open-options::after {
+    font-family: "Icon";
+    content: '\f0dc'; 
+    font-size: 0.75rem; 
+    transform: scale(0.8) !important;
+    transition: none;
+    margin-left: 6px;
+    opacity: .65;
+}
+/* #switch-mode.mode_code ~ label */
+#toolbar #switch {
+    position: absolute;
+    top: 13px;
+    right: -2px;
+}
+#toolbar #switch label {
+    position: relative;
+    display: block;
+    margin: 0 3px;
+    padding: 1px 5px;
+    line-height: 0;
+    font-size: 2rem;
+    color: #716741;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 883;
+}
+#toolbar #switch label[ico]::before {
+    position: relative;
+    top: 5px;
+    right: 4px;
+    font-size: 2rem;
+}
+#toolbar #switch label:hover {
+    filter: brightness(150%);
+}
+#toolbar #switch-mode:checked ~ label {
+    color: #E40022;
+    text-shadow: 2.4px 2.4px 1px rgba(0, 0, 0, 0.35);
+}
+#toolbar input#switch-mode {
+    display: none;
+}
+
+#toolbar .options {
+    position: absolute;
+    display: block;
+    width: 90px;
+    margin-top: 11px;
+    box-shadow: 3px 4px 6px 2px rgba(0, 0, 0, 0.50), -3px 4px 6px 2px rgba(0, 0, 0, 0.50);
+    background-color: transparent;
+    z-index: 883;
+}
+#toolbar .options button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 0 0;
+    padding: 4px 5px 4px 7px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0;
+    color: #716741;
+    background-color: #1D2120;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.80);
+}
+#toolbar .options button:first-child { 
+    border-top: none; 
+}
+#toolbar .options button:last-child { 
+    border-bottom: none; 
+}
+#toolbar .options button:hover, #toolbar .options button:active, #toolbar .options button:focus, #toolbar .options button.action {
+    filter: brightness(130%);
+}
+#toolbar button.open-options ~ .options {
+    display: none;
+}
+#toolbar button.open-options.active ~ .options {
+    display: block;
+}
+#toolbar #inline .options button mark {
+    display: inline-block;
+    background-color: #474C00;
+    padding: 0 4px;
+    border-radius: 3px;
+    font-family: 'SrcCode', monospace;
+}
+#toolbar #grid .options {
+    width: 130px;
+}
+#toolbar #grid .options button {
+    position: relative;
+    padding: 10px 7px;
+}
+#toolbar #grid .options button::before {
+    position: relative;
+    display: block;
+    content: '';
+    width: 100%;
+    height: 7px;
+}
+#toolbar #grid .options button.cn__x__::before {
+    background-image: linear-gradient(to right, #716741 0 48.5%, transparent 48.5% 51.5%, #716741 51.5% 100%);
+}
+#toolbar #grid .options button.cn___x_::before {
+    background-image: linear-gradient(to right, #716741 0 66.6%, transparent 66.6% 69.6%, #716741 69.6% 100%
+    );
+}
+#toolbar #grid .options button.cn_x___::before {
+    background-image: linear-gradient(to left, #716741 0 66.6%, transparent 66.6% 69.6%, #716741 69.6% 100%
+    );
+}
+#toolbar #grid .options button.cn_x_x_::before {
+    background-image: linear-gradient(to left, #716741 0 30%, transparent 30% 33%, #716741 33% 66.6%, transparent 66.6% 69.6%, #716741 69.6% 100%
+    );
+}
+#toolbar #textalign .options {
+    width: 140px;
+    background-color: #1D2120;
+    border: none;
+}
+#toolbar #textalign .options button {
+    display: inline-block;
+    margin: 0 -1.5px;
+    padding: 3px 7px;
+    width: auto;
+    border: none;
+}
+#toolbar #textalign .options button::before {
+    font-size: 1.29rem;
+}
+#toolbar #textalign .options button:last-child {
+    margin-right: 0;
+}
+
+/*#toolbar #color .options {
+    width: 147.5px;
+    height: 190px;
+    padding-top: 1px;
+    background-color: #eee;
+
+}
+#toolbar #color .options button {
+    display: block;
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 0 0 1px 1px;
+    border: none;
+}
+#toolbar #color .options::before, #toolbar #color .options::after {
+    display: table;
+    content: "";
+    clear: both;
+}*/
+#toolbar #color .options {
+    display: none;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: 148px;
+    background-color: #eee;
+    border: 1px solid #eee;
+    border-right: none;
+}
+#toolbar #color .open-options.active ~ .options {
+    display: flex;
+}
+#toolbar #color .options button {
+    flex: 0 0 20px;
+    max-width: 20px;
+    height: 20px;
+    border: none;
+}
+
+#toolbar #fontsize .options button {
+    text-align: center;
+}
+#toolbar .divider::before {
+    position: relative;
+    content: " | ";
+    top: -8px;
+    display: inline-block;
+    transform: scale3d(0.8, 3.5, 1.05);
+    padding: 0 5px;
+    color: #675D37;
+    opacity: .7;
+}

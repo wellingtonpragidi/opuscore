@@ -1,0 +1,191 @@
+.alert {
+    position: relative;
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 12px 15px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.35);
+}
+/** remove espacamento superior no "primeiro filho" e inferior "ultimo filho" de .alert */
+.alert:not(.close) > *:first-child, .alert .close + * {
+    margin-top: 0;
+    padding-top: 0;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.alert a {
+    text-shadow: none;
+}
+.alert mark, .alert code {
+    padding: 0 4px;
+    margin: 0 -1px;
+}
+.alert mark {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1px;
+    text-shadow: none;
+}
+.alert hr {
+    background-color: transparent;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    margin: 10px 0;
+}
+
+.alert button, .alert a button, .alert button a, .alert a.button {
+    text-decoration: none;
+    padding: 8px 13px 7px;
+    margin: 0 0;
+    font-size: 1.2rem;
+    transition: .3s;
+    border-radius: 3px;
+    font-family: 'Muli', var(--fontSystem);
+    color: #00998c;
+    background-color: #00332f;
+    border: 1px solid #001a17;
+    box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.55) inset;
+    filter: brightness(125%);
+    user-select: none;
+    cursor: pointer;
+}
+.alert button:hover, .alert a button:hover, .alert button a:hover, .alert a.button:hover {
+    text-decoration: none !important;
+    transition: .3s;
+    filter: brightness(110%);
+    box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.27) inset;
+}
+
+.alert.success {
+    color: #0B3852;
+    background-color: #99D3F4;
+    border: 1px solid #6AB2DC;
+}
+.alert.warning {
+    color: #696110;
+    background-color: #FBF37E;
+    border: 1px solid #E6DE4A;
+}
+.alert.error {
+    color: #4E2229;
+    background-color: #E0ACB3;
+    border: 1px solid #C6989E;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.alert.success a {
+    color: #00008B;
+}
+.alert.success mark {
+    background-color: #6AB2DC;
+}
+
+.alert.warning a {
+    color: #8A852C;
+}
+.alert.warning mark {
+    background-color: #E6DE4A;
+    color: #FFFFFF;
+}
+
+.alert.error a {
+    color: #600000;
+}
+.alert.error mark {
+    background-color: #C6989E;
+}
+
+/* alert strong */
+.alert mark {
+    box-shadow: 0 -1px 2px 1px rgba(0, 0, 0, 0.15) inset;
+    color: inherit;
+}
+.alert a {
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.40);
+}
+.alert code {
+    color: #564A26;
+}
+
+.alert.success {
+    background-image: linear-gradient(to bottom, #01EBFF 5%, #00A4B3 95%);
+    border: 2px solid #01EBFF;
+    border-image: linear-gradient(to bottom, #00A4B3, #01EBFF, #01EBFF, #007580);
+    border-image-slice: 2;
+    color: #00171A;
+}
+.alert.warning {
+    background-image: linear-gradient(to bottom, #E4D100 5%, #B3A400 95%);
+    border: 2px solid #C1B700;
+    border-image: linear-gradient(to bottom, #B3A400, #E4D100, #E4D100, #7E7300);
+    border-image-slice: 2;
+    color: #1A1700;
+}
+.alert.error {
+    background-image: linear-gradient(to bottom, #FF0000 5%, #B30000 95%);
+    border: 2px solid #DE0C02;
+    border-image: linear-gradient(to bottom, #B30000, #FF0000, #FF0000, #800000);
+    border-image-slice: 2;
+    color: #1A0000;
+}
+
+.alert.success a {
+    color: #000080;
+    text-shadow: 0 0 1px blue, 1px 1px rgba(255, 255, 255, 0.60);
+}
+.alert.success mark {
+    background-image: linear-gradient(to bottom, #0091a0, #009aa9, #00a4b3, #20aebd, #32b8c7);
+}
+
+.alert.warning a {
+    color: #685F00;
+    text-shadow: 0 0 1px #8A852C, 1px 1px rgba(255, 255, 0, 0.60);
+}
+.alert.warning mark {
+    background-image: linear-gradient(to top, #E6DE4A, #8A852C);
+}
+
+.alert.error a {
+    text-shadow: 0 0 1px #B30000, 1.5px 1.5px rgba(255, 255, 255, 0.22);
+}
+.alert.error mark {
+    background-image: linear-gradient(to bottom, #9f0000, #a50000, #ac0000, #b30000, #ba1005, #c11b0a, #c82410);
+}
+.alert.error code {
+    color: #564A26;
+    text-shadow: 0.5px 0.5px rgba(255, 255, 255, 0.10);
+    filter: brightness(80%);
+}
+
+
+.alert.discard .close [icon=x], .discard .close [icon=close] {
+    width: 28px;
+    height: 28px;
+    top: -5px !important;
+    right: -5px !important;
+}
+.alert.discard .close [icon=x] .ico, .discard .close [icon=close] .ico {
+    max-width: 28px;
+    max-height: 28px;
+}
+
+.alert .concat {
+    font-size: 15px;
+}
+.alert .concat.err {
+    color: red;
+}
+
+.txt_success {
+    color: #01EBFF !important;
+}
+.txt_warning {
+    color: #E4D100 !important;
+}
+.txt_error {
+    color: #FF0000 !important;
+}

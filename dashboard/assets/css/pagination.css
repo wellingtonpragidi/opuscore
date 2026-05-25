@@ -1,0 +1,72 @@
+
+#pagination {
+    position: relative;
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+}
+.total-page {
+    font-family: var(--fontSerif);
+    font-size: 1.5rem;
+    margin-top: 15px;
+    margin-right: 150px;
+    text-align: right;
+    opacity: 0.6;
+}
+#pagination a span, #pagination a span, .numeric-pagination {
+    position: relative;
+}
+.numeric-pagination {
+    display: inline-block;
+    margin: 0 13px;
+}
+#pagination a {
+    display: inline-block;
+    text-decoration: none;
+}
+#pagination a:hover {
+    text-decoration: none;
+}
+#pagination a span {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    margin: 0 1px;
+    font-family: var(--fontMono);
+    line-height: 0.9;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    font-size: 1.25rem;
+    color: #31a9b4;
+    background-image: linear-gradient(to top, #10383c, #102b3c, #10383c);
+    border: 1px solid #1b5e64;
+    border-radius: 2px;
+    box-shadow: 0 7px 7px -5px rgba(0, 0, 0, 0.75);
+    transition: 0.25s ease;
+    user-select: none;
+}
+#pagination a:hover, #pagination a:focus, #pagination a:active {
+    text-decoration: none !important;
+}
+#pagination .numeric-pagination a span {
+    min-width: 33px;
+    width: auto;
+}
+#pagination a.first-page span, #pagination a.last-page span, 
+#pagination a.prev span, #pagination a.next span, #pagination a span.disabled {
+    font-size: 1.7rem;
+    padding: 0 4px;
+}
+#pagination a span:hover, #pagination a span:focus, #pagination a.current span {
+    color: #31a9b4;
+    transition: .3s;
+    filter: brightness(125%);
+}
+#pagination a span.disabled, #pagination a.current span {
+    cursor: default;
+}
+#pagination a span.disabled:hover, #pagination a span.disabled:focus {
+    opacity: 0.7;
+}

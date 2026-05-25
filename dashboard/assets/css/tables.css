@@ -1,0 +1,100 @@
+/** restart */
+table {
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    border-collapse: collapse;
+    background-image: linear-gradient(to right, rgba(16, 56, 60, 0.60), rgba(16, 43, 60, 0.60), rgba(16, 56, 60, 0.60));
+    overflow: hidden;
+    transition: .3s;
+}
+table, table tr, table th, table td {}
+table th {
+    text-align: center;
+}
+table tr {
+    font-size: 1rem;
+    border: 2px solid #1b5e64;
+    border-image: linear-gradient(to left, #1b5e64, #1b4864);
+    border-image-slice: 2;
+    border-left: none;
+    border-right: none;
+}
+table tr:hover {
+   background-image: linear-gradient(to right, rgba(16, 56, 60, 0.80), rgba(16, 43, 60, 0.80), rgba(16, 56, 60, 0.80));
+   transition: .3s;
+}
+table tr:first-child:hover {
+   background-image: none;
+   transition: .3s;
+}
+table th {
+    padding: 0.44rem 0.56rem 0.56rem 0.56rem;
+    font-weight: normal;
+    font-size: 1.2rem;
+    letter-spacing: 0.04rem;
+}
+table td {
+    padding: 0.375rem 0.5rem 0.4rem 0.5rem;
+    padding: 6px 8px 7px 9px;
+    font-size: 1rem;
+}
+table caption {
+    text-align: left;
+    padding: 0.375rem 0.5rem 0.4rem;
+    border-bottom: none;
+}
+
+table.tsm th {
+    padding: 4px 6px 6px 6px;
+    font-size: 1rem;
+    letter-spacing: 0.02rem;
+}
+table.tsm td {
+    padding: 1px 5px 4px 5px;
+    font-size: 0.9rem;
+}
+
+table.tlg th {
+    padding: 8px 10px 10px 11px;
+    font-size: 1.37rem;
+}
+table.tlg td {
+    padding: 7px 7px 8px 9px;
+    font-size: 1.16rem;
+}
+
+/** 
+ * essa classe adiciona scroll horizontal automatico a tabela */
+.stacktable {
+    display: block;
+    overflow-x: auto;
+}
+.stacktable table th, .stacktable table td {
+    white-space: nowrap;
+}
+
+table .thumb {
+    width: 44px;
+}
+table .thumb div {
+    position: relative;
+    display: block;
+    width: 43px;
+    height: 35px;
+}
+table .thumb.fallback a {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url("<?php echo Image::fallback() ?>") center -8px / 100% 55px no-repeat;
+}
+table .thumb:hover ~ .show a {
+    color: #73d0d9;
+}
+table .thumb img {
+    width: 100%;
+    height: 100%;
+}

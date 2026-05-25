@@ -1,0 +1,121 @@
+
+/**
+ * ============================================
+ *                    article                  
+ * ============================================
+ * */
+#article {
+    position: relative;
+    white-space: normal;
+}
+#article #title {
+    height: 60px;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    padding: 0.469rem 0.875rem;
+}
+#article [for=summary] {
+    margin-top: 30px;
+}
+#article #summary {
+    margin-top: 5px;
+}
+
+
+/**
+ * 
+ * 
+ * ============================================
+ *                    aside                  
+ * ============================================
+ * */
+#aside {
+    white-space: wrap;
+}
+
+#aside .section {
+    margin: 25px 0;
+}
+#aside .section:first-child {
+    margin-top: 0;
+}
+#aside .section:last-child {
+    margin-bottom: 5px;
+}
+
+.section .title {
+    display: block;
+    margin: 0 0;
+    line-height: normal;
+    color: #217178;
+    border-top: 2px solid #217178;
+    border-left: 2px solid #217178;
+    border-radius: 7px 10px 0 2px;
+    padding: 7px 10px 10px;
+    font-size: 1.05rem;
+    font-weight: 400;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.80) inset;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.80);
+    opacity: 0.9;
+}
+
+/**
+ * */
+.section.section-submit {
+    text-align: center;
+}
+.section.section-submit .title {
+    text-align: left;
+}
+
+/**
+ * */
+#aside .section-delete {
+    text-align: right;
+}
+
+/**
+ * */
+.post-categories ol.scrollbar {
+    position: relative;
+    height: auto;
+    max-height: 410px;
+}
+.post-categories ol {
+    position: relative;
+    list-style: none;
+    margin: 0 0;
+    padding: 0 0;
+    z-index: 10;
+}
+.post-categories ol ol {
+    position: relative;
+    margin: 0 0 0 12px;
+    padding: 0 0 0 8px;
+    border-left: 1px dashed #1b5e64;
+}
+.post-categories li {
+    position: relative;
+    margin: 5px 7px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 8;
+}
+.featured_icon [icon] {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto 5px;
+}
+
+.section.featured-image img, .section.featured-image label.btn, /* posts page */
+.section-attachment img /* category */ {
+    display: block;
+    margin: 10px auto 0;
+    text-align: center;
+    color: rgba(146, 163, 161, 0.70);
+}
+
+#aside .section.info {
+    font-size: 0.9rem;
+}

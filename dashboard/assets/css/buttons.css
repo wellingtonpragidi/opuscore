@@ -1,0 +1,213 @@
+.btn, a.btn {
+    text-align: center;
+    text-decoration: none;
+    padding: 6px 12px;
+    margin: 0 0;
+    font-size: 1.05rem;
+    transition: .3s;
+    border-radius: 3px;
+    font-family: 'Muli', var(--fontSystem);
+    color: #31a9b4;
+    background-image: linear-gradient(to top, #10383c, #102b3c, #10383c);
+    border: 1px solid #1b5e64;
+    box-shadow: 0 7px 7px -5px rgba(0, 0, 0, 0.75);
+    user-select: none;
+    cursor: pointer;
+}
+.btn:hover, .btn:focus, .btn:active, 
+a.btn:hover, a.btn:focus, a.btn:active, 
+.btn a:hover, .btn a:focus, .btn a:active {
+    text-decoration: none !important;
+    transition: .3s;
+    filter: brightness(125%);
+}
+.btn.xsm {
+    padding: 3px 9px 3px 9px;
+    font-size: 0.76rem;
+}
+.btn.sm {
+    padding: 5px 10px 5px 10px;
+    font-size: 0.85rem;
+}
+.btn.md {
+    padding: 7px 12px;
+    font-size: 1.1rem;
+}
+.btn.lg {
+    padding: 8px 13px 8px 13px;
+    font-size: 1.22rem;
+}
+.btn.xlg {
+    padding: 9px 14px 9px 14px;
+    font-size: 1.32rem;
+}
+
+.btn.center {
+    display: block;
+    margin: auto;
+}
+.btn.right {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}
+a.btn.center, a.btn.right, .btn.center a, .btn.right a {
+    display: table;
+}
+
+/** botoes de alerta */
+.btn.success, .btn.warning, .btn.error,
+.btn.success:hover, .btn.warning:hover, .btn.error:hover,
+.btn.success:focus, .btn.warning:focus, .btn.error:focus,
+.btn.success:active, .btn.warning:active, .btn.error:active {
+    color: #FFFFFF;
+    text-shadow: none;
+    box-shadow: none;
+}
+.btn.success {
+    background-color: #007580;
+    background-image: linear-gradient(to bottom, #01EBFF, #007580, #007580, #01EBFF);
+    border: 2px solid #01EBFF;
+    border-image: linear-gradient(to bottom, #007580, #01EBFF, #01EBFF, #007580);
+    border-image-slice: 2;
+}
+.btn.success:hover, .btn.success:focus, .btn.success:active {
+    background-image: linear-gradient(to left, #01EBFF, #007580, #007580, #01EBFF);
+    border-image: linear-gradient(to left, #007580, #01EBFF, #01EBFF, #007580);
+    border-image-slice: 2;
+}
+
+.btn.warning {
+    background-color: #7E7300;
+    background-image: linear-gradient(to bottom, #E4D100, #7E7300, #7E7300, #E4D100);
+    border: 2px solid #C1B700;
+    border-image: linear-gradient(to bottom, #7E7300, #E4D100, #E4D100, #7E7300);
+    border-image-slice: 2;
+}
+.btn.warning:hover, .btn.warning:focus, .btn.warning:active {
+    background-image: linear-gradient(to left, #E4D100, #7E7300, #7E7300, #E4D100);
+    border-image: linear-gradient(to left, #7E7300, #E4D100, #E4D100, #7E7300);
+    border-image-slice: 2;
+}
+
+.btn.error {
+    background-color: #800000;
+    background-image: linear-gradient(to bottom, #FF0000, #800000, #800000, #FF0000);
+    border: 2px solid #DE0C02;
+    border-image: linear-gradient(to bottom, #800000, #FF0000, #FF0000, #800000);
+    border-image-slice: 2;
+}
+.btn.error:hover, .btn.error:focus, .btn.error:active {
+    background-image: linear-gradient(to left, #FF0000, #800000, #800000, #FF0000);
+    border-image: linear-gradient(to left, #800000, #FF0000, #FF0000, #800000);
+    border-image-slice: 2;
+}
+
+/** botoes alert outline */
+.btn.outline {
+    background-color: transparent;
+    background-image: none;
+}
+.btn.outline.success, .btn.outline.warning, .btn.outline.error {
+    border-width: 2px;
+    transition: .5s;
+}
+.btn.outline.success {
+    color: #01EBFF;
+}
+.btn.outline.warning {
+    color: #E4D100;
+}
+.btn.outline.error {
+    background: radial-gradient(ellipse at top, #FF0000, transparent),
+        radial-gradient(ellipse at bottom, #800000, #C40000, transparent);
+    color: transparent;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparente;
+    background-clip: text;
+}
+.btn.outline.success:hover, .btn.outline.warning:hover, .btn.outline.error:hover,
+.btn.outline.success:focus, .btn.outline.warning:focus, .btn.outline.error:focus,
+.btn.outline.success:active, .btn.outline.warning:active, .btn.outline.error:active {
+    color: #FFFFFF;
+    transition: .35s;
+}
+
+/** botao progresso (em foco) */
+.btn.progress:focus, .btn.progress:active, .btn.progress.focus {
+    box-shadow: none;
+    background: repeating-linear-gradient(
+        45deg,
+        #0b1d28 0,
+        #0b2628 10px,
+        #10383c 10px,
+        #102b3c 20px
+    );
+    background-size: 400% 400%;
+    animation: progress 7s linear infinite;
+}
+@keyframes progress {
+    0% { background-position: 100% }
+    100% { background-position: 0 }
+}
+
+/** Botões com aparencia de texto comum e link */
+.input_false {
+    display: inline-block;
+    color: inherit;
+    font-size: 1.04rem;
+    margin: 2px 0;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 0 !important;
+    background-color: transparent !important;
+}
+.input_false.link {
+    color: #31a9b4;
+}
+.input_false.link:hover, .input_false.link:focus, .input_false.link:active {
+    color: #73d0d9;
+}
+.input_false.link.delete {
+    color: #C5001E;
+}
+.input_false.link.delete:hover, .input_false.link.delete:focus, .input_false.link.delete:active {
+    color: #E40022;
+}
+/** botoes: delete, cancel e danger. ´diferente dos botoes de alertas´ */
+.btn_cancel, .btn_delete, .btn_danger {
+    display: inline-block;
+    padding: 20px 12px;
+    color: #D1BFE0;
+    background-color: #632929;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.11rem;
+    font-family: var(--fontPrime);
+    letter-spacing: 0.45px;
+    line-height: 0.1;
+    text-shadow: none;
+    box-shadow: none;
+}
+.btn_cancel.upperstr, .btn_delete.upperstr, .btn_danger.upperstr {
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: bold;
+}
+.btn_cancel:hover, .btn_delete:hover, .btn_danger:hover, 
+.btn_cancel:focus, .btn_delete:focus, .btn_danger:focus,
+.btn_cancel:active, .btn_delete:active, .btn_danger:active {
+    color: #D1BFE0;
+    background-color: #7A1E1E;
+}
+.btn_cancel a, .btn_delete a, .btn_danger a,
+.btn_cancel a:hover, .btn_delete a:hover, .btn_danger a:hover,
+.btn_cancel a:focus, .btn_delete a:focus, .btn_danger a:focus,
+.btn_cancel a:active, .btn_delete a:active, .btn_danger a:active,
+a.btn_cancel , a.btn_delete, a.btn_danger,
+a.btn_cancel:hover, a.btn_delete:hover, a.btn_danger:hover,
+a.btn_cancel:focus, a.btn_delete:focus, a.btn_danger:focus,
+a.btn_cancel:active, a.btn_delete:active, a.btn_danger:active {
+    color: #D1BFE0;
+    text-decoration: none;
+}

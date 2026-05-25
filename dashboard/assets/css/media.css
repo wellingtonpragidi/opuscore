@@ -1,0 +1,288 @@
+body#media #gallery {
+    margin-right: -10px;
+}
+#gallery .thumb {
+    position: relative;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    margin: 5px;
+    border: 2px solid #31A9B4;
+    width: calc( 25% - 10px );
+}
+@media(min-width: 992px) {
+    #gallery .thumb {
+        width: calc( 14.25% - 10px );
+    }
+}
+#gallery .thumb::before {
+    padding-top: 100%;
+    display: block;
+    content: "";
+}
+#gallery .thumb a {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    /*background: url("<?php echo Image::fallback() ?>") center / contain no-repeat;*/
+    background-color: #2f4f4f;
+    background-image:
+        linear-gradient(45deg, rgba(229, 229, 229, 0.60) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(229, 229, 229, 0.60) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(229, 229, 229, 0.60) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(229, 229, 229, 0.60) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+#gallery .thumb img {
+    display: block;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+#gallery .shipment::before, #gallery .shipment::after {
+    display: table;
+    content: "";
+    clear: both;
+}
+/* popup editor de texto punk */
+.popup#files #gallery .thumb {
+    margin: 4px;
+    width: calc( 33.333% - 8px );
+}
+@media(min-width: 992px) {
+    .popup#files #gallery .thumb {
+        margin: 5px;
+        width: calc( 25% - 10px );
+    }
+}
+@media(min-width: 1280px) {
+    .popup#files #gallery .thumb {
+        width: calc( 20% - 10px );
+    }
+}
+@media(min-width: 1366px) {
+    .popup#files #gallery .thumb {
+        width: calc( 16.66666666666667% - 10px );
+    }
+}
+@media (min-width: 1680px) {
+    .popup#files #gallery .thumb {
+        width: calc( 14.2856% - 10px );
+    }
+}
+.popup#files #gallery .thumb img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    height: 100%;
+}
+
+/* botao carregar posts */
+.loadmore {
+    position: relative;
+    clear: both;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 35px auto;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+/* texto quando acaba as midias */
+.loadmore-end {
+    clear: both;
+    opacity: .6;
+    font-size: 1rem;
+    margin: 50px auto;
+    padding-top: 50px;
+    text-align: center; 
+}
+
+/**
+ * pagina unica (?id=)
+ *  container > media (imagem) e info do arquivo 
+ * */
+#mediabox {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    height: 85vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    border-left: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.50);
+    border-right: 2px solid rgba(0, 0, 0, 0.50);
+    box-shadow: -2px -2px 0 rgba(0, 0, 0, 0.50), 1px 1px 0 rgba(255, 255, 255, 0.10);
+}
+#mediabox .view, #mediabox .aside {
+    position: relative;
+    height: 100%;
+}
+#mediabox .view {
+    max-width: 70%;
+    flex: 0 0 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 14px;
+    border-right: 2px solid rgba(0, 0, 0, 0.50);
+}
+#mediabox .view img {
+    position: relative;
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+#mediabox .aside {
+    position: relative;
+    max-width: 30%;
+    flex: 0 0 30%;
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+}
+/* control > buttons prev, next e close */
+#mediabox .control {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: end;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.50);
+}
+#mediabox .prev, #mediabox .next {
+    position: flex;
+    width: 60px;
+    height: 100%;
+    flex: 0 0 60px;
+    color: #BBB;
+    background-color: transparent;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.10);
+    border-right: 2px solid rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+    user-select: none;
+    transition: .3s;
+}
+#mediabox .prev {
+    box-shadow: -1.5px 0 0 rgba(0, 0, 0, 0.50);
+}
+#mediabox .next {
+    border-right: none
+}
+#mediabox .prev:hover, #mediabox .next:hover, #mediabox .close:hover {
+    color: #EEE;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+#mediabox .prev[aria-disabled], #mediabox .next[aria-disabled] {
+    color: #AAA;
+    box-shadow: 0 -3px 7px 3px rgba(0, 0, 0, 0.50) inset;
+    opacity: 0.6;
+    filter: brightness(110%);
+    cursor: default;
+}
+#mediabox .prev[aria-disabled]:hover, #mediabox .next[aria-disabled]:hover {
+    background-color: transparent;
+}
+#mediabox .prev [icon], #mediabox .next [icon] {
+    position: relative;
+    top: 4px;
+}
+/* info do arquivo */
+#mediabox .info {
+    position: relative;
+    height: calc(100% - 60px);
+    padding: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#mediabox .info h3 {
+    margin-top: -4px;
+    margin-bottom: 13px;
+    color: rgba(255, 255, 255, 0.30);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 1.5px 1.5px #121617, 0 0 #000, 1.5px 1.5px #121617;
+}
+#mediabox .info p {
+    font-size: 0.9rem;
+}
+/* input filename */
+#mediabox .purl {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+#mediabox label {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: .75rem;
+    margin-top: 8px;
+    margin-left: 0;
+}
+#mediabox label span {
+    margin-left: 3px;
+}
+#mediabox input[type=url] {
+    width: 100%;
+    height: 30px;
+    padding: 4px 5px 4.5px 6px;
+    font-size: .75rem;
+    font-weight: lighter;
+    margin-top: 4px;
+    background-color: #191F20;
+    border: 1px solid #000;
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.10), 0 0 2px 0 rgba(0, 0, 0, 0.50) inset;
+}
+#mediabox .aside form {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+/**
+ * FAVICON */
+body#media-favicons .output {
+    width: 512px;
+}
+body#media-favicons .btn_change {
+    width: 180px;
+    text-transform: uppercase;
+}
+
+body#media-favicons .favicons {
+    display: block;
+    white-space: nowrap;
+    overflow-x: auto;
+    margin-left: -13px;
+    margin-right: -13px;
+}
+body#media-favicons .favicons figure {
+    display: inline-block;
+    margin: 10px 3px 10px 3px;
+    padding: 3px;
+}
+body#media-favicons .favicons figcaption {
+    padding: 2px 0;
+    margin: 2px 0 -3px;
+    color: #eee;
+    font-size: 14px;
+}
+body#media-favicons .favicons img {
+    display: block;
+    margin: auto;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+}

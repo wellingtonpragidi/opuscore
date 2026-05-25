@@ -1,0 +1,71 @@
+.accordion {
+    position: relative;
+    width: 100%;
+}
+
+.acc_btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-top: 4px;
+    padding: 10px 35px 10px 15px;
+    letter-spacing: 0.094rem;
+    font-size: 1.25rem;
+    color: #92A3A1;
+    background-image: linear-gradient(to right, rgba(16, 56, 60, 0.60), rgba(16, 43, 60, 0.60), rgba(16, 56, 60, 0.60));
+    background-color: transparent;
+    border: 2px solid #1b5e64;
+    border-image: linear-gradient(to left, #1b5e64, #1b4864);
+    border-image-slice: 2;
+}
+.acc_btn::before, .acc_btn::after {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: #31A9B4;
+    opacity: 0.80;
+    transition: 0.3s;
+}
+.acc_btn:hover::before, .acc_btn:hover::after,
+.acc_btn:focus::before, .acc_btn:focus::after {
+    opacity: 1;
+    transition: 0.3s;
+}
+.acc_btn::before {
+    right: 12px;
+    top: calc(50% - 2px);
+    width: 20px;
+    height: 4px;
+}
+.acc_btn::after {
+    right: 20px;
+    top: 12px;
+    top: calc(50% - 10px);
+    width: 4px;
+    height: 20px;
+    transition: 0.3s linear;
+}
+.acc_btn.expanded::after, .acc_btn.extended::after {
+    transform: rotate(90deg);
+    transition: 0.3s linear;
+}
+.acc_panel {
+    position: relative;
+    display: none;
+    width: 100%;
+    padding: 0 0 !important;
+    border: 2px solid #1b5e64;
+    border-image: linear-gradient(to left, #1b5e64, #1b4864);
+    border-image-slice: 2;
+    border-top: none;
+    font-size: 1.063rem;
+    color: #4F5040;
+}
+.acc_panel.oppened {
+    display: block;
+}
+.acc_content {
+    position: relative;
+    padding: 10px;
+}
