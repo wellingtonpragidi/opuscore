@@ -1,26 +1,23 @@
 <div align="center">
 
-<img src="./dist/assets/img/opuscore-access-logo.svg" width="180" alt="Opus Core">
+<h1><img src="./dist/assets/img/opuscore-access-logo.svg" width="180" alt="Opus Core"></h1>
 
 <br>
 
 <p>
-  Sistema gerenciador web/CMS desenvolvido em PHP puro,<br>
-  com foco em simplicidade, clareza estrutural,<br>
-  baixo acoplamento e controle explícito da aplicação.
+  Sistema gerenciador web/CMS desenvolvido em PHP puro, com foco em simplicidade, clareza estrutural, baixo acoplamento e controle explícito da aplicação.
 </p>
 
+<br>
+
 <a href="https://opuscore.dev/docs">
-  Explorar documentação do Opus Core »
+  Explorar documentação »
 </a>
 
 <br>
 </div>
 
 <hr>
-
-# Opus Core
-
 
 ## Sobre
 
