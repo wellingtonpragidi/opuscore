@@ -11,6 +11,8 @@
 [![License](https://img.shields.io/badge/license-MPL--2.0%20%2B%20Commons%20Clause-yellow)]()
 [![Status](https://img.shields.io/badge/status-active-2ea44f)]()
 
+<br>
+
 <p>
   <a href="https://opuscore.dev/docs">
     Explorar documentação »
@@ -19,7 +21,6 @@
 
 </div>
 
-<br>
 <hr>
 <br>
 
