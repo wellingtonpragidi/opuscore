@@ -55,8 +55,8 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 ## Requisitos
 - PHP 8.1+ (Testado com PHP 8.3)
 - MySQL 8.0+ ou MariaDB 10.5+
-Apache/Nginx:
-- O Opus Core é utilizado atualmente em ambiente Apache.
+- Apache/Nginx:
+    - O Opus Core é utilizado atualmente em ambiente Apache.
     - Compatibilidade com Nginx ainda não foi oficialmente testada.
 - Em **produção**, HTTPS é considerado requisito devido à segurança e compatibilidade com recursos modernos da web.
 
@@ -80,7 +80,6 @@ Ainda não existe um instalador por interface visual. De qualquer forma, a cria�
 6. Os arquivos `scheme.sql` e `config.php` ficam na raiz do arquivo `opuscore-{version}.zip`.
 7. Após isso o site já estará funcionando com o Old Begin enviado junto ao pacote e ativo por padrão.
 8. Login provisório do painel:
-
     1. URL: http://seusite.ext/dashboard
     2. Nome: Administrator do Sistema
     3. E-mail: admin@localhost.ext
