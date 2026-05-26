@@ -80,11 +80,11 @@ header( 'Content-Type: text/html; charset=utf-8' );
  * @see https://opuscore.dev/constants/versao-do-sistema
  **/
 ## start versao do sistema
-define('VERSION', '2.8.3');
+define('VERSION', '1.0.0');
 ## end version 
 
 ## start versao do banco de dados do sistema
-define('DB_VERSION', '1.2.2');
+define('DB_VERSION', '1.0.0');
 ## end db version 
 
 ## start URL do servidor que hospeda os pacotes de atualizacoes
