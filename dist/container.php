@@ -68,7 +68,6 @@ if( defined('IS_WEB') && IS_WEB ) {
     $container->singleton('Image', function($c) {
         return new Image(
             $c->make('Connection'),
-            $c->make('Router'),
             $c->make('Category'), 
             $c->make('Post'), 
             $c->make('Page'),
