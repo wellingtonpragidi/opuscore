@@ -221,10 +221,3 @@ set_exception_handler( function( Throwable $e ): void {
     }
     throw $e; # e pra outras excecoes, (se nao for OpusException), deixa o php estourar
 });
-/*
-set_error_handler → converte tudo possível
-
-set_exception_handler → último recurso
-
-register_shutdown_function → fatal only
-*/
