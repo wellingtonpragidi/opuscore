@@ -19,10 +19,16 @@ sitemap.xml
 # engine
 /packages/
 
-# host
+# gerais
+/.anot/
+/.dumps/
+/.misc/
+/.notes/
 error_log
 logs
 *.log
+*.ton
+*.zip
 
 # sistema
 .DS_Store
@@ -31,11 +37,3 @@ logs
 # editores 
 .vscode/
 .idea/
-
-# gerais
-/.anot/
-/.dumps/
-/.misc/
-/.notes/
-*.ton
-*.zip
