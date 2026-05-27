@@ -10,4 +10,4 @@ Primeira versão pública estável após anos de utilização e refinamento em p
 ## [1.0.1] - 27/05/2026
 
 ### Corrigido
-Correção de bug de tipo no argumento do construtor da classe Image chamado na instância do container.
+Correção de bug: Ajustado erro de tipagem no argumento enviado ao construtor da classe Image [Output] pela instância do container.
