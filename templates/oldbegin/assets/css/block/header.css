@@ -1,0 +1,335 @@
+
+header {
+    position: relative;
+    background-color: #161616;
+    padding: 0 15px 25px;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.40);
+}
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #ff3c00;
+    border-top: 1px #ff5722 solid;
+    border-bottom: 1px #992400 solid;
+}
+header::before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset:  0;
+    background: radial-gradient(circle, rgba(74, 158, 255, 0.07) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 25px; /* compensa padding-top do header */
+    width: 180px;
+    flex: 0 0 180px;
+    margin: 0 0;
+}
+#navbar #logo a {
+    border: none;
+}
+#logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    line-height: 0;
+}
+
+
+#navbar {
+    position: relative;
+    height: 90px;
+}
+#navbar .menu, #navbar .menu ul {
+    position: relative;
+    padding: 0 0;
+    list-style: none;
+    z-index: 1025;
+}
+#navbar .menu {
+    margin: 10px 0 0 auto;
+}
+#navbar .menu ul {
+    margin: 0 0;
+}
+#navbar a {
+    display: block;
+    width: 100%;
+}
+#navbar .current a, #navbar .active > a {
+    color: #ff5722;
+}
+
+#navbar .hasub > a .caret {
+    position: relative;
+    top: 4px;
+    margin-left: 1px;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.10);
+    z-index: 1001;
+}
+
+
+#navbar .isub .hasub > .isub, #navbar .isub .hasub + .isub,
+#navbar ul li + ul, #navbar ul > ul, {
+    display: none;
+    width: 0;
+    height: 0;
+    overflow: hidden
+} 
+
+
+@media( width < 768px ) {
+    #navbar .toggle {
+        top: 25px;
+        right: 0;
+        width: 43px;
+        height: 33px;
+    }
+    #navbar .toggle, #navbar .toggle * {
+        cursor: pointer;
+    }
+    #navbar .toggle, #navbar .switch, #navbar .switch::before, #navbar .switch::after {
+        position: absolute;
+        display: block;
+        width: 37px;
+        z-index: 1003;
+    }
+    #navbar .switch, #navbar .switch::before, #navbar .switch::after {
+        right: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to bottom, #F7FBF9, #aaa);
+        border-radius: 5px;
+    }
+    #navbar .switch {
+        top: 0;
+        border: none;
+        padding: 0 0;
+    }
+    #navbar .switch::before, #navbar .switch::after {
+        content: '';
+        transition: transform 0.4s;
+    }
+    #navbar .switch::before {
+        top: 12px;
+    }
+    #navbar .switch::after {
+        top: 24px;
+    }
+    #navbar .toggle:focus-within .switch, 
+    #navbar .toggle:focus-within .switch::before, 
+    #navbar .toggle:focus-within .switch::after,
+    #navbar .toggle.focus .switch::before, 
+    #navbar .toggle.focus .switch::after {
+        filter: brightness(1.2);
+    }
+    #navbar .toggle.focus .switch {
+        width: 0;
+        height: 0;
+        overflow: visible;
+    }
+    #navbar .toggle.focus .switch::before, #navbar .toggle.focus .switch::after {
+        top: 12px;
+        width: 38px;
+        height: 5.5px;
+        overflow: visible;
+    }
+    #navbar .toggle.focus .switch::after {
+        transform: rotate(45deg);
+    }
+    #navbar .toggle.focus .switch::before {
+        transform: rotate(-45deg);
+    }
+    #navbar .toggle, #navbar .toggle.focus {
+        /*transform: scale(1.15, 1.1);*/
+    }
+
+    #navbar .menu {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 0;
+
+        background-color: #1e1e1e;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 1.0);
+        border-bottom-left-radius: 2px;
+        transition: width 0.9s;
+    }
+    #navbar .menu.visible {
+        width: calc(60vw + 5rem);
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        border-top: 1px solid rgba(0, 0, 0, 1.0);
+    }
+    #navbar a {
+        width: 100%;
+        padding: 8px 10px 8px 20px;
+        font-size: 1.1rem;
+        font-weight: 400;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid rgba(0, 0, 0, 1.0);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    #navbar .caret a {}
+
+    #navbar .isub a {
+        font-size: 1rem;
+        padding-left: 35px;
+    }
+}
+@media( width >= 768px ) {
+    header {
+        padding: 0 25px 25px;
+    }
+    #navbar {
+        display: flex;
+    }
+    #navbar .toggle {
+        display: none;
+    }
+    #logo {
+        top: 26px;
+    }
+    #navbar .menu {
+        display: flex;
+        gap: 15px;
+        text-align: right;
+        transform: translateY(10%);
+    }
+    #navbar .menu .isub {
+        position: absolute;
+        top: 41px;
+        width: 170px;
+        background-color: #1e1e1e;
+        text-align: left;
+        border-bottom: #054742;
+        border-top: #161616;
+        z-index: 1024;
+    }
+    #navbar .menu li {
+        position: relative;
+        display: inline-block;
+    }
+    #navbar .menu .isub li {
+        position: relative;
+        display: block;
+    }
+    #navbar a {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+    #navbar a:hover {
+        transform: scale(1.1);
+    }
+    #navbar li:last-child a {
+        padding-right: 0;
+    }
+    #navbar .isub li a {
+        padding: 18px 10px 18px 10px;
+        font-size: 1.1rem;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+        text-transform: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid rgba(0, 0, 0, 1.0);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    #navbar .isub li a:hover {
+        transform: none;
+    }
+}
+
+@media (width >= 992px) {
+    header {
+        padding: 0 40px 25px;
+    }
+    #logo {
+        width: 220px;
+        flex: 0 0 220px;
+    }
+}
+
+@media( width >= 1280px ) {
+    header {
+        padding: 0 65px 25px 60px;
+    }
+    #navbar li a {
+        font-size: 1.15rem;
+        letter-spacing: 1.1px;
+    }
+}
+
+@media( width >= 1500px ) {
+    header {
+        padding: 0 95px 25px 90px;
+    }
+    #navbar li a {
+        font-size: 1.25rem;
+    }
+}
+
+
+/*#search-bar*/
+header form {
+    position: relative;
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    align-items: end;
+    margin: 9px 0 0 auto;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #2a2a2a;
+    background-color: #161616;
+    transition: 0.3s;
+}
+header form:focus, header form:focus-within {
+    border: 1px #404040 solid;
+}
+header [type=search] {
+    flex: 1 1 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+header button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+header [type=search], header button {
+    height: 100%;
+    margin: 0 0;
+    border: none;
+}

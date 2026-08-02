@@ -1,0 +1,115 @@
+#insert-router {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.80);
+    z-index: 98889;
+}
+
+
+#insert-router > form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1024px;
+    max-width: 100%;
+    margin: auto auto;
+    padding: 0 15px;
+}
+
+
+#insert-title {
+    border: 2px solid rgba(128, 128, 128, 0.30);
+    padding: 3px;
+    border-radius: 2px;
+}
+
+#insert-router #title, 
+/* context */
+#insert-section_select, #insert-section {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 90px;
+    font-family: var(--fontSystem);
+    font-weight: 300;
+    font-size: 3rem;
+    padding: 12px 20px;
+    color: #8B888C;
+    background-color: rgba(128, 128, 128, 0.30);
+    border: 2px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.25) inset;
+    text-align: center;
+}
+#insert-title #title::placeholder {
+    font-size: 3rem;
+}
+
+
+#insert-router #btn {
+    display: block;
+    text-align: right;
+    margin-left: auto;
+    margin-top: 17px;
+    opacity: .7;
+    font-family: var(--fontSystem);
+    padding: 11px 21px 11.5px 21px;
+    font-size: 1.6rem;
+    transition: .4s;
+    letter-spacing: 1.2px;
+    color: #9F8E8B;
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 
+        0 0 2px 1px #000,0 -2px 3px rgba(156, 156, 156, 0.25) inset,
+        0 0 10px rgba(255, 255, 255, 0.05) inset;
+    border: none;
+    border-radius: 2px;
+}
+
+#insert-router #goback {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    font-size: 15px;
+    padding: 15px 12px;
+    line-height: 0.1;
+}
+
+
+
+
+
+
+/* ========================================================= */
+/*              ADICIONAIS DO INSERT DE CONTEXT              */
+/* ========================================================= */
+#insert-router fieldset {
+    width: 512px;
+    margin: 0 0 40px auto;
+    padding: 4px 4px;
+    border: 1px rgba(128, 128, 128, 0.30) solid;
+}
+#insert-section_select, #insert-section {
+    height: 50px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding: 8px 12px 8px 15px;
+    background-color: #282A2B;
+    border: 2px solid transparent;
+    text-align: left;
+}
+#insert-section::placeholder {
+    color: #747075;
+}
+
+
+/* ========================================================= */
+/*                           continua..                      */
+/* ========================================================= */
+
+#insert-router #title, #insert-section {
+    margin-bottom: 0;
+}

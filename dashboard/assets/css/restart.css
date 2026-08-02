@@ -1,0 +1,204 @@
+:root {
+    --fontSystem: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    --fontSerif: "Georgia", ui-serif, "PT Serif", serif;
+    --fontMono: "Consolas", ui-monospace, "Liberation Mono", monospace;
+}
+*, *::before, *::after {
+    outline: 0;
+    box-sizing: border-box;
+}
+html {
+    background-color: #0A2224;
+}
+body {
+    position: relative;
+    margin: 0 0;
+    min-height: 130vh;
+    font-size: 1.063rem;
+    font-family: 'Muli', var(--fontSystem);
+    color: #92A3A1;
+    background-color: #0A2224;
+    background-image: linear-gradient(to right, #0A1A24 23%, #0A2224 60%);
+    line-height: 1.15;
+}
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    font-weight: 400;
+    letter-spacing: 0.010rem;
+    opacity: 0.8;
+    overflow-wrap: break-word;
+}
+h1 {
+    font-size: 1.75rem;
+    margin: 0 0 25px 5px;
+}
+h2 {
+    font-size: 1.5rem;
+    margin: 0.95rem 0 0.8rem; /* 20 */
+}
+h3 {
+    font-size: 1.40rem; /* 24px */
+    margin: 0.9rem 0 0.65rem; /* 18 */
+}
+h4 {
+    font-size: 1.30rem; /* 21.5px */
+    margin: 0.9rem 0 0.6rem; /* 21 */
+}
+h5 {
+    font-size: 1.19rem; /* 19px */
+    margin: 0.9rem 0 0.6rem; /* 22px */
+    font-weight: 600;
+}
+h6 {
+    font-size: 1.06rem; /* 17px */
+    margin: 0.75rem 0 0.5rem; /* 25px */
+    font-weight: 600;
+}
+p {
+    margin-top: 0.690rem;
+    margin-bottom: 0.690rem;
+    overflow-wrap: break-word;
+}
+#content {
+    position: relative;
+}
+a {
+    color: #31A9B4;
+    text-decoration: none;
+    transition: 0.25s;
+    cursor: pointer;
+}
+a:hover, a:focus {
+    color: #73d0d9;
+    transition: 0.25s;
+}
+ul, ol {
+    padding-left: 1.5rem;
+    margin: 0.625rem 0;
+    font-size: 1rem;
+}
+ul li, ol li {
+    line-height: 1.5;
+}
+img {
+    max-width: 100%;
+    height: auto; 
+    font-size: 14px;
+}
+
+figure {
+    margin: 0.313rem;
+    padding: 0.45rem 0.45rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+figcaption {
+    position: relative;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.embed {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.embed::before {
+    padding-top: 56.25%;
+    display: block;
+    content: "";
+}
+.embed iframe {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
+iframe {
+    width: 100%;
+    border: 0;
+}
+
+hr {
+    position: relative;
+    display: block;
+    margin: 15px 0;
+    border-top: 1.5px solid #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    border-right: none;
+    border-left: none;
+    clear: both;
+}
+
+hr.hl {
+    margin: 30px 0;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+details {
+    margin: 0.25rem auto;
+    padding: 0.5rem 0.5rem 0;
+    border: 1px solid;
+    border-radius: 4px;
+}
+summary {
+    margin: -0.5rem -0.5rem 0;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+details[open] {
+    padding: 0.5rem;
+}
+details[open] summary {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid;
+}
+blockquote {
+    position: relative;
+    margin: 0.5rem 0 4.125rem 0;
+    padding: 0.9rem;
+    color: #B93E44;
+    border: 2px solid;
+    border-radius: 1.375rem;
+    font-size: 1.15rem;
+    font-family: serif;
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: 0.08rem;
+    text-indent: 1rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.50);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.40), 1px 1px 1px rgba(0, 0, 0, 0.40) inset;
+}
+/*a, abbr, b, button, cite, code, dfn, em, i, ins, kbd, label, mark, q, s, select, small, span, strong, time, u {
+    display: inline-block;
+}*/
+strong {
+    font-weight: 600;
+}
+abbr[title] {
+    cursor: help;
+}
+code, mark {
+    position: relative;
+}
+code {
+    padding: 0 5px 2px;
+    font-family: 'SrcCode', monospace;
+    font-weight: 400;
+    color: rgba(182, 110, 134, 0.80);
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.035);
+}
+pre {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    letter-spacing: 1.1px;
+    font-family: 'SrcCode', Consolas, monospace;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 2px;
+}

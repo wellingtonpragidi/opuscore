@@ -1,0 +1,91 @@
+#content {
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    height: 100%;
+}
+#nav {
+    width: 180px;
+    flex: 0 0 180px;
+    min-height: 100vh;
+}
+#main {
+    position: relative;
+    width: calc(100% - 180px);
+    flex: 0 0 calc(100% - 180px);
+    margin-left: 180px;
+    margin-bottom: 200px;
+    padding: 10px;
+    min-height: 130vh;
+    white-space: normal;
+}
+#main.select-type {
+    padding: 10px 20px;
+}
+#update {
+    position: relative;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: minmax(0, 1fr) 260px;
+}
+
+#categories .insert {
+    padding-right: 7px;
+}
+#categories .select {
+    padding-left: 7px;
+}
+#footer {
+    position: relative;
+    width: calc(100% - 180px);
+    height: 65px;
+    margin-left: 180px;
+    margin-top: -65px;
+    padding: 20px 10px 0;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+#footer p {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+}
+#footer .version {
+    position: absolute;
+    display: inline-block;
+    bottom: 1px;
+    right: 65px;
+}
+
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+[class^="cn_"], [class*=" cn_"] {
+    position: relative;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.cn_0 { 
+    flex: 1 0 auto;
+}
+@media( min-width: 768px ) {
+    .cn_15 { flex: 0 0 15%; max-width: 15% }
+    .cn_20 { flex: 0 0 20%; max-width: 20% }
+    .cn_25 { flex: 0 0 25%; max-width: 25% }
+    .cn_30 { flex: 0 0 30%; max-width: 30% }
+    .cn_35 { flex: 0 0 35%; max-width: 35% }
+    .cn_33 { flex: 0 0 33.333333%; max-width: 33.333333% }
+    .cn_40 { flex: 0 0 40%; max-width: 40% }
+    .cn_45 { flex: 0 0 45%; max-width: 45% }
+    .cn_50 { flex: 0 0 50%; max-width: 50% }
+    .cn_55 { flex: 0 0 55%; max-width: 55% }
+    .cn_60 { flex: 0 0 60%; max-width: 60% }
+    .cn_65 { flex: 0 0 65%; max-width: 65% }
+    .cn_67 { flex: 0 0 66.666667%; max-width: 66.666667% }
+    .cn_70 { flex: 0 0 70%; max-width: 70% }
+    .cn_75 { flex: 0 0 75%; max-width: 75% }
+    .cn_80 { flex: 0 0 80%; max-width: 80% }
+    .cn_85 { flex: 0 0 85%; max-width: 85% }
+    .cn_90 { flex: 0 0 90%; max-width: 90% }
+}

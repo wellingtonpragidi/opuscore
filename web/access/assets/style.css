@@ -1,0 +1,294 @@
+* { 
+    outline: 0; 
+    box-sizing: border-box 
+}
+
+html, body {
+    background-color: #eaeaec;
+}
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 40px;
+    font-size: 1.1rem;
+    font-family: 'Segoe_UI', system-ui, sans-serif;
+    color: #444;
+    background-image: url("<?php echo web_access_url('assets/bg.jpeg') ?>");
+    text-shadow: 1px 1px #FFF;
+}
+
+strong, b {
+    font-weight: 600;
+}
+
+#logo {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 8vh;
+}
+#logo img {
+    width: 145px;
+}
+
+#wrapper {
+    position: relative;
+    width: 400px;
+    max-width: 100%;
+    margin: 20px auto 0;
+    padding: 15px;
+    border: 3px solid #DDD;
+    box-shadow: 2px 2px 1px #FFF, 2px 2px 1px #FFF inset;
+    background-color: rgba(255, 255, 255, 0.20);
+    border-radius: 3px;
+}
+
+p.title {
+    text-align: center;
+    color: #888888;
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+label {
+    margin: 0 0 2px 1px;
+    font-size: 1rem;
+    color: #888;
+}
+.formit {
+    display: flex;
+}
+.formit input {
+    flex: 0 0 calc(100% - 44px);
+    width: calc(100% - 60px);
+    height: 43px;
+    margin-bottom: 8px;
+    padding: 8px 11px 8px 7px;
+    background-color: rgba(255, 255, 255, 0.40);
+    font-size: 1.15rem;
+    font-family: 'Segoe_UI', system-ui, sans-serif;
+    letter-spacing: 0.031rem;
+    color: #444444;
+    border: 2px solid #CCC;
+    box-shadow: 1.5px 1.5px 1px #FFF, 1px 1px 1px #FFF inset;
+    border-radius: 0 2px 2px 0;
+    box-sizing: inherit;
+}
+
+.password {
+    display: flex;
+    flex-wrap: wrap;
+}
+.password .pswd {
+    flex: 1 1 0;
+    border-right: none;
+}
+.password .look {
+    position: relative;
+    display: block;
+    height: 43px;
+    line-height: 0.8;
+    padding: 0 5px 0 0;
+    color: #888;
+    font-size: 40px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.40);
+    border: 2px solid #CCC;
+    border-left: none;
+    box-shadow: 1.5px 1.5px 1px #FFF, 1px 1px 1px #FFF inset;
+    border-radius: 0 2px 2px 0;
+}
+.password .look.hidden {
+    position: relative;
+}
+.password .look.hidden::after {
+    position: absolute;
+    content: "";
+    top: 17px;
+    right: 7px;
+    width: 37px;
+    height: 4px;
+    border-radius: 3px;
+    background-color: #888;
+    transform: rotate(-50deg);
+}
+
+.formit img {
+    display: block;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 43px;
+    padding: 8px 4px;
+    background-color: rgba(255, 255, 255, 0.40);
+    border: 2px solid #CCC;
+    border-right: none;
+    box-shadow: 1.5px 1.5px 1px #FFF, 1px 1px 1px #FFF inset;
+    border-radius: 2px 0 0 2px;
+    box-sizing: inherit;
+}
+.formit img.email {
+    padding: 9px 4px 7px;
+}
+.formit img.padlock {
+    height: 43px;
+}
+
+button {
+    display: block;
+    margin: 6px 3px 0 auto;
+    padding: 6px 14px 6.5px 14px;
+    font-size: 1.1rem;
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #777;
+    text-shadow: 1px 1px #fff;
+    background-image: linear-gradient(
+        to bottom, 
+        rgba(170, 170, 170, 0.10) 0 40%, 
+        rgba(170, 170, 170, 0.35) 60% 100%
+    );
+    background-color: transparent;
+    border: 2px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 2px 2px 1px #FFF, 2px 2px 1px #FFF inset;
+    transition: .2s;
+    cursor: pointer;
+}
+button#btn-pswd-generator {
+    margin: 4px auto 17px auto;
+    padding: 2px 7px 3px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    color: #888;
+    border: 1px solid #bbb;
+    background-image: linear-gradient(
+        to bottom, 
+        rgba(170, 170, 170, 0.10) 0 40%, 
+        rgba(170, 170, 170, 0.35) 60% 100%
+    );
+    box-shadow: 
+        2px 2px 1px rgba(255, 255, 255, .5), 
+        2px 2px 1px rgba(255, 255, 255, .4) inset,
+        -2px 2px 1px rgba(255, 255, 255, .4) inset;
+    text-shadow: 1px 1px rgba(255, 255, 255, .6);
+}
+button:hover, button:focus, button:active,
+button#btn-pswd-generator:hover, button#btn-pswd-generator:focus {
+    background-image: linear-gradient(
+        to top, 
+        rgba(255, 255, 255, 0.40) 0 40%, 
+        rgba(170, 170, 170, 0.40) 60% 100%
+    );
+}
+
+.txt-small-info {
+    display: block;
+    margin-top: -5px;
+    color: #aaa;
+    font-size: 0.83rem;
+    font-weight: 500;
+}
+
+ul {
+    margin-top: 45px;
+    padding-top: 30px;
+    border-top: 3px solid #DDD;
+    box-shadow: 0 2px 1px #FFF inset;
+}
+ul li::marker {
+    content: "→ ";
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1A7E8D;
+}
+li a {
+    color: #1A7E8D;
+    text-decoration: none;
+}
+li a:hover {
+    color: #009EB7;
+}
+
+.alert {
+    --alert__text-shadow: 1px 1px rgba(255, 255, 255, 0.35);
+
+    --alertSuccess__color: #0B3852;
+    --alertSuccess__background: #99D3F4;
+    --alertSuccess__border: 1px solid #6AB2DC;
+    --alertSuccessLink__color: #00008B;
+
+    --alertWarning__color: #696110;
+    --alertWarning__background: #FBF37E;
+    --alertWarning__border: 1px solid #E6DE4A;
+    --alertWarningLink__color: #8A852C;
+
+    --alertError__color: #4E2229;
+    --alertError__background: #E0ACB3;
+    --alertError__border: 1px solid #C6989E;
+    --alertError__text-shadow: 1px 1px rgba(255, 255, 255, 0.25);
+    --alertErrorLink__color: #600000;
+    
+    position: relative;
+    margin-top: 0.2rem;
+    margin-bottom: 0.75rem;
+    padding: 12px 15px;
+    border-radius: 3px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-shadow: var(--alert__text-shadow);
+}
+/** remove espacamento superior no "primeiro filho" e inferior "ultimo filho" de .alert */
+.alert:not(.close) > *:first-child, .alert .close + * {
+    margin-top: 0;
+    padding-top: 0;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.alert a {
+    text-shadow: none;
+}
+.alert.success {
+    color: var(--alertSuccess__color);
+    background-color: var(--alertSuccess__background);
+    border: 1px solid var(--alertSuccess__border);
+}
+.alert.warning {
+    color: var(--alertWarning__color);
+    background-color: var(--alertWarning__background);
+    border: 1px solid var(--alertWarning__border);
+}
+.alert.error {
+    color: var(--alertError__color);
+    background-color: var(--alertError__background);
+    border: 1px solid var(--alertError__border);
+    text-shadow: var(--alertError__text-shadow);
+}
+.alert.success a {
+    color: var(--alertSuccessLink__color);
+}
+.alert.warning a {
+    color: var(--alertWarningLink__color);
+}
+.alert.error a {
+    color: var(--alertErrorLink__color);
+}
+
+.sr {
+    position: absolute;
+    clip-path: inset(50%);
+    font-size: 14px;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden
+    word-wrap: normal;
+}

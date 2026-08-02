@@ -1,0 +1,92 @@
+
+#content {
+    width: 100%;
+    max-width: 1300px;
+	margin: 30px auto 60px;
+    padding: 0 15px;
+}
+
+#master-title {
+    margin: 20px 0 10px;
+    padding: 0 0 10px 5px;
+    font-size: 1.4rem;
+    color: #b1b1b1;
+    border-bottom: 2px solid #363636;
+    text-transform: uppercase;
+}
+
+@media( width >= 992px ) {
+    #content {
+        padding: 0 40px;
+    }
+
+    #master-title {
+        font-size: 2rem;
+    }
+}
+
+@media( width >= 1200px ) {
+    #content {
+        padding: 0 70px;
+    }
+}
+
+
+.admin-edit {
+    text-align: right;
+    margin-left: auto;
+}
+
+
+.unlist, .unlist ul {
+    margin: 0 0;
+    padding: 0 0;
+    list-style: none;
+}
+
+.sr {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    font-size: 14px;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden
+    word-wrap: normal;
+}
+a.sr:focus {
+    position: relative;
+    display: block;
+    color: #ff5722;
+    background-color: #2196f3;
+    clip: auto;
+    clip-path: none;
+    width: auto;
+    height: auto;
+    margin: 1px;
+    padding: 3px 6px;
+    line-height: normal;
+    text-decoration: none;
+    z-index: 876543;
+}
+
+
+.orange {
+    color: #ff5722;
+}
+.blue {
+    color: #2196f3;
+}
+
+a .orange, a .blue {
+    transition: 0.27s;
+}
+a:hover .orange {
+    color: #2196f3;
+}
+a:hover .blue {
+    color: #ff5722;
+}

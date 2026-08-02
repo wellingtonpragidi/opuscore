@@ -1,0 +1,43 @@
+# / 
+/.htaccess
+/config.php
+
+# * 
+favicon.ico
+manifest.json
+robots.txt
+sftp-config.json
+sftp-config.disable.json
+sftp-config.disabled.json
+sitemap.xml
+
+# cache e dados armazenados
+/storage/
+
+# engine
+/packages/
+
+/uploads/
+
+templates/*
+!templates/oldbegin/
+
+
+# gerais
+/.anot/
+/.dumps/
+/.misc/
+/.notes/
+error_log
+logs
+*.log
+*.ton
+*.zip
+
+# sistema
+.DS_Store
+*.db
+
+# editores 
+.vscode/
+.idea/

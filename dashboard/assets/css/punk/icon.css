@@ -1,0 +1,69 @@
+[ico]::before {
+    font-family: "Icon";
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    text-align: center;
+}
+[ico=doublearrow]::before { /* select - dropdown */
+    content: '\f0dc'; 
+    font-size: 0.8rem; 
+    transform: scaleX(0.85);
+}
+[ico=arrow]::before { 
+    content: '\e814';
+    transform: scaleX(0.80); 
+}
+[ico=h1]::before { content: '\e82f' }
+[ico=h2]::before { content: '\e830' }
+[ico=h3]::before { content: '\e832' }
+[ico=h4]::before { content: '\e833' }
+[ico=h5]::before { content: '\e834' }
+[ico=h6]::before { content: '\e835' }
+[ico=blockquote]::before { 
+    position: relative;
+    top: -2px;
+    font-size: 1.2rem;
+    content: '\e831' 
+}
+[ico=quote]::before { content: '\e804' }
+[ico=cite]::before { content: '– ' }
+[ico=alignleft]::before { content: '\e805' }
+[ico=aligncenter]::before { content: '\e806' }
+[ico=alignright]::before { content: '\e807' }
+[ico=alignjustify]::before { content: '\e808' }
+[ico=color]::before { content: '\e80c' }
+[ico=orderedlist]::before { content: '\e815' }
+[ico=unorderedlist]::before { content: '\e813' }
+[ico=grid]::before { content: '\e824' }
+[ico=link]::before { content: '\e812' }
+[ico=unlink]::before { content: '\e80f' }
+[ico=underline]::before { content: '\e800' }
+[ico=italic]::before { content: '\e83c' }
+[ico=bold]::before { content: '\e80a' }
+[ico=strike]::before { content: '\e80d' }
+[ico=code]::before { content: '\e809' }
+[ico=srcode]::before { content: '\eeea' }
+[ico=pre]::before { content: '\f121'; transform: scaleX(1.29); }
+[ico=codellipsis]::before { content: '\e840' }
+[ico=fontsize]::before { content: '\ea61' }
+[ico=image]::before { content: '\e801' }
+[ico=embed]::before { content: '\e802' }
+[ico=video]::before { content: '\e803' }
+[ico=ruler]::before { content: '\e821' }
+[ico=text]::before { content: '\e83f'; position: relative; top: 1px }
+[ico=cleanformat]::before { content: '\e83e' }
+[ico=close]::before { content: '\eee4' }
+[ico=calendar]::before { content: '\ec45' }
+[ico=spinner]::before { 
+    content: '\effa';
+    animation: spin 2s infinite linear;
+    display: inline-block;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(359deg) }
+}
+[ico=superscript]::before { content: '\f12b' }
+[ico=subscript]::before { content: '\f12c' }

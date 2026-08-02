@@ -1,0 +1,22 @@
+{
+    "1": {
+        "Principal": "Master",
+        "description": "Superadmin com controle total, irrestrito e soberano sobre todo o sistema."
+    },
+    "2": {
+        "Gerenciador": "Administrador de Operações Gerais",
+        "description": "Possui acesso total ao sistema, exceto para excluir a si mesmo e ao administrador principal. Um perfil que exige máxima integridade e confiança."
+    },
+    "3": {
+        "Produtor": "Administrador de Conteúdos",
+        "description": "Com exceção de categorias, pode criar, editar e publicar conteúdos globais como artigos, páginas, produtos e contextos."
+    },
+    "4": {
+        "Articulista": "Administrador de Artigos",
+        "description": "Pode criar e publicar artigos de blog, mas possui permissão de edição restrita apenas aos artigos de sua própria autoria."
+    },
+    "5": {
+        "Moderador": "Administrador de Moderação da Comunidade",
+        "description": "Gerencia interações. Edita e aprova comentários; possui autonomia para aprovar, restringir e excluir perfis de usuários comuns."
+    }
+}

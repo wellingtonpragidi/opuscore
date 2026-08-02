@@ -1,0 +1,102 @@
+.one-exception {
+    position: relative;
+    white-space: normal;
+    width: calc( 100% - 40px );
+    min-height: 85px;
+    flex: 0 0 calc( 100% - 40px );
+    margin: 1rem auto;
+    padding: 12px 15px;
+    border-radius: 3px;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.20);
+    background-image: linear-gradient(to top, #004d46 5%, #00332f 95%);
+    border: 4px double #004d46;
+    border-image: linear-gradient(to top, #00332f, #004d46, #004d46, #00332f);
+    border-image-slice: 4;
+    color: #8DBEBB;
+}
+.one-exception::before, .one-exception::after {
+	position: absolute;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	border: 3px double rgba(255, 255, 255, 0.15);
+	z-index: -1;
+}
+.one-exception::before {
+	top: -12px;
+	left: -12px;
+}
+.one-exception::after {
+	bottom: -12px;
+	right: -12px;
+}
+.one-exception details {
+	margin-top: 10px;
+	border-color: rgba(255, 255, 255, 0.20);
+}
+.one-exception details[open] summary, .one-exception details summary {
+	padding: 7px 10px;
+	font-size: 1rem;
+	border-color: rgba(255, 255, 255, 0.20);
+	cursor: pointer;
+}
+.one-exception details ul {
+	font-family: 'SrcCode', Consolas, monospace;
+}
+.one-exception details ul em {
+	font-family: 'SrcCodeIt', 'SrcCode', Consolas, monospace;
+	font-style: italic;
+	color: #005EFF;
+}
+.one-exception code {
+	font-size: 1.18rem;
+	color: #6D94B6;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	background-color: rgba(255, 255, 255, 0.05);
+	padding: 0 2px;
+	border-radius: 4px;
+	line-height: 22px;
+}
+.one-exception a {
+	color: #00ccbb;
+}
+.one-exception a:hover {
+	color: #00e6d2;
+	text-decoration: underline;
+}
+.one-exception button, .one-exception a button, .one-exception button a, 
+.one-exception .btn, .one-exception  a.btn, .one-exception a .btn, .one-exception .btn a {
+    text-decoration: none;
+    padding: 8px 14px;
+    margin: 0 0;
+    font-size: 1.2rem;
+    transition: .3s;
+    border-radius: 3px;
+    font-family: 'Muli', var(--fontSystem);
+    color: #00998c;
+    background-image: none;
+    background-color: #00332f;
+    border: 1px solid #001a17;
+    box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.55) inset;
+    filter: brightness(125%);
+    user-select: none;
+    cursor: pointer;
+}
+.one-exception button:hover, .one-exception a button:hover, .one-exception button a:hover, 
+.one-exception .btn:hover, .one-exception  a.btn:hover, .one-exception a .btn:hover, .one-exception .btn a:hover {
+    text-decoration: none !important;
+    transition: .3s;
+    filter: brightness(110%);
+    box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.27) inset;
+}
+
+.one-exception .changelog ul {
+	font-size: 1.11rem;
+}
+.one-exception .changelog ul code {
+	font-size: 1em;
+}

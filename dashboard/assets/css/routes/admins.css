@@ -1,0 +1,83 @@
+.edit-wrapper {}
+
+
+.confirm-submit {
+    display: none;
+    flex-direction: column; 
+    gap: 10px;
+}
+
+
+#confirm-delete {
+    margin: 12px 0 10px auto;
+    padding: 12px 10px 15px;
+}
+
+.btn.danger {
+    position: relative;
+    display: block;
+    padding: 12px;
+
+    color: #E1E0C0;
+    background-image: none; 
+    background-color: #632929;
+
+    border: none;
+    box-shadow: none;
+    font-family: var(--fontPrime);
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+#admin-delete .btn.danger.right {
+    margin-right: 10px;
+}
+
+
+.btn.danger:hover, .btn.danger:focus, .btn.danger:active .btn.danger.active {
+    color: #FFF5A5;
+    background-color: #7A1E1E;
+    filter: none;
+}
+
+.btn.danger[disabled] {
+    filter: grayscale(0.32);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.btn.danger [icon] {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+
+
+
+
+
+.btn.dark {
+    padding: 7px 16px;
+    font-size: 1.15rem;
+    color: #607A7C;
+    background-image: linear-gradient(to top, #051314, #151515);
+    border: 1px solid #212b2b;
+    box-shadow: 0 7px 7px -5px #000, 0 0 5px 1px rgba(96, 122, 124, 0.11) inset;
+    filter: brightness(110%);
+}
+
+
+
+/*
+form.css line 209
+.input-btn-assoc {
+    display: flex; 
+    gap: 10px; 
+    align-items: center;
+}
+.input-btn-assoc input, .input-btn-assoc select {
+    margin: 0 0;
+}
+*/

@@ -1,0 +1,66 @@
+
+.ob-page #master-title {
+    margin-bottom: 5px;
+}
+
+.ob-page main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* --- A IMAGEM DE DESTAQUE DO ARTIGO --- */
+.ob-page article img.page-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #333;
+    margin-bottom: 30px;
+    display: block;
+}
+
+/* --- O CORPO DO TEXTO --- */
+.entry {
+    max-width: 940px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 1.25rem;
+}
+.entry p {
+    margin-bottom: 25px;
+    color: #d4d4d4;
+}
+.entry strong, .entry b {
+    font-weight: 700;
+}
+.entry img {
+    display: inline-block;
+}
+.entry a {
+    font-weight: 400;
+}
+.entry a:hover {
+    text-decoration: underline;
+}
+
+
+.admin-edit {
+    max-width: 940px;
+    margin: 30px auto 0;
+}
+.admin-edit a {
+    display: inline-block;
+    background-color: #2a2a2a;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #ff5722;
+    transition: background 0.2s;
+}
+.admin-edit a:hover {
+    background-color: #ff5722;
+    color: #161616;
+}

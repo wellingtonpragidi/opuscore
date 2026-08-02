@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Ubuntu';
+    font-display: swap;
+    src: url("<?php echo dash_url('assets/fonts/Ubuntu.ttf') ?>") format('truetype');
+}
+
+@font-face {
+    font-family: 'Muli';
+    font-display: swap;
+    src: url("<?php echo dash_url('assets/fonts/Muli.ttf') ?>") format('truetype');
+}
+
+@font-face {
+    font-family: 'SrcCode';
+    font-display: swap;
+    src: url("<?php echo dash_url('assets/fonts/SrcCode.ttf') ?>") format('truetype');
+}

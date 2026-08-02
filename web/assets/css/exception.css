@@ -1,0 +1,82 @@
+*, *::before, *::after {
+    outline: 0;
+    box-sizing: border-box;
+}
+body {
+    position: relative;
+    margin: 0 0;
+    font-size: 1.063rem;
+    font-family: system-ui, Segoe UI, Roboto, Oxygen, Ubuntu, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: #42464F;
+    background-color: #BCC3C9;
+    line-height: 1.15;
+}
+.one-exception {
+    position: relative;
+    white-space: normal;
+    width: 750px;
+    max-width: calc( 100% - 20px );
+    min-height: 100px;
+    flex: 0 0 calc( 100% - 20px );
+    margin: 80px auto 0;
+    padding: 30px 25px 25px;
+    border-radius: 1px;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+    background-color: #d9d9d9;
+    border: 2px solid rgba(0, 0, 0, 0.20);
+}
+.one-exception::before, .one-exception::after {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border: 3px double rgba(0, 0, 0, 0.15);
+    z-index: -1;
+}
+.one-exception::before {
+    top: -8px;
+    left: -8px;
+}
+.one-exception::after {
+    bottom: -8px;
+    right: -8px;
+}
+.one-exception details {
+    margin-top: 10px;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.20);
+}
+.one-exception details summary {
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.one-exception details[open] summary {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+}
+.one-exception details ul {
+    font-family: 'SrcCode', Consolas, monospace;
+}
+.one-exception details ul em {
+    font-family: 'SrcCodeIt', 'SrcCode', Consolas, monospace;
+    font-style: italic;
+    color: #005EFF;
+}
+.one-exception code {
+    font-size: 1.18rem;
+    color: #6D94B6;
+}
+.one-exception code.class-name {
+    font-size: 1.22rem;
+    filter: brightness(85%);
+    font-weight: bold;
+    font-style: italic;
+}
+.one-exception a {
+    color: #783739;
+}
+.one-exception a:hover {
+    text-decoration: underline;
+}

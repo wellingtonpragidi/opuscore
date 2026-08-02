@@ -1,0 +1,21 @@
+.template > div {
+    position: relative;
+    background-color: #1c2420;
+    border: 1px solid #675D37;
+}
+.template.active > div {
+    filter: brightness(1.5);
+}
+.template.active > div img {
+    filter: brightness(0.75);
+}
+.template .action {
+    padding: 10px 15px;
+}
+.template .action h3 {
+    margin: 0 0;
+    float: left;
+}
+.template .action button {
+    float: right;
+}

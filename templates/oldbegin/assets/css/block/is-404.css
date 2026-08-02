@@ -1,0 +1,35 @@
+main {
+    display: grid;
+    place-items: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 6rem;
+    line-height: 1;
+    color: #ff5722;
+    margin: 0 0 10px 0;
+    animation: shake 0.3s ease-in-out infinite;
+}
+
+main h2 {
+    font-size: 1.8rem;
+    margin: 0 0 15px 0;
+}
+
+main p {
+    font-size: 1.1rem;
+    color: #a3a3a3;
+    max-width: 400px; 
+    margin: 0 auto 30px auto;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}

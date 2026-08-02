@@ -1,0 +1,35 @@
+#categories label, #categories input, #categories select, #categories textarea {
+    display: block;
+}
+#categories label {
+    margin-top: 25px;
+}
+#categories label:first-child {
+    margin-top: 0;
+}
+
+form#category {
+    width: 100%;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 400px;
+}
+#category .article {
+    margin-top: 44px;
+}
+#category .aside {
+    position: relative;
+    margin-top: 44px;
+    padding: 10px;
+    border: 1px solid #217178;
+}
+#category .aside label[for=upload] {
+    margin-top: 0;
+    cursor: pointer;
+}
+#category label, #category input, #category select, #category textarea {
+    display: block;
+}
+#category label {
+    margin-top: 25px;
+}

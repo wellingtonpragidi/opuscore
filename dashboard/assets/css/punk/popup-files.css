@@ -1,0 +1,148 @@
+#files.popup .modal_header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    position: relative;
+    height: 55px;
+    border-bottom: 2px solid #000;
+}
+#files.popup .upload-area {
+    position: relative;
+    padding: 8px 12px;
+}
+#files.popup [for=upload] {
+    display: inline-block;
+    padding: 9px 18px;
+    font-size: 1.125rem;
+    font-family: 'Muli', system-ui, sans-serif;
+    border-radius: 2px;
+    user-select: none;
+}
+.upload input[type=file] {
+    display: none !important;
+}
+#files.popup [icon=close].popup_close { /* remove icon padrao popup.js */
+    display: none;
+}
+/**-----------------------------------
+ * Altera todo o padrao por um botao e exibe caminho com nome do arquivo */
+.filename {
+    font-size: 1.05rem;
+    color: inherit;
+    font-family: 'SrCode', monospace;
+}
+#files.popup .controls {
+    position: relative;
+}
+#files.popup .controls [icon=close] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    border-left: 2px solid #000;
+    box-shadow: 1px 0 rgba(255, 255, 255, 0.11) inset;
+    cursor: pointer;
+}
+#files.popup .controls [icon=close] .ico {
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #31a9b4;
+}
+#files.popup .controls [icon=close] .ico:hover {
+    color: #73d0d9;
+}
+#files.popup .modal_main {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 55px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0 0;
+}
+#files.popup .modal_main::before, #files.popup .modal_main::after {
+    display: table;
+    content: "";
+    clear: both;
+}
+#callback, #box-insert {
+    position: relative;
+    height: 100%;
+    float: left;
+    padding: 10px;
+}
+#callback {
+    width: 74%;
+    overflow-y: auto;
+}
+#callback #gallery {
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+}
+#callback #gallery input[type=radio] {
+    display: none;
+}
+
+
+
+#box-insert {
+    width: 26%;
+    border-left: 2px solid #000;
+    box-shadow: 1px 0 rgba(255, 255, 255, 0.11) inset;
+    overflow-y: auto;
+}
+#details {
+    position: relative;
+    height: calc(100% - 75px);
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+}
+#box-insert h3 {
+    margin: 0 0 5px;
+    font-weight: 400;
+    font-size: 1.04rem;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+#box-insert #info p {
+    font-size: 0.9rem;
+}
+#box-insert .purl {
+    margin-bottom: 5px;
+    margin-top: 18px;
+}
+#edit-alttext {
+    margin: 13px 0;
+    padding: 10px 0 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+#box-insert label[for=std], #box-insert label[for=lg], #box-insert label[for=md], #box-insert label[for=sm] {
+    font-size: .75rem;
+}
+#box-insert input[type=url] {
+    width: 100%;
+    padding: 5px 5px;
+    height: 28px;
+    font-size: 0.82rem;
+    margin-bottom: 8px;
+}
+/*#box-insert label.fileurl {
+    margin-top: 25px;
+    opacity: 0.6;
+}
+#file-url {
+    opacity: 0.6;
+    color: #000 !important;
+}*/
+#box-insert .delete_media {
+    margin: 16px 0 10px auto;
+    text-align: right;
+}
+#inserfile {
+    position: relative;
+    display: block;
+    margin: 20px auto;
+}

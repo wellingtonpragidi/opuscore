@@ -1,0 +1,18 @@
+#punk #foot {
+    position: relative;
+    padding: 5px 15px;
+    height: 27px;
+}
+#punk #foot::after {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    content: 'Punk';
+    font-family: 'Ubuntu', sans-serif;
+    color: #675D37;
+    opacity: .5;
+}
+#punk #foot #range-parent-element {
+    display: inline-block;
+    font-family: 'srcCode';
+}
