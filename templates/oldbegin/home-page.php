@@ -34,7 +34,7 @@
     <section id="news">
         <article>
             <h2>Artigos Recentes</h2>
-            <?php articles_recents() ?>
+            <?php posts_recents() ?>
         </article>
 
         <aside>

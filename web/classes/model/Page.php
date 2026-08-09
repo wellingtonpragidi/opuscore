@@ -105,7 +105,7 @@ class Page extends Model {
      * $pages = pages_find( ['home-page, about'], null ); 
      * foreach( $pages as $page )
      */
-    public function find( string|array $slugs, ?string $scope = 'large' ): array {
+    public function find( string|array $slugs ): array {
         $list = [];
 
         if( empty($slugs) ) {
@@ -113,14 +113,16 @@ class Page extends Model {
         }
         
         $slugs = (array) $slugs;
-        $scope ??= '';
 
         $placeholders = implode( ', ', array_fill(0, count($slugs), '?') );
 
         $cmd = $this->conn->prepare("
             SELECT p.ID, p.title, p.content, p.segment, p.slug, m.attachment 
-            FROM pages AS p 
-            LEFT JOIN medias AS m ON m.related_id = p.ID AND m.related_type = ?
+            FROM pages p 
+
+            LEFT JOIN medias m 
+                ON m.related_id = p.ID AND m.related_type = ?
+
             WHERE p.status = 1 AND p.slug IN ($placeholders)
         ");
 
@@ -129,13 +131,12 @@ class Page extends Model {
         while( $row = $cmd->fetch(PDO::FETCH_ASSOC) ) {
             $bind = new Assign;
             
-            $bind->ID         = $row['ID'];
-            $bind->title      = $row['title'];
-            $bind->content    = $row['content'];
-            $bind->URL        = URL::root($row['segment'] ?? '');
-            $bind->attachment = json_decode($row['attachment'] ?? '');
-            /*$attachments      = json_decode($row['attachment'] ?? '');
-            $bind->attachment = upload_url($attachments->$scope ?? '');*/
+            $bind->ID      = $row['ID'];
+            $bind->title   = $row['title'];
+            $bind->content = $row['content'];
+            $bind->URL     = URL::root($row['segment'] ?? '');
+
+            $bind->attachment = Ensure::object($row['attachment']);
 
             $list[] = $bind;
         }

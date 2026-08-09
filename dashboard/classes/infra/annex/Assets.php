@@ -131,8 +131,8 @@ class JavaScript {
 
     public function editors(): string {
         if( editor_is('punk') ) {
-            $js  = $this->sys->append_script( 'routes/editor/punk', null );
-            $js .= $this->sys->append_script( 'routes/editor/punk-popup-media', null );
+            $js  = $this->sys->append_script( 'routes/editor/punk/punk', null );
+            $js .= $this->sys->append_script( 'routes/editor/punk/punk-popup-media', null );
 
             return $js;
         }
@@ -152,8 +152,8 @@ class JavaScript {
             return $js;
         }
         else if( editor_is('ace') ) {
-            $js  = $this->sys->append_script( 'routes/editor/ace', null );
-            $js .= $this->sys->append_script( 'routes/editor/ace-init', null );
+            $js  = $this->sys->append_script( 'routes/editor/ace/ace', null );
+            $js .= $this->sys->append_script( 'routes/editor/ace/init', null );
             
             return $js;
         }

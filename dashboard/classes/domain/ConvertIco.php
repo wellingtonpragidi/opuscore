@@ -252,19 +252,19 @@ class ConvertIco {
         # detectar tipo de imagem entrada
         switch( $type ) {
             case IMAGETYPE_PNG:
-                $image = imagecreatefrompng( $file );
+                $image = @imagecreatefrompng( $file );
             break;
             case IMAGETYPE_JPEG:
-                $image = imagecreatefromjpeg( $file );
+                $image = @imagecreatefromjpeg( $file );
             break;
             case IMAGETYPE_GIF:
-                $image = imagecreatefromgif( $file );
+                $image = @imagecreatefromgif( $file );
             break;
             case IMAGETYPE_BMP:
-                $image = imagecreatefrombmp( $file );
+                $image = @imagecreatefrombmp( $file );
             break;
             case IMAGETYPE_WEBP:
-                $image = imagecreatefromwebp( $file );
+                $image = @imagecreatefromwebp( $file );
             break;
             default:
                 return false;

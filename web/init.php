@@ -13,7 +13,7 @@ $router = $container->make('Router');
 $fileannex = match( Router::case() ) {
     'categories' => 'categories.php',
     'page'       => 'page.php',
-    'article'       => 'article.php',
+    'article'    => 'article.php',
     'user'       => 'user.php',
     default      =>  null,
 };

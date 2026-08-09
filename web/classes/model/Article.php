@@ -79,6 +79,8 @@ class Article extends Model {
 
     # usado para exibir articles recentes em sidebars */
     public function recents( int $limit ): array {
+        $list = [];
+
         $cmd = $this->conn->prepare("
             SELECT 
                 p.title, p.segment, p.created, m.attachment 
@@ -92,14 +94,17 @@ class Article extends Model {
             ORDER BY p.ID DESC 
             LIMIT $limit
         ");
-        $cmd->execute([ URL::pathname(), 1, 'article' ]);
-        $list = [];
+
+        $cmd->execute([ 'article', URL::pathname(), 1 ]);
+
         while( $row = $cmd->fetch(PDO::FETCH_ASSOC) ) {
             $bind = new Assign;
+
             $bind->title      = $row['title'];
             $bind->created    = $row['created'];
-            $bind->URL        = URL::root( $row['segment'] );
+            $bind->URL        = site_url( $row['segment'] );
             $bind->attachment = json_decode( $row['attachment'] ?? '' );
+
             $list[] = $bind;
         }
 

@@ -103,7 +103,7 @@ class Upgrade {
         ini_set('max_execution_time', 300);
         ini_set('memory_limit', '300M');
 
-        $upgrade_dir   = UPLOAD_DIR . 'packages/upgrades/';
+        $upgrade_dir   = STORAGE_DIR . 'upgrades/';
         $zip_file_path = $upgrade_dir . trim($zip_file_name);
         $log_path      = $upgrade_dir . 'upgrade.log';
 
@@ -298,22 +298,22 @@ class Upgrade {
 
 
     /**
-     * -------------- HTTP : https://opuscore.dev/packages/upgrades/
-     * -------------- Cache : .../uploads/upgrades/*.cache
+     * -------------- HTTP  : https://opuscore.dev/packages/upgrades/
+     * -------------- Cache : .../storage/upgrades/*.cache
      */
 
     /**
      * Busca o conteudo de URL remota, utilizando um sistema de cache baseado em arquivo.
      *   ↓  ↓  ↓  ↓  ↓          ↓  ↓  ↓  ↓  ↓  ↓
      * Prioriza a leitura do arquivo em cache local se existir e nao estiver expirado.
-     * Do contrario, tenta buscar o conteudo remotamente usando `file_get_contents` com um contexto de stream configurado
+     * Do contrario, tenta buscar o conteudo remotamente usando `file_get_contents` 
      */
     public static function read_file( string $filename ): ?string {
         $cache_expires = 172800; # 48h
 
         $remote_file = ENGINE_URL . '/packages/upgrades/' . $filename;
 
-        $cache_dir = UPLOAD_DIR . 'packages/upgrades/';
+        $cache_dir = STORAGE_DIR . 'upgrades/';
 
 
         if( ! is_dir($cache_dir) ) {
@@ -354,6 +354,7 @@ class Upgrade {
 
         if( self::is_valid_remote_content($filename, $content) ) {
             Ensure::writeLock( $cached_file, $content );
+            
             return $content;
         }
 
@@ -388,7 +389,7 @@ class Upgrade {
             exit;
         }
 
-        $dest_file = UPLOAD_DIR . 'packages/upgrades/' . $zip_name;
+        $dest_file = STORAGE_DIR . 'upgrades/' . $zip_name;
 
         if( ! is_dir(dirname($dest_file)) ) {
             mkdir( dirname($dest_file), 0755, true );
@@ -465,7 +466,7 @@ class Upgrade {
 
         $remote_file = ENGINE_URL . '/packages/upgrades/' . $filename;
         
-        $cache_dir = UPLOAD_DIR . 'packages/upgrades/';
+        $cache_dir = STORAGE_DIR . 'upgrades/';
 
         $tmp_file = $cache_dir . $filename . '.tmp';
 

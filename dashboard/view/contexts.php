@@ -6,7 +6,7 @@ if( INPUT::formSubmitted() ) {
 
 $insert = dash_url('contexts/insert');
 
-if( Count::contexts() === 0 ) :
+if( count( get_contexts() ) === 0 ) :
 
     echo <<<HTML
     <div class="mt40 mb25 ml10">

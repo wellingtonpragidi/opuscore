@@ -67,6 +67,8 @@
 
         xhr.addEventListener('load', function() {
             if( xhr.status >= 200 && xhr.status < 300 ) {
+                OpusCore.debug(this.response);
+                
                 result.innerHTML = this.response;
 
                 window.setTimeout(function() {

@@ -54,15 +54,15 @@ class ImageHandler {
         }
 
         # Usa caminho passado no argumento ou o padrao do ano/mes/ atual
-        $relative_path = ($args['path'] ?? null) ?: date('Y/m/');
+        $relative_path = $args['path'] ?? date('Y/m/');
         
 
-        $absolute_path = UPLOAD_DIR . $relative_path;
+        $abs_path = UPLOAD_DIR . $relative_path;
 
 
-        if( ! is_dir($absolute_path) ) {
+        if( ! is_dir($abs_path) ) {
 
-            if( ! mkdir($absolute_path, 0755, true) ) {
+            if( ! mkdir($abs_path, 0755, true) ) {
 
                 return false;
             }
@@ -72,7 +72,7 @@ class ImageHandler {
 
         $data = [
             'input'    => $args['input'],
-            'abs_path' => $absolute_path,
+            'abs_path' => $abs_path,
             'filename' => $args['filename'] . '.' . $ext,
             'width'    => $args['width'],
             'height'   => $args['height'],

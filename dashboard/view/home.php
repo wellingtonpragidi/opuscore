@@ -20,13 +20,13 @@ if( Upgrade::has() ) :
 
         ?>
         <div id="in-upgrade">
-            <h3 class="mt0">Nova versão disponível: one <?= $upgrade['latest_version'] ?></h3>
+            <h3 class="mt0">Nova versão disponível: opuscore <?= $upgrade['latest_version'] ?></h3>
             <p>
                 <span icon="calendar"></span> 
                 <em class="fs15"> <?= $upgrade['release_date'] ?></em>
             </p>
             <details>
-                <summary>Últimas alterações:</summary>
+                <summary>Informações:</summary>
                 <div class="changelog">
                     <?php echo $markdown->text( $changelog ) ?>
                 </div>

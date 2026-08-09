@@ -26,7 +26,9 @@ class OpusSessionHandler implements SessionHandlerInterface {
         }
 
         if( ! is_writable($this->savepath) ) {
-            throw new OpusException('O diretório de armazenamento da sessão não é gravável', 'warn');
+            throw new OpusException(
+                'O diretório de armazenamento da sessão não é gravável', 'warn'
+            );
         }
     }
 
@@ -156,118 +158,3 @@ class OpusSessionHandler implements SessionHandlerInterface {
         return $dir . '/' . "session_{$safe}";
     }
 }
-/*
-class OpusSessionHandler implements SessionHandlerInterface {
-    
-    private $savepath;
-
-    public function __construct() {
-        $parts = explode( '/', DIR );
-
-        if( IS_LOCAL ) {
-            # Pega o primeiro diretorio servidor local, apos "C:/" Windows "/" Linux e Mac
-            # /wamp/ ou /wamp64/ Windows, /var/ Linux, /Applications/ Mac e xamp para os tres
-            $userDIR = $parts[0] . '/' . $parts[1];
-        }
-        else {
-            # Pega o primeiro diretorio que geralmente se chama `/home/`
-            $userDIR = $parts[0] . '/' . $parts[1] . '/' . $parts[2];
-        }
-
-        $this->savepath = $userDIR . '/session-storage';
-
-        if( ! is_dir($this->savepath) ) {
-            # 0700 = so o usuario do PHP tem acesso
-            mkdir( $this->savepath, 0700, true );
-        }
-
-        if( ! is_writable($this->savepath) ) {
-            throw new OpusException('O diretório de armazenamento da sessão não é gravável', 'warn');
-        }
-
-    }
-
-
-    public function getSavePath(): string {
-        return $this->savepath;
-    }
-
-
-    public function open( string $savepath, string $sessioname ): bool {
-        return true;
-    }
-
-
-    public function close(): bool {
-        return true;
-    }
-
-
-    public function read( string $id ): string {
-        $file = "{$this->savepath}/session_{$id}";
-
-        if( ! file_exists($file) ) {
-            return '';
-        }
-
-        $data = @file_get_contents( $file );
-
-        if( $data === false ) {
-            return '';
-        }
-
-        return $data === false ? '' : $data;
-    }
-
-
-    public function write( string $id, string $data ): bool {
-        $file = "{$this->savepath}/session_{$id}";
-        
-        $content = Ensure::writeLock( $file, $data, Ensure::FILE_HANDLING_LOCK );
-
-        # permissoes do arquivo: 0600 = escrita e leitura para o proprietario, nada mais para ninguem
-        @chmod( $file, 0600 );
-
-        return $content !== false;
-    }
-
-
-    public function destroy( string $id ): bool {
-        $file = "{$this->savepath}/session_{$id}";
-        if( file_exists($file) ) {
-            unlink($file);
-        }
-
-        return true;
-    }
-
-
-    public function gc( int $lifetime ): int|false {
-        $count = 0;
-        foreach( glob("{$this->savepath}/session_*") as $file ) {
-            error_log('[gc parametro $lifetime] valor: '.$lifetime);
-            if( filemtime($file) + $lifetime < time() ) {
-                if( unlink($file) ) {
-                    $count++;
-                }
-            }
-        }
-
-        return $count;
-    }
-
-
-        $dir = 'C:/wamp/session-storage';
-        $max = 2628000;
-        $now = time();
-        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
-        foreach ($it as $file) {
-            if ($file->isFile() && str_starts_with($file->getFilename(), 'session_')) {
-                if ($file->getMTime() + $max < $now) {
-                    @unlink($file->getPathname());
-                }
-            }
-        }
-
-}
-*/

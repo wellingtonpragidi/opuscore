@@ -3,14 +3,15 @@ declare( strict_types = 1 );
 
 
 /**
- * @see https://opuscore.dev/x @docx
+ * @see https://opuscore.dev/site_logo
  * @usage ALL
  */
 function site_logo( array $args = []  ): void {
     $filepath = $args['filepath'] ?? 'assets/img/logo.svg';
-    $alt      = $args['alt'] ?? escattr( site_title() );
-    $width    = Ensure::tryInt( $args['width'] ?? null );
-    $height   = Ensure::tryInt( $args['height'] ?? null );
+    $alt      = $args['alt'] ?? Ensure::attr( site_title() );
+
+    $width    = (int) $args['width'] ?? null;
+    $height   = (int) $args['height'] ?? null;
     
     $logo_url = template_url( $filepath );
 
@@ -64,11 +65,7 @@ function master_title( array $args = [] ): void {
 
 /**
  * @see https://opuscore.dev/functions/category_title
- * 
- * @todo atualizacao com quebra de compatibilidade
- * @changed :
- * # removido escolha de tag que já por padrao era: 'tag' => 'h1', passando exibir h1 direto
- **/
+ */
 function category_title( array $args = [] ): void {
     if( ! is_category() ) {
         return;
@@ -94,8 +91,6 @@ function category_title( array $args = [] ): void {
 
 /**
  * @see https://opuscore.dev/functions/category_description
- * 
- * @todo atualizacao com quebra de compatibilidade
  */
 function category_description( array $args = [] ): void {
     $dscpt = Container::instance()->make('Category')->content();
@@ -119,11 +114,6 @@ function category_description( array $args = [] ): void {
 
 /**
  * @see https://opuscore.dev/functions/search_title
- * 
- * @todo atualizacao com quebra de compatibilidade
- * @changed :
- * # removido escolha de tag que já por padrao era: 'tag' => 'h1', passando exibir h1 direto
- * # classe padrao do 'prefix' antes era query-prefix agora query-label
  */
 function search_title( array $args = [] ): void {
     if( ! is_query() ) {
@@ -185,13 +175,13 @@ function articles_paginator(): void {
 
 
 /**
- * @see 
+ * @see https://opuscore.dev/functions/pages_find
  * @usage ALL
  */
-function pages_find( string|array $slugs, string $scope = 'larger' ): array {
+function pages_find( string|array $slugs ): array {
     $page = Container::call('Page');
 
-    return $page->find( $slugs, $scope ); 
+    return $page->find( $slugs ); 
 }
 
 
@@ -209,20 +199,28 @@ function escattr( ?string $string ): string {
 /**
  * @see https://opuscore.dev/functions/html_class
  * */
-function selector_value( string $prefix ): void {
-    echo Router::selector_value($prefix);
+function html_class(): void {
+    $value  = Router::selector_values();
+
+    echo 'class="' . $value . '"';
 }
-function html_class( string $prefix ): void {
-    echo Router::html_class($prefix);
-}
+
+/**
+ * @see https://opuscore.dev/functions/html_id
+ * */
 function html_id( string $prefix ): void {
-    echo Router::html_id($prefix);
+    $values   = Router::selector_values();
+    $selector = explode( ' ', $values );
+    $value    = $prefix . '-' . $selector[0];
+
+    echo 'id="' . $value . '"';
 }
 
 
 
 
 /**
+ * @see https://opuscore.dev/functions/access_url
  * retorna a url da rota publica
  * @param $value | valor da query string 'action' 
  * @param $queries | sequencia de query(ies) strings, ex: '&chave=valor'
@@ -236,6 +234,7 @@ function access_url( string $value, string $queries = '' ): string {
 }
 
 /**
+ * @see https://opuscore.dev/functions/web_access_url
  * retorna a url fisica apontando diretamente para o diretorio
  * @param $extend | estender a url para subdiretorios e arquivos
  */
@@ -288,6 +287,9 @@ function admin_edit( string $display = 'Editar' ): void {
 
 
 
+/**
+ * @see https://opuscore.dev/subsystems/feed-async
+ */
 function feed_async( array $args = [] ): void {
     Hook::append_action( 'feed_async', function() use ($args) {
         require annex_path('feed-async.php');
@@ -295,7 +297,9 @@ function feed_async( array $args = [] ): void {
 }
 
 
-
+/**
+ * @see https://opuscore.dev/functions/icon
+ */
 function icon( string $name, int $width = 20, int $height = 20 ): string {
     require annex_path('icons.php');
 
@@ -303,6 +307,9 @@ function icon( string $name, int $width = 20, int $height = 20 ): string {
 }
 
 
+/**
+ * @see https://opuscore.dev/functions/shares
+ */
 function shares( array $args = [] ): string {
     require annex_path('shares.php');
 
@@ -347,7 +354,7 @@ function foot(): void {
 
     block_script("
         const BASE_URL = '" . URL::root() . "';
-        const TEMP_URL = '" . template_url() . "/';
+        const TEMP_URL = '" . template_url() . "';
     ");
 
     if( is_article() && has_resource('comment_area') ) {
@@ -377,15 +384,6 @@ function append_script( string $path, string $v = '', string $attrs = '' ): void
     $url = template_url( $path . $version );
 
     echo "<script src=\"{$url}\"{$attributes}></script>\n";
-}
-/**
- * @deprecated use append_script()
- **/
-function add_script( string $path, string $version = '', string $attributes = '' ): void {
-    $attrs = empty( $attributes ) ? '' : " {$attributes}";
-    $v = empty( $version ) ? '' : "?v={$version}";
-    $url = template_url( $path . $v );
-    echo "<script src=\"{$url}\"{$attrs}></script>\n";
 }
 
 
@@ -429,33 +427,30 @@ function block_script( string $script ): void {
 
     echo "<script>\n" . implode( "\n", $out ) . "\n</script>\n";
 }
+
+
+
 /**
- * @deprecated use block_script()
- **/
-function inline_script( string $script ): void {
-    block_script( $script );
-}
+ * 
+ * @see https://opuscore.dev/functions/funcoes-para-inclusao-de-estilos
+ * 
+ * block_style(...) - append_style(...) - import_style(...)
+ */
 
-
-
-
-function block_style( string $css ): void {
+function block_style( string $css, bool $abs_path = true ): void {
+    if( $abs_path ) {
+        $css = TEMPLATE_PATH . $css;
+    }
+    
     $content = file_get_contents($css);
 
     echo "<style>\n" . compress_CSS($content) . "\n</style>\n";
-}
-/**
- * @deprecated use block_style()
- **/
-function inline_style( string $css ): void {
-    block_style( $css );
-    
 }
 
 function append_style( string $path, string $v = '', string $attrs = '' ): void {
     $attributes = empty($attrs) ? '' : " {$attrs}";
     $version    = ($v === '') ? '' : "?v={$v}";
-    $url        = template_url( $path . $v );
+    $url        = template_url( $path . $version );
 
     echo "<link rel=\"stylesheet\" href=\"{$url}{$version}\"{$attributes} />\n";
 }
@@ -484,56 +479,16 @@ function resources( string $action, string $key ): bool {
     return false;
 }
 
+/**
+ * @see https://opuscore.dev/functions/append_resource
+ */
 function append_resource( string $key ): void {
     resources('append', $key);
 }
 
+/**
+ * @see https://opuscore.dev/functions/has_resource
+ */
 function has_resource( string $key ): bool {
     return resources('has', $key);
 }
-
-
-
-
-
-/**
- * ----------------- Context ----------------------
- * 
- * @deprecated use os metodos estaticos da classe Context
- */
-/*function context( string $name ): void {
-    echo Context::value($name);
-}
-function get_context( string $name ): string {
-    return Context::value($name);
-}
-
-function context_title( string $name ): void {
-    echo Context::title($name);
-}
-function get_context_title( string $name ): string {
-    return Context::title($name);
-}
-
-function context_content( string $name ): void {
-    echo Context::value($name);
-}
-
-function context_section( string $name ): void {
-    echo Context::section($name);
-}
-function get_context_section( string $name ): string {
-    return Context::section($name);
-}
-
-function get_context_basename( string $name ): string {
-    return Context::basename($name);
-}
-function get_context_filename( string $name ): string {
-    return Context::filename($name);
-}
-function get_context_filepath( string $name ): string {
-    return Context::filepath($name);
-}*/
-# ----------------- Context ----------------------
-

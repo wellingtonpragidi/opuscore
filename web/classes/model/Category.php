@@ -36,9 +36,11 @@ class Category extends Model {
         $cmd = $this->conn->prepare("
             SELECT c.ID, c.name, c.parent, c.segment, c.content, m.attachment 
             FROM categories c 
+
             LEFT JOIN medias m 
-            ON m.related_id = c.ID AND m.related_type = 'category-article' 
-            {$WHERE}
+                ON m.related_id = c.ID AND m.related_type = 'category-article' 
+
+            $WHERE
             ORDER BY c.parent DESC, c.name DESC
         ");
 
@@ -71,7 +73,7 @@ class Category extends Model {
             $bind->parent     = $row['parent'];
             $bind->content    = $row['content'];
             $bind->segment    = $row['segment'];
-            $bind->attachment = json_decode( $row['attachment'] ?? '' );
+            $bind->attachment = Ensure::object($row['attachment']);
 
             # true se categoria tiver filhos
             if( ! empty($hierarchy[$bind->ID]) ) {
@@ -232,16 +234,30 @@ class Category extends Model {
                 }
             }
 
-            // if( ! empty($hierarchy[$cat['ID']]) )
-            // $class[] = 'hasub';
 
             $class = [];
+            /**
+             * if( ! empty($hierarchy[$cat['ID']]) ) {
+             *     $class[] = 'hasub';
+             * }
+            */
+
             if( $active !== '' ) {
                 $class[] = 'active';
             }
+
             if( $is_last ) {
                 $class[] = 'last-item';
             }
+
+            /**
+             * Isso faz adicional class="final-item" ao ultimo <li> 
+             * filho direto do primeiro <ul>. Obs: Ele pode ser um <li> com filhos (.hasub)
+             * if( $is_last && $level === 0 ) {
+             *     $class[] = 'final-item';
+             * }
+             */
+
             $classes = count($class) > 0 ? ' class="' . implode(' ', $class) . '"' : '';
 
             $html .= '<li' . $classes . '>';

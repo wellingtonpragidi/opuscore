@@ -1,24 +1,24 @@
 <?php
-# get_page('ID');
+# page_field('ID');
 
 function page_title(): void {
-    echo get_page('title');
+    echo page_field('title');
 }
 
 function page_content(): void {
-    echo get_page('content');
+    echo page_field('content');
 }
 
 function page_url(): void {
-    echo URL::root( get_page('segment') ?? '' );
+    echo URL::root( page_field('segment') );
 }
 
 function page_lastmod(): void {
-    echo get_page('lastmod') ?? '';
+    echo page_field('lastmod');
 }
 
-function get_page( string $column ): string {
+function page_field( string $column ): string {
     $page = Container::call('Page');
 
-    return $page->$column(); 
+    return $page->$column() ?? ''; 
 }

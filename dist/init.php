@@ -93,12 +93,12 @@ declare( strict_types = 1 );
      **/
 
     ## start opuscore version
-    define( 'VERSION', '1.0.0' );
+    define( 'VERSION', '1.1.0' );
     ## end opuscore version
 
 
     ## start opuscore DB version
-    define( 'DB_VERSION', '1.1.0' );
+    define( 'DB_VERSION', '2.0.0' );
     ## end opuscore DB version
 
 
@@ -125,7 +125,7 @@ declare( strict_types = 1 );
     define( 'MIN_MYSQL_VERSION', '8.0' );
 
     # versao minima do banco de dados MariaDB
-    define( 'MIN_MARIADB_VERSION', '15.5' );
+    define( 'MIN_MARIADB_VERSION', '10.11' );
 
 # —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
 

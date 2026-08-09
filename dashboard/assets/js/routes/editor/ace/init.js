@@ -1,6 +1,9 @@
 let editor = ace.edit("editor");
+
 editor.setTheme("ace/theme/monokai");
+
 editor.session.setMode("ace/mode/html");
+
 editor.setOptions({
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
@@ -17,8 +20,9 @@ editor.setOptions({
 let textarea = document.getElementById("output");
 editor.setValue(textarea.value);
 
-const EVENTS = ['keydown', 'keyup', 'change', 'input', 'mousedown', 'mouseup', 'click', 'load'];
-EVENTS.forEach(event => {
+const EVENTS = ['keyup', 'input', 'paste', 'drop', 'change'];
+
+EVENTS.forEach( event => {
     editor.session.on(event, function() { 
         // Atualiza o textarea com o conteudo do editor
         textarea.value = editor.getValue();

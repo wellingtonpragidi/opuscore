@@ -60,7 +60,7 @@ if( $action === 'insert' ) {
     ];
 
     if( ArrayExport::apply($name, $array_data, 'contexts/' . $basename) ) {
-        redirect( dash_url('contexts/?id=' . $current_id), 1000 );
+        redirect( dash_url('contexts/update/?id=' . $current_id), 1000 );
         preloader(800);
     } 
     else {

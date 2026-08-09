@@ -1,13 +1,19 @@
-{
-	"name": "Old Begin",
-	"slug": "oldbegin",
-
+{ 
+    "name": "Old Begin",
+    "slug": "oldbegin",
     "template_url": "",
 
-    "author": "Wellington Pragidi",
-    "author_url": "https://webship.dev",
+    "author": { 
+        "title": "Wellington Pragidi",
+        "url": "https://webship.dev"
+    },
 
     "description": "Esse template tem como objetivo oferecer poucos recursos e estruturas descomplicada, para servir como uma base leve, organizada e funcional para diferentes tipos de conteúdo e projetos, facilitando entendimento, edição e adaptação mesmo para quem ainda não conhece o sistema Opus Core.",
 
-    "version": "1.0"
+    "version": "1.1",
+
+    "requires": {
+        "opuscore": "1.1",
+        "php": "8.1"
+    }
 }

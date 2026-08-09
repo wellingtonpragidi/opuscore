@@ -16,7 +16,7 @@ if( $_POST['action'] === 'upgrade' ) {
 
     $return = Upgrade::update_system( $_POST['zip_filename'] );
 
-    if( $return == true ) {
+    if( $return === true ) {
 
         alert_redirect(
             "success discard alert-upgrade",
@@ -27,37 +27,6 @@ if( $_POST['action'] === 'upgrade' ) {
         Upgrade::hidden_upgrade_content();
 
 
-        /*$markers = "## start opuscore version\n" . 
-                   "define( 'VERSION', '" . $_POST['latest_version'] . "' );\n" . 
-                   "## end opuscore version\n";
-
-        $file_init = DIST_DIR . 'init.php';
-
-        $markers = trim($markers);
-        $current = file_get_contents($file_init);
-
-        $start = trim('## start opuscore version');
-        $end   = trim('## end opuscore version');
-        $regex = "/{$start}*?{$end}/s";
-
-        $regex = '/## start opuscore version*?## end opuscore version/s';
-
-        if( preg_match($regex, $current) ) {
-            $current = preg_replace($regex, $markers, $current);
-            Ensure::writeLock( 
-                $file_init, 
-                $current, 
-                Ensure::FILE_HANDLING_LOCK | Ensure::USE_REAL_FILEPATH
-            );
-        } 
-        else {
-            alert(
-                'error alert-upgrade', 
-                'Os marcadores para a atualização da constant <code>VERSION</code> no arquivo <code>' . $file_init . '</code> foram modificados ou removidos.'
-            );
-        }
-
-        ----------- */
         $start = '## start opuscore version';
         $end   = '## end opuscore version';
 

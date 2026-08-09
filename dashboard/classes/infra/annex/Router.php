@@ -236,6 +236,26 @@ class Router {
     }
 
 
+    public function case( $action = false ): string {
+        if( isset(self::$views[$this->segment]) ) {
+
+            if( $action === false ) {
+                $part = explode( '/', $this->segment );
+
+                return $part[0];
+            }
+            else {
+                
+                return $this->segment;
+            }
+        }
+        else {
+
+            return '404';
+        }
+    }
+
+
     private function title_by_query(): ?string {
         if( is_context() ) {
             $context = Container::call('Context');

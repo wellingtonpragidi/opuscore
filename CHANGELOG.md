@@ -1,6 +1,6 @@
 # Registro de alterações
 
-## [1.1.0] - 02/08/2026
+## [1.1.1] - ?/?/2026
 
 ### Adicionado
 Bloqueios contra possíveis registros duplicados para imagem de destaque na tabela `medias`  

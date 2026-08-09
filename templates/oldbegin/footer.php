@@ -4,14 +4,11 @@
 
     <section>
         <div>
-            <?php echo Context::value('resumo_template');
-            // get_context('resumo_template') ?>
+            <?php context('resumo_template') ?>
         </div>
         <div>
-            <h2><?php echo Context::title('recursos');
-            // context_title('recursos') ?></h2>
-            <?php echo Context::value('recursos');
-            // context_content('recursos') ?>
+            <h2><?php context_title('recursos') ?></h2>
+            <?php context('recursos') ?>
         </div>
         <div>
             <h2>Legal</h2>

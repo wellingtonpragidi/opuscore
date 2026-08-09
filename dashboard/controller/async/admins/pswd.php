@@ -5,8 +5,8 @@ if( realpath($_SERVER['SCRIPT_FILENAME']) === __FILE__ ) {
 }
 
 
-if( ! $auth->is_authorized() ) {
-    alert('error', 'Sem autorização para editar conta de outro administrador.');
+if( ! $auth->is_self() ) {
+    alert('error', 'Somente o dono da propria conta pode alterar sua senha.');
 
     exit;
 }

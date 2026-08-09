@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow" />
-    <?php if( file_exists(UPLOAD_DIR . 'favicon/48x48.png') ) : ?>
-    <link rel="shortcut icon" href="<?= upload_url('favicon/48x48.png') ?>">
-    <?php else : ?>
-    <link rel="shortcut icon" href="<?= dash_url('assets/img/favicon.png') ?>">
-    <?php endif; ?>
-    <title><?php echo $router->title_tag() ?></title>
-    <style><?php stylesheets() ?></style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow" />
+<?php if( file_exists(UPLOAD_DIR . 'favicons/48x48.png') ) : ?>
+    <link rel="shortcut icon" href="<?= upload_url('favicons/48x48.png') ?>">
+<?php else : ?>
+    <link rel="shortcut icon" href="<?= dist_img_url('opuscore-favicon.svg') ?>">
+<?php endif; ?>
+<title><?php echo $router->title_tag() ?></title>
+<style><?php stylesheets() ?></style>
 </head>
 <body <?= $router->body_id() ?>>
 

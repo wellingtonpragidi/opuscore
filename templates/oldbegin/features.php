@@ -10,7 +10,7 @@ if( defined('IS_WEB') && IS_WEB ) {
     }
 
 
-    function articles_recents( array $args = [] ): void {
+    function posts_recents( array $args = [] ): void {
         $article = Container::call('Article');
 
         $has_image = (bool) ($args['image'] ?? false);
@@ -31,7 +31,7 @@ if( defined('IS_WEB') && IS_WEB ) {
                 }
             }
 
-            $date = chronos_format($show->created, 'd M');
+            $date = chronos_format( $show->created, 'd M' );
 
             echo "
             <div>

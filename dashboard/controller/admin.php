@@ -106,6 +106,25 @@ if( $action === 'register' ) {
 
 
 if( $action === 'delete' ) {
+
+    # ninguem exclui um master a nao ser ele mesmo
+    if( $auth->is_from_master() && ! $auth->is_self_master() ) { 
+        alert( 
+            'error', 
+            'A conta de um administrador Master não pode ser excluída por outros.' 
+        );
+        exit;
+    }
+
+    if( Count::admins('master') <= 1 ) {
+        alert( 
+            'error', 
+            'Esta conta não pode ser excluída porque é o único administrador Master registrado no sistema.' 
+        );
+        exit;
+    }
+
+    if( $auth->is_self_master() ) {}
     
     $bind->ID   = _POST::int('target_id') ?: URL::int('id');
     $bind->pswd = _POST::str('pswd_confirm_delete');

@@ -291,21 +291,11 @@ class Router {
     }
 
 
-    public static function selector_value( string $prefix = '' ): string {
-        return $prefix . self::$selector_value;
+    public static function selector_values(): string {
+        
+        return self::$selector_value;
     }
 
-    public static function html_class( string $prefix = '' ): string {
-        $class = $prefix . self::$selector_value;
-            
-        return 'class="' . $class . '"';
-    }
-
-    public static function html_id( string $prefix = '' ): string {
-        $class = $prefix . self::$selector_value;
-            
-        return 'id="' . $class . '"';
-    }
 
 
     private function show_404(): void {
@@ -315,10 +305,10 @@ class Router {
         if( ! file_exists( template_path('404.php') ) ) {
             throw new OpusException('Página não encontrada', 'error', 404);
         }
-        self::$case       = '404';
-        $this->basename   = '404';
-        $this->title      = 'Página não encontrada';
-        $this->title_hook = '404_title';
+        self::$case           = '404';
+        $this->basename       = '404';
+        $this->title          = 'Página não encontrada';
+        $this->title_hook     = '404_title';
         self::$selector_value = 'not-found error-404';
         http_response_code(404);
     }

@@ -17,8 +17,20 @@ class Count {
     }
 
 
-    public static function admins(): int {
-        return self::totRows( 'admins' );
+    public static function admins( string $role = '' ): int {
+        self::init(); 
+        $pattern = "SELECT COUNT(*) FROM admins";
+
+        if( $role === 'master' ) {
+            $cmd = self::$conn->prepare("$pattern WHERE role = ?");
+            $cmd->execute([1]);
+        }
+        else {
+            $cmd = self::$conn->prepare($pattern);
+            $cmd->execute();
+        }
+
+        return (int) $cmd->fetchColumn();
     }
 
 
@@ -34,12 +46,6 @@ class Count {
 
     public static function menus(): int {
         return count( Menu::load() );
-    }
-    
-    public static function contexts(): int {
-        require dist_annex('context.php');
-
-        return count($cache);
     }
 
 

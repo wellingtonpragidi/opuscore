@@ -29,7 +29,6 @@ else {
 }
 
 
-
 # Insere os atributos no SVG original
 $svg = preg_replace( '/^<svg\b/', '<svg ' . $attrs, $svg );
 

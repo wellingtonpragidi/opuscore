@@ -6,7 +6,6 @@ define( 'IS_DASHBOARD', true );
 require str_replace( '\\', '/', dirname(__DIR__, 1) ) . '/config.php';
 
 
-
 URL::normalize();
 
 

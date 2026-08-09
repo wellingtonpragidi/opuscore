@@ -10,7 +10,7 @@ class Context {
 
         $list = [];
 
-        foreach( self::datafiles() as $data ) {
+        foreach( get_contexts() as $data ) {
 
             if( ! is_array($data) ) {
                 continue;
@@ -100,7 +100,7 @@ class Context {
         # para selecionar context em select > options quando em insert
         $sections = [];
 
-        foreach( self::datafiles() as $data ) {
+        foreach( get_contexts() as $data ) {
 
             if( ! is_array($data) ) {
                 continue;
@@ -117,10 +117,10 @@ class Context {
     }
 
 
-    public static function exists( string $var ): bool {
-        $vars = self::datafiles();
+    public static function exists( string $name ): bool {
+        $context = get_contexts();
         # o nome da variavel que armazena o array de contexto eh uma chave de array
-        return array_key_exists($var, $vars); 
+        return array_key_exists( $name, $context );
     }
 
 
@@ -131,27 +131,27 @@ class Context {
     public static function delete( string $name, string $basename ): bool {
         $file = STORAGE_DIR . 'contexts/' . $basename . '.php';
 
-        $vars = Provider::include_file_vars($file);
+        $context = Provider::include_file_vars($file);
 
-        if( ! isset($vars[$name]) ) {
+        if( ! isset($context[$name]) ) {
             return false;
         }
         
-        unset($vars[$name]);
+        unset( $context[$name] );
 
         # deleta o arquivo caso nao encontre variavel de array
-        if( empty($vars) ) {
+        if( empty($context) ) {
             unlink($file);
 
             return true;
         }
 
-        return ArrayExport::rewrite( $vars, $file );
+        return ArrayExport::rewrite( $context, $file );
     }
 
 
     public static function show_record(): string {
-        $count = Count::contexts();
+        $count = count( get_contexts() );
 
         return match($count) {
             0 => "<p>Nenhum Contexto</p>",
@@ -203,14 +203,6 @@ class Context {
             flock( $fp, LOCK_UN );
             fclose( $fp );
         }
-    }
-
-
-    
-    private static function datafiles(): array {
-        require dist_annex('context.php');
-
-        return $context;
     }
 
 }

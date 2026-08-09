@@ -1,8 +1,3 @@
-<?php
-/*if( ! is_admin() ) {
-    exit;
-}*/
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -37,5 +32,4 @@
 
 </header>
 
-<div id="content">
-<?php
+<div id="content">   

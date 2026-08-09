@@ -14,12 +14,7 @@
  * - file_location: caminho e nome ou nome base do arquivo PHP que renderiza o conteudo padrao: feed-async.php
  * 
  * Veja mais nas documentacoes
- * 
- * @todo Atualizar documentacoes:
- * @doc Gancho 'loadmore' >>  'feed_async loadmore':
- * @see https://opuscore.dev/hooks/_loadmore_
- * @doc function 'loadmore()' :
- * @see https://opuscore.dev/functions/loadmore
+ * @see https://opuscore.dev/subsystems/feed-async
  */
 
 

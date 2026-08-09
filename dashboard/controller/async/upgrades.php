@@ -13,9 +13,10 @@ if( $_POST['action'] === 'refresh_cache' ) {
     ob_clean();
 
     if( Upgrade::refresh_cache('package.json') ) {
-
-        Upgrade::refresh_cache( 'evidence.json' );
+        
+        # Upgrade::refresh_cache( 'evidence.json' );
         Upgrade::refresh_cache( 'CHANGELOG.md' );
+        
 
         $response = Upgrade::has()
             ? '<a href="' . INPUT::GET('href') . '">Atualização disponível</a>'
@@ -28,6 +29,7 @@ if( $_POST['action'] === 'refresh_cache' ) {
     } 
     else {
         echo "<div class='alert warning mb15'>Cache não atualizado.</div>";
+        
         return;
     }
 }

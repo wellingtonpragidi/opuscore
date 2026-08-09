@@ -15,22 +15,14 @@ declare( strict_types = 1 );
  * @see https://opuscore.dev/functions/shares
  * */
 
-$mode = $args['mode'] ?? 'icon';
-
-
-$h_title = $args['title'] ?? '<div><strong>Compartilhar:</strong></div>';
-
-$size    = (int) ($args['icon_size'] ?? 26);
-
-$except  = is_array($args['except'] ?? null) ? $args['except'] : [];
-
+$except = is_array($args['except'] ?? null) ? $args['except'] : [];
 
 $article = Container::call('Article');
 
-$article_url =  URL::root( $article->target()->segment );
-$title    = rawurlencode( $article->target()->title );
-$url      = rawurlencode( $article_url );
+$title = rawurlencode( $article->target()->title );
 
+$article_url = URL::root( $article->target()->segment );
+$url = rawurlencode( $article_url );
 
 # Esses atributos em "arrow function" nao estao sendo usados  # Mantendo aqui caso algo mude 
 $aria_label = fn($name) => "aria_label=\"Clique para compartilhar no {$name}\"";
@@ -58,23 +50,26 @@ $networks = [
 
 $shares = "<div id=\"shares\">";
 
-$shares .= $h_title;
+$shares .= $args['title'] ?? '<strong>Compartilhar:</strong>';
 
-$render_icon = function( $name ) use ( $mode, $size, $args ) {
+$render_icon = function( string $name ) use ( $args ): string {
+
     $label = strtolower($name);
 
-    # modo atual
-    if( $mode === 'icon' ) {
+    $mode = $args['mode'] ?? 'icon';
+
+    $size = (int) ($args['icon_size'] ?? 26);
+
+    # padrao que pode ser usado com icones de font css ou inserido com javascript
+    if( $mode === 'svg' ) {
         return "<span icon=\"{$label}\" size=\"{$size}\" aria-hidden=\"true\"></span>";
     }
-
-    # modo SVG (usa sua funcao PHP)
-    if( $mode === 'svg' ) {
+    # modo SVG (usa nossa funcao PHP)
+    else if( $mode === 'svg' ) {
         return icon( $label, $size, $size );
     }
-
     # modo personalizado
-    if( $mode === 'customized' && isset($args['customized'][$name]) ) {
+    else if( $mode === 'customized' && isset($args['customized'][$name]) ) {
         return $args['customized'][$name] ?? '';
     }
     
@@ -91,8 +86,9 @@ foreach( $networks as $name => $href ) {
 
     $onclick = "onclick=\"window.open('{$href}', 'page', 'width=700, height=500'); return false;\"";
 
-    $mod = $args['mode'] ?? null;
-    $isValidMode = $mod === null || in_array($mod, ['icon', 'svg', 'customized']);
+    $mode = $args['mode'] ?? null;
+    # se nulo, usa o modo padrao retornado por $render_icon()
+    $isValidMode = $mode === null || in_array( $mode, ['icon', 'svg', 'customized'] );
 
     if( $isValidMode ) {
         $shares .= "<a 
@@ -107,15 +103,9 @@ foreach( $networks as $name => $href ) {
     }
     else {
         exception("Argumento <code>'mode'</code> inválido");
-        return '';
+        return null;
     }
 }
 
-// return $shares .= "</div>";
+
 return $shares . "</div>";
-
-
-
-/*$target = ($label === 'whatsapp') 
-    ? 'target="_blank" rel="nofollow noopener noreferrer"' 
-    : "onclick=\"window.open('{$href}', 'page', 'width=700, height=500'); return false;\"";*/

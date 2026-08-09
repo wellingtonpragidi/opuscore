@@ -184,8 +184,12 @@ class Assign {
     private ?string $nonce;
 
 
-
+    /**
+     * @deprecated */
     private array $dynamo = [];
+
+
+    private object $html;
 
 
 
@@ -195,6 +199,9 @@ class Assign {
 
             $this->{$property} = $value;
         }
+        
+
+        $this->html = new stdClass;
         
 
         $this->related = new stdClass;

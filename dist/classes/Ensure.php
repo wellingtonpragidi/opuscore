@@ -67,7 +67,7 @@ class Ensure {
 
 
     public static function tryInt( mixed $value, int $flags = self::ABSOLUTE_INT ): ?int {
-        if( ! is_int($value) && ! is_string($value) ) {
+        if( is_int($value) && ! is_string($value) ) {
             return null;
         }
 

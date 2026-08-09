@@ -103,13 +103,17 @@ class Auth {
         return $this->is_valid && $this->logged('role') === 1;
     }
 
+    # Verifica se o admin logado eh um admin 'master' e esta em sua propria view
+    public function is_self_master(): bool {
+        return $this->is_master() && $this->logged_id === URL::int('id');
+    }
+
     /**
      * Verifica se o documento/rota eh de um admin que possui a funcao master
      * ***
      * 
-     * Esse metodo nao verifica apenas se o admin logado esta em sua propria rota
-     * 
-     * Verifica se a rota eh de um master, 
+     * Esse metodo nao verifica se o admin logado esta em sua propria view
+     * Verifica se a view eh de um master, 
      *     independente de qual admin esteja no caminho (inclusive ele mesmo)
      */
     public function is_from_master(): bool {
@@ -117,26 +121,21 @@ class Auth {
             return false;
         }
 
-        $cmd = $this->conn->prepare("SELECT 1 FROM admins WHERE role = ? AND ID = ? LIMIT 1");
+        $cmd = $this->conn->prepare("
+            SELECT 1 FROM admins WHERE role = ? AND ID = ? LIMIT 1
+        ");
 
         $cmd->execute([ 1, URL::int('id') ]);
 
         return (bool) $cmd->fetchColumn();
     }
 
-    # Verifica se o admin logado eh um admin 'master' e esta em sua propria rota/documento 
-    public function is_self_master(): bool {
-        return $this->is_master() && $this->logged_id === URL::int('id');
-    }
-
 
     # Verifica se o admin logado possui a funcao 'Master (1) ou Gerenciador (2)'
     public function is_any_manager(): bool {
-        if( ! $this->is_valid ) {
-            return false;
-        }
+        $role = $this->logged('role');
 
-        return $this->logged('role') === 1 || $this->logged('role') === 2;
+        return $this->is_valid && ($role === 1 || $role === 2);
     }
 
 
@@ -159,7 +158,9 @@ class Auth {
 
     # Verifica se o admin logado eh um is_manager() ou se eh o dono da conta
     public function is_authorized(): bool {
-        return $this->is_any_manager() || $this->logged_id === URL::int('id');
+        $is_self = $this->logged_id === URL::int('id');
+
+        return $this->is_valid && ($this->is_any_manager() || $is_self);
     }
 
 
