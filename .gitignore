@@ -1,43 +1,47 @@
-# / 
+
 /.htaccess
-/config.php
+
+# /index.php 
+# /config.php | pertence ao repositorio e esta protegido por skip-worktree
 
 # * 
 favicon.ico
 manifest.json
 robots.txt
-sftp-config.json
-sftp-config.disable.json
-sftp-config.disabled.json
 sitemap.xml
 
-# cache e dados armazenados
-/storage/
+/storage/*
+!/storage/contexts/
+!/storage/contexts/context-increment.txt
+!/storage/menus.php
+!/storage/settings.php
 
-# engine
-/packages/
-
-/uploads/
 
 templates/*
 !templates/oldbegin/
 
+/uploads/*
+!/uploads/.gitkeep
 
-# gerais
-/.anot/
-/.dumps/
-/.misc/
-/.notes/
-error_log
+
+# ------------------------------------ 
+
+sftp-config.json
+sftp-config.disabled.json
+
 logs
+error_log
 *.log
 *.ton
 *.zip
 
-# sistema
+/.anot/
+/.dumps/
+/.misc/
+/.notes/
+
 .DS_Store
 *.db
 
-# editores 
 .vscode/
 .idea/
