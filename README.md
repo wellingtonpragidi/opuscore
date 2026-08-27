@@ -53,11 +53,9 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 
 
 ## Requisitos
-- PHP 8.1+ (Testado com PHP 8.3)
+- PHP `>= 8.1 && < 8.4`
 - MySQL 8.0+ ou MariaDB 10.5+
-- Apache/Nginx:
-    - O Opus Core é utilizado atualmente em ambiente Apache.
-    - Compatibilidade com Nginx ainda não foi oficialmente testada.
+- Apache || Nginx
 - Em **produção**, HTTPS é considerado requisito devido à segurança e compatibilidade com recursos modernos da web.
 
 Extensões PHP necessárias:
