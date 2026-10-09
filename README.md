@@ -53,10 +53,17 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 
 
 ## Requisitos
+<<<<<<< HEAD
 - PHP 8.1+
 - MySQL 8.0+ ou MariaDB 10.5+
 - Apache || Nginx
 - Em **produção** utilizando Apache, HTTPS é considerado requisito
+=======
+- PHP `>= 8.1 && < 8.4`
+- MySQL 8.0+ ou MariaDB 10.5+
+- Apache || Nginx
+- Em **produção**, HTTPS é considerado requisito devido à segurança e compatibilidade com recursos modernos da web.
+>>>>>>> origin/master
 
 Extensões PHP necessárias:
 - PDO

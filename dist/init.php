@@ -93,7 +93,7 @@ declare( strict_types = 1 );
      **/
 
     ## start opuscore version
-    define( 'VERSION', '1.1.0' );
+    define( 'VERSION', '1.2.0' );
     ## end opuscore version
 
 
