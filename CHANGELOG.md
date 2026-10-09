@@ -37,8 +37,3 @@ A contagem de registros e a paginação passam a considerar a categoria selecion
 
 Adicionada proteção contra perda de alterações não salvas em formulários de edição e configuração.  
 Mantidos os dados preenchidos no formulário quando ocorre um erro no envio.
-
-
-
-### Notas
-Observações finais ou alterações que não se enquadram nos títulos acima.
