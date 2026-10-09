@@ -4,7 +4,7 @@
     $formaction = fn($act) => 
         dash_url('controller/async/?route=/settings/image-sizes/&action=' . $act); 
     ?>
-	<form id="img-article" class="cn_50" method="POST" action="<?= $formaction('article') ?>">
+	<form id="img-article" class="cn_50" method="POST" action="<?= $formaction('article') ?>" data-dirty="false">
 		<div class="response"></div>
 		<table>
 		<caption class="fs18">Artigos</caption>
@@ -43,7 +43,7 @@
 		</table>
 		<button class="btn mt10">Salvar alterações</button>
 	</form>
-	<form id="img-page" class="cn_50" method="POST" action="<?= $formaction('page') ?>">
+	<form id="img-page" class="cn_50" method="POST" action="<?= $formaction('page') ?>" data-dirty="false">
 		<div class="response"></div>
 		<table>
 		<caption class="fs18">Páginas</caption>
@@ -74,7 +74,7 @@
 		</table>
 		<button class="btn mt10">Salvar alterações</button>
 	</form>
-	<form id="img-cat" class="cn_50" method="POST" action="<?= $formaction('category') ?>">
+	<form id="img-cat" class="cn_50" method="POST" action="<?= $formaction('category') ?>" data-dirty="false">
 		<div class="response"></div>
 		<table>
 		<caption class="fs18">Categorias</caption>
@@ -97,7 +97,7 @@
 		</table>
 		<button class="btn mt10">Salvar alterações</button>
 	</form>
-	<form id="img-user" class="cn_50" method="POST" action="<?= $formaction('user') ?>">
+	<form id="img-user" class="cn_50" method="POST" action="<?= $formaction('user') ?>" data-dirty="false">
 		<div class="response"></div>
 		<table>
 		<caption class="fs18">Usuários<?= file_exists(TEMPLATE_PATH . 'user.php') ? '' : ' <abbr class="fs14" title="O template não tem o arquivo user.php">(não habilitado)</abbr>' ?></caption>
@@ -114,7 +114,7 @@
 		</table>
 		<button class="btn mt10">Salvar alterações</button>
 	</form>
-    <form id="img-system" class="cn_50" method="POST" action="<?= $formaction('system') ?>">
+    <form id="img-system" class="cn_50" method="POST" action="<?= $formaction('system') ?>" data-dirty="false">
         <div class="response"></div>
         <table>
         <caption class="fs18 cur_help" title="Indicado para uso no painel de controle">Sistema</caption>

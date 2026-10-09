@@ -35,3 +35,5 @@
         endif; ?>
 
     </div>
+
+<?php # </section> fecha em comment-list

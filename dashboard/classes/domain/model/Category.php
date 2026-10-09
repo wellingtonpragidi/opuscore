@@ -84,25 +84,9 @@ class Category extends Model {
 
 
     public function update( Assign $bind ): bool {
-        $columns = ['name', 'parent', 'content', 'type'];
+        $columns = ['name', 'slug', 'parent', 'content', 'type'];
 
-        if( ! parent::hasChanged('categories', $columns, $bind) ) {
-            return false;
-        }
-
-        $columns = implode(' = ?, ', $columns) . ' = ?';
-        
-        $cmd = $this->conn->prepare("UPDATE categories SET $columns WHERE ID = ?");
-
-        $cmd->execute([
-            $bind->name,
-            $bind->parent,
-            $bind->content,
-            $bind->type,
-            $bind->ID
-        ]);
-        
-        return true;
+        return parent::updater('categories', $columns, $bind);
     }
 
 
@@ -175,23 +159,31 @@ class Category extends Model {
      * representando categorias de forma hierarquica e indentada.
      */
     public function select_option(): string {
-        $NOT_ID = URL::has('id') ? 'AND ID != ?' : '';
+        $is_update = URL::query(['not' => 'by', 'has' => 'id']);
+
+        $WHERE = $is_update 
+            ? 'WHERE type = ? AND ID != ?' 
+            : 'WHERE type = ?';
+
         # Busca todas as categorias para o tipo especificado na URL, ordenadas por pai e nome
         $cmd = $this->conn->prepare("
             SELECT ID, name, parent FROM categories 
-            WHERE type = ? {$NOT_ID} 
+            $WHERE 
             ORDER BY parent, name ASC
         ");
 
         $kind  = kind();
         $curID = URL::int('id');
 
-        if( URL::has('id') ) {
+        if( $is_update ) {
+
             $cmd->execute([ $kind, $curID ]);
         }
         else {
+
             $cmd->execute([ $kind ]);
         }
+
         $categories = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
         # Organiza as categorias em um array hierarquico onde a chave eh o ID do pai.
@@ -237,6 +229,7 @@ class Category extends Model {
 
         return $html;
     }
+    
 
     /**
      * Verifica se uma categoria especifica deve estar pre-selecionada em um elemento `<select>`.
@@ -247,19 +240,26 @@ class Category extends Model {
      * @return string A string 'selected' se a categoria deve ser pre-selecionada, caso contrario, uma string vazia.
      */
     public function option_selected( int $id ): string {
-        # Obtem o ID da categoria que esta sendo editada via URL.
-        $current_category_id = URL::int('id');
 
-        # Busca o pai da categoria atualmente em edicao.
-        $cmd = $this->conn->prepare("SELECT parent FROM categories WHERE ID = ?");
-        $cmd->execute([ $current_category_id ]);
-        $row = $cmd->fetch(PDO::FETCH_ASSOC);
+        $option_id  = (int) $id;
 
-        # Se a categoria pai da categoria em edicao for igual ao ID passado, marca como selecionado.
-        $selected = ( $row && (int) $id === (int) $row['parent'] ) ? 'selected' : '';
+        $current_id = URL::int('id');
 
-        return $selected;
+        # Se em edicao de categoria
+        if( URL::query(['not' => 'by', 'has' => 'id']) ) {
+            $cmd = $this->conn->prepare("SELECT parent FROM categories WHERE ID = ?");
+            $cmd->execute([ $current_id ]);
+            $row = $cmd->fetch(PDO::FETCH_ASSOC);
+
+            $parent = $row ? (int) $row['parent'] : 0;
+
+            return $option_id === $parent ? 'selected' : '';
+        }
+        
+        # se <select> estver na listagem de artigos
+        return $option_id === $current_id ? 'selected' : '';
     }
+
 
     /**
      * Gera e retorna uma string HTML para uma tabela completa de categorias.
@@ -318,7 +318,7 @@ class Category extends Model {
                 $fallback  = null;
             }
 
-            $href = dash_url( "articles/category/?id={$cat["ID"]}" );
+            $href = dash_url( "articles/category/?id={$cat['ID']}" );
             ### style="margin-left: ' . $level * 10 . 'px;"
             # Monta a linha da tabela (<tr>) com os dados da categoria e botoes de acao.
             $html .= 
@@ -340,7 +340,7 @@ class Category extends Model {
 
                     <td>' . chronos_format( $cat['created'] ) . '</td>
 
-                    <td class="txt_center">' . $relation->num_added( $cat['segment'] ) . '</td>
+                    <td class="txt_center">' . $relation->num_added( $cat['ID'] ) . '</td>
 
                     <td>
                         <button 
@@ -425,7 +425,7 @@ class Category extends Model {
 
             $id = array_shift($queue);
 
-            # recalcula segment deste noh
+            # recalcula segment deste no-h
             $segment = $this->build_segment($id);
             $this->update_segment( $segment, $id );
 
@@ -446,14 +446,18 @@ class Category extends Model {
     }
 
 
+    public function slug( ?int $id = null ): ?int {
+        if( $id === null ) {
+            return null;
+        }
 
-    # Se categoria tem um parent, retorna o slug do mesmo
-    public function parent( string $parent ): string {
         $cmd = $this->conn->prepare("SELECT slug FROM categories WHERE ID = ?");
-        $cmd->execute([ $parent ]);
-        $row = $cmd->fetch( PDO::FETCH_ASSOC );
 
-        return $row ? $row['slug'] : '';
+        $cmd->execute([ $id ]); 
+
+
+        return (int) $cmd->fetchColumn();
     }
+
 
 }

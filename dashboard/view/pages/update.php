@@ -1,4 +1,4 @@
-<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data" data-dirty>
 	<?php 
 	if( INPUT::formSubmitted() ) {
         require annex_path('deps/controller.php');
@@ -80,7 +80,13 @@
 			</div>
 			<div class="section section-slug">
 				<label for="edit-slug" class="title">Slug</label>
-				<p><input id="edit-slug" class="sm" type="text" name="slug" value="<?= $show->slug ?>" /></p>
+				<p>
+                    <input 
+                        id="edit-slug" class="sm" 
+                        type="text" name="slug" 
+                        value="<?= $show->slug ?>" 
+                    />
+                </p>
 			</div>
 			<div class="section info">
 				<div class="title title-info">Informações da página</div>
@@ -90,10 +96,11 @@
 				</p>
 
 				<?php 
-                if( $show->segment ) :
-                    $page_url = URL::root($show->segment); ?>
-                    <p>URL: <a href="<?= $page_url ?>" target="_blank"><?= $page_url ?></a></p>
-                <?php endif ?>
+                if( $show->segment ) : ?>
+                    <p>
+                        URL: <a href="<?= $show->URL ?>" target="_blank"><?= $show->URL ?></a>
+                    </p>
+                <?php endif; ?>
 
 				<input type="hidden" name="author" value="<?= $show->author ?>" />
 				<input type="hidden" name="date" value="<?= $show->lastmod ?>" />

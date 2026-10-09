@@ -1,4 +1,4 @@
-<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data" data-dirty>
 	<?php 
 
 	if( INPUT::formSubmitted() ) {

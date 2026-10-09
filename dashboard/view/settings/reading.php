@@ -6,7 +6,7 @@
     }
 	?>
 	<h2 class="pl15"><span class="border-span">Públicas <small>(template)</small></span></h2>
-	<form class="pb40" method="POST" action="<?= URL::current() ?>">
+	<form class="pb40" method="POST" action="<?= URL::current() ?>" data-dirty="false">
 		<div class="flexbox">		
 			<span class="cn_70 mt10"><label for="pppage">Exibição de artigos por paginação</label></span>
             <input id="pppage" class="cn_25 lg" type="number" name="articles_per_page" 
@@ -19,7 +19,7 @@
     <hr class="my40">
 
 	<h2 class="mt40 pt40 pl15"><span class="border-span">Painel de controle <small>(dashboard)</small></span></h2>
-	<form method="POST" action="<?= URL::current() ?>">
+	<form method="POST" action="<?= URL::current() ?>" data-dirty="false">
 		<div class="flexbox">		
 			<span class="cn_70 mt10">
 				<label for="pppage">Exibição de páginas por paginação</label>

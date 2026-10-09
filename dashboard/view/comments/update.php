@@ -4,7 +4,7 @@ if( INPUT::formSubmitted() ) {
 }
 
 ?>
-<form id="comment" class="w70 ml20" method="POST" action="<?= URL::current() ?>">
+<form id="comment" class="w70 ml20" method="POST" action="<?= URL::current() ?>" data-dirty>
 
 	<?php foreach( select_comments() as $show ) : ?>
 

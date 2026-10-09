@@ -209,7 +209,7 @@ class Router {
         else if( $this->is_user() ) {
             if(  ! file_exists( template_path('user.php') )  ) {
 
-                if( DISPLAY_ERRORS ) {
+                if( ERROR_REPORTING ) {
 
                     throw new OpusException(
                         'Template sem suporte para view de usuários.', 'error', 404

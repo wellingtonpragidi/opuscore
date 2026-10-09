@@ -340,7 +340,7 @@
 .mb {
     margin-bottom: auto !important; 
 }
-.ml { 
+.ml, ._m { 
     margin-left: auto !important 
 }
 .mx {

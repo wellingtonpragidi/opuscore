@@ -66,6 +66,23 @@ class Count {
         return (int) $cmd->fetchColumn();
     }
 
+    public static function articles_by_category( int $catID ): int {
+        self::init();
+        $cmd = self::$conn->prepare("
+            SELECT COUNT(*)
+                FROM articles a
+
+            JOIN relations r
+                ON r.type_id = a.ID
+
+            WHERE r.category_id = ? AND r.type = ?
+        ");
+
+        $cmd->execute([ $catID, 'article' ]);
+
+        return (int) $cmd->fetchColumn();
+    }
+
 
     /**
      * total de visitas registradas na tabela 'statistics' oq representa o total de page views
@@ -85,6 +102,10 @@ class Count {
      * - Se houver 1 registro: exibe no singular (ex: "1 Artigo").
      * - Se houver > 1 registros: exibe no plural (ex: "5 Artigos").
      * - Se houver 0 registros: exibe mensagem customizada com link para adicionar novo.
+     * 
+     * $target vem da URL (articles/pages/comments) e vira o nome do metodo estatico correspondente:
+     *  self::articles(), self::pages(), self::comments() etc...
+     *  que retornam o total de registros daquele tipo.
      */
     public static function selects(): string {
         $target = URL::param(0);
@@ -104,14 +125,19 @@ class Count {
                 "%d páginas" 
             ],
             'comments' => [ 
-                //sprintf($empty, 'comentário'),
+                # sprintf($empty, 'comentário'),
                 'Nenhum comentário',
                 "1 comentário", 
                 "%d comentários" 
             ]
         ];
-        
+
+        # self::$target() chama o metodos estaticos dinamicamente
         $count = self::$target();
+
+        if( $target === 'articles' && URL::has('by') ) {
+            $count = self::articles_by_category( URL::int('id') );
+        }
 
         $index = min( $count, 2 );
 

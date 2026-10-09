@@ -269,6 +269,10 @@ class Model {
 
         $is_category = URL::param(1) === 'category';
 
+        if( URL::has('by') ) {
+            return null;
+        }
+
         if( ! in_array(URL::param(0), ['admins', 'menus', 'pages', 'articles', 'users']) ) {
             return null;
         }

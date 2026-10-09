@@ -30,9 +30,6 @@
             <?php admin_edit() ?>
         </div>
 
-    <?php endwhile; 
-    
-    comment_area([ 'tag' => 'h3' ]); 
-    ?>
+    <?php endwhile; ?>
 
 </main>

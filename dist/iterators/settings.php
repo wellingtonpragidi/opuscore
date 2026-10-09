@@ -50,27 +50,69 @@ function site_title(): string {
 /**
 * bloco de funcoes que retornam configuracao de envio de e-mail como o servidor SMTP
 * @see https://opuscore.dev/constants/configuracao-de-e-mail
+* 
 */
+function smtp_port(): int {
+    $email = get_settings('email');
+    return (int) $email['smtp']['port'] ?? 587;
+}
+
+function smtp_host(): string {
+    $email = get_settings('email');
+    return $email['smtp']['host'] ?? '';
+}
+
+function smtp_user(): string {
+    $email = get_settings('email');
+    return $email['smtp']['user'] ?? '';
+}
+
+function smtp_pswd(): string {
+    $email = get_settings('email');
+    return $email['smtp']['pswd'] ?? '';
+}
+
+function smtp_address(): string {
+    $email = get_settings('email');
+    return $email['smtp']['address'] ?? '';
+}
+
+/* email de destino (aquele que recebe) */
+function email_dest(): string {
+    $email = get_settings('email');
+    return $email['dest'] ?? $email['smtp']['address'] ?? '';
+}
+
+function email_reply_to(): string {
+    $email = get_settings('email');
+    return $email['reply_to'] ?? $email['smtp']['address'] ?? '';
+}
+
+/**
+ * 
+ * @deprecated s -- use smtp_*()
+ */
 function email_port(): int {
     $email = get_settings('email');
-    return (int) $email['port'] ?? 587;
+    return (int) $email['smtp']['port'] ?? 587;
 }
 function email_host(): string {
     $email = get_settings('email');
-    return $email['host'] ?? '';
+    return $email['smtp']['host'] ?? '';
 }
 function email_user(): string {
     $email = get_settings('email');
-    return $email['user'] ?? '';
+    return $email['smtp']['user'] ?? '';
 }
 function email_pswd(): string {
     $email = get_settings('email');
-    return $email['pswd'] ?? '';
+    return $email['smtp']['pswd'] ?? '';
 }
 function email_address(): string {
     $email = get_settings('email');
-    return $email['address'] ?? '';
+    return $email['smtp']['address'] ?? '';
 }
+
 
 
 /**

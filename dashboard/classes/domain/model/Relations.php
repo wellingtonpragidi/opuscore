@@ -22,26 +22,27 @@ class Relations {
 
 
     /**
-     * Conta o numero de paginas que possuem relacao com uma categoria especifica
+     * Conta o numero de publicacoes que possuem relacao com uma categoria especifica
      *
      * Consulta as tabelas 'relations' e 'categories' para contar quantas entradas
      * existem para um 'slug' de categoria fornecido
      */
-    public function num_added( string $catslug ): int {
+    public function num_added( int $ID ): int {
         $cmd = $this->conn->prepare("
             SELECT COUNT(r.category_id) 
-            FROM relations AS r
-            JOIN categories AS c ON c.ID = r.category_id
-            WHERE c.segment = ?
+            FROM relations r 
+            JOIN categories c 
+                ON c.ID = r.category_id
+            WHERE c.ID = ?
         ");
-        $cmd->execute([ $catslug ]);
+        $cmd->execute([ $ID ]);
 
         return (int) $cmd->fetchColumn(); 
     }
 
 
     /**
-     * Sincroniza a relacao entre um tipo de pagina com as categorias selecionadas. 
+     * Sincroniza a relacao entre um tipo de publicacao com as categorias selecionadas. 
      * Marcou: INSERT: Desmarcou: DELETE; 
      * E tambem Remove duplicacoes caso aja: DELETE
      *
@@ -97,7 +98,7 @@ class Relations {
 
 
     /**
-     * Deleta todas as relacoes de uma pagina especifica.
+     * Deleta todas as relacoes de uma publicacao especifica.
      *
      * Este metodo e ativado por uma requisicao POST que contenha um parametro 'target_id'
      * Ele remove todas as entradas da tabela 'relations' que estao associadas
@@ -115,7 +116,7 @@ class Relations {
      *
      * Semelhante ao `delete_related_type`, este metodo e ativado por POST com 'target_id'
      * Ele remove todas as entradas da tabela 'relations' que estao associadas
-     * ao 'category_id' fornecido no POST de forma direta e eficiente
+     * ao 'category_id' fornecido no POST de forma direta
      */
     public function delete_category( Assign $bind ): bool {
         $cmd = $this->conn->prepare("DELETE FROM relations WHERE category_id = ?");

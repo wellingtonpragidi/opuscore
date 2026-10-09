@@ -38,26 +38,36 @@ function get_contexts() {
     } 
     catch( UnexpectedValueException $e ) {
         exception('
-            Diretório <code>contexts</code> para caminho fornecido não encontrado ou sem permissão.'
+            Diretório <code>contexts</code> para caminho fornecido não encontrado ou sem permissão em <code>' . STORAGE_DIR . '</code>.'
         );
     }
     
     return $contexts;
 }  
-/**
+/*
  * $contexts : 
- * retorna todos os arrays de contextos adicionados
+ * retorna todos os arrays de contextos adicionados e armazenados em `/storage/contexts/`
  * 
  * $contexts[$key] $key :
  * retorna o array do contexto passado pelo argumento $name
- */
+ * 
+ **/
 
 /**
+ * 
  * $contexts[$name]['value'] : 
- * retorna o conteudo do array passado pelo argumento $name
+ * retorna o conteudo do elemento 'value' de um array 
+ *   identificado pelo argumento passado em $name
  */
 
 if( defined('IS_WEB') && IS_WEB ) {
+
+    function get_context( string $name ): string {
+        $context = get_contexts();
+
+        return $context[$name]['value'] ?? '';
+    }
+
     function context( string $name ): void {
         $context = get_contexts();
 
@@ -71,11 +81,17 @@ if( defined('IS_WEB') && IS_WEB ) {
         echo $context[$name]['title'] ?? '';
     }
 
+    function get_context_title( string $name ): string {
+        $context = get_contexts();
+
+        return $context[$name]['title'] ?? '';
+    }
+
 
     function has_context( string $name ): bool {
         $context = get_contexts();
 
-        # o nome da variavel que armazena o array de contextos eh o mesmo que o valor da chave 'name' do array de um contexto
+        # o nome da **_variavel_ que armazena o array** de contextos eh o mesmo que o valor da chave 'name' do array de um contexto
         return array_key_exists( $name, $context ); 
     }
 

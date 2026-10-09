@@ -85,10 +85,10 @@ class Provider {
         $mailer->SMTPAuth    = true;
         $mailer->SMTPAutoTLS = true;
 
-        $mailer->Host       = email_host();
-        $mailer->Username   = email_user();
-        $mailer->Password   = email_pswd();
-        $mailer->Port       = email_port();
+        $mailer->Host       = smtp_host();
+        $mailer->Username   = smtp_user();
+        $mailer->Password   = smtp_pswd();
+        $mailer->Port       = smtp_port();
 
         if( $mailer->Port === 587 ) {
             $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -100,10 +100,18 @@ class Provider {
             $mailer->SMTPSecure = false;
         }
 
-        $mailer->From       = email_address();
-        $mailer->FromName   = $sitename;
-        $mailer->addReplyTo( email_address(), $sitename );
+        $mailer->From     = smtp_address();
+        $mailer->FromName = $sitename;
+        $mailer->addReplyTo( email_reply_to(), $sitename );
         $mailer->addAddress( $args['email'], $args['name'] );
+
+        /*
+        smtp_dest() :
+        
+        Ainda nao eh usado aqui, 
+          podera futuramente ser um adicional, 
+              como um email de aviso por exemplo.
+        */
 
         $mailer->Subject = $sitename . ' – ' . $args['subject'];
 
@@ -146,7 +154,7 @@ class Provider {
 
         return $h2 . $p1 . $p2 . $link 
         . '<p style="font-size: 0.95rem; margin-top: 30px; opacity: 0.85">
-            Caso isso seja um engano, você pode responder a: ' . SYSTEM_EMAIL_ADDRESS . '
+            Favor desconsiderar esta mensagem caso tenha sido enviada por engano.
         </p>';
     }
     

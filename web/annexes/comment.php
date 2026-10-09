@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @see https://int.opuscore.dev/hooks/comment_area-e-comment_area_loaded
  * @see https://opuscore.dev/functions/comment_area
  */
 function comment_area( array $args = [] ): void {
@@ -20,10 +19,6 @@ function comment_area( array $args = [] ): void {
 
     $class = isset($opts['class']) ? ' class="' . $opts['class'] . '"' : null;
 
-
-    extract( Container::commentscope(), EXTR_SKIP );
-
-
     if( $opts['show-title'] === true ) {
         echo "
         <{$opts['tag']} id=\"{$opts['id']}\"{$class}>
@@ -31,9 +26,21 @@ function comment_area( array $args = [] ): void {
         </{$opts['tag']}>";
     }
 
+
+    $container = Container::instance();
+
+    $article = $container->make('Article');
+    $comment = $container->make('Comment');
+
+
     if( $opts['show-count'] === true ) {
         echo '<p id="comment-count">' . $comment->count($article) . '</p>';
     }
+
+
+    $auth    = $container->make('Auth');
+    $image   = $container->make('Image');
+    $user    = $container->make('User');
 
 
     $suffixes = ['header', 'form', 'list'];

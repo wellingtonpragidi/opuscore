@@ -20,6 +20,10 @@ class Page extends Model {
 
         $list = [];
 
+        $page_url = fn($seg) => str_starts_with($seg, 'external:') 
+            ? substr($seg, 9) 
+            : URL::root($seg);
+
         if( $is_update ) {
 
             $cmd = $this->conn->prepare("
@@ -46,7 +50,8 @@ class Page extends Model {
                 $bind->summary    = $row['summary'];
                 $bind->parent     = $row['parent'];
                 $bind->slug       = $row['slug'];
-                $bind->attachment = Ensure::object($row['attachment']); 
+                $bind->attachment = Ensure::object($row['attachment']);
+                $bind->URL        = $page_url( $bind->segment );
 
                 $list[] = $bind;
             }
@@ -80,6 +85,7 @@ class Page extends Model {
                 $bind->template = $row['template'];
                 $bind->status   = $row['status'];
                 $bind->lastmod  = $row['lastmod'];
+                $bind->URL        = $page_url( $bind->segment );
 
                 # page parent
                 if( empty($bind->parent) ) {
@@ -117,8 +123,12 @@ class Page extends Model {
 
 
     public function insert( Assign $bind ): bool {
-        $cmd = $this->conn->prepare("INSERT INTO pages(title, slug) VALUES(?, ?)");
+        $cmd = $this->conn->prepare("
+            INSERT INTO pages(title, slug) VALUES(?, ?)
+        ");
+        
         $cmd->execute([ $bind->title, $bind->slug ]);
+
         $bind->LastID = (int) $this->conn->lastInsertId();
 
         return $bind->LastID > 0;
@@ -210,6 +220,11 @@ class Page extends Model {
 
 
 
+    /**
+     * select parent
+     * 
+     * <select><option>
+     */
     public function select_option(): iterable {
         $cmd = $this->conn->prepare("SELECT ID, title, parent FROM pages WHERE ID != ?");
         $cmd->execute([ URL::int('id') ]);

@@ -5,7 +5,7 @@
 	}
 ?>
 </div>
-<form class="w75" method="POST" action="<?= URL::current() ?>">
+<form class="w75" method="POST" action="<?= URL::current() ?>" data-dirty="false">
 	<?php 
     $opt = get_settings('options');
     $option = INPUT::GET('editor') ?: ($opt['editor'] ?? null);

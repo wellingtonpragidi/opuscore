@@ -7,8 +7,8 @@ $bind = new Assign;
 $bind->ID    = URL::int('id') ?: INPUT::int('target_id');
 $bind->title = INPUT::GET('title');
 
-$pageslug   = INPUT::GET('slug') ?: $bind->title;
-$bind->slug = Ensure::slug($pageslug);
+$slug       = INPUT::GET('slug') ?: $bind->title;
+$bind->slug = Ensure::slug($slug);
 
 $bind->type  = INPUT::GET('target_type');
 

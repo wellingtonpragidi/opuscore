@@ -36,24 +36,21 @@ function require_dashboard( string $filepath ): void {
 
 /**
  * 
- * funcoes de path para `view/`
+ * incluir arquivos de `view/`
  * 
- * \ ! /
  * Nao se deve requirir/incluir arquivos direto de view/ ou view/subpath/
- * esses arquivos sao requiridos/incluido pelo Router, e somente ele ou hook ligado a ele
- * Para adicionar arquivos de view/ e depois requirir eh necessario ter diretorios: view/subpath/*
  * 
- * Para arquivos nao .php use a funcao dashboard_view_path(string:$filepath) ou a constante DASH_DIR
- * Exemplos:
- * dashboard_view_path('x/x/x.ext') 
- * ou :
- * DASH_DIR . 'view/x/x/x.ext'
+ * Esses arquivos sao requiridos/incluidos pelo Router, 
+ *   e somente pode ser incluido no Router ou arquivo externo por meio de um hook 
+ *  
+ * Para adicionar arquivos de view/ direto do dashboard e depois requirir eh necessario ter:
+ *   view/subpath/* 
+ *  ( ou seja, um terceiro diretorio )
+ * 
+ * Para arquivos nao .php use a constante DASH_DIR
+ * Ex.: DASH_DIR . 'view/x/x/x.json'
  */
 
-# caminho base de view ate arquivo necessario
-function dashboard_view_path( string $filepath ): string {
-    return DASH_DIR . 'view/' . $filepath;
-}
 
 /** 
  * caminho para um diretorio dentro de um sub diretorio de rota da view 
@@ -65,40 +62,11 @@ function dashboard_view_path( string $filepath ): string {
  * exemplo: view_param_path( 'updates/status' )
  * Se preferir usar diretorios separado do nome do arquivo use view_subx_path('?dir/dir', 'file')
  */
-function view_param_path( string $fillpath ): string {
-    return DASH_DIR . 'view/' . URL::param(0) . '/' . $fillpath . '.php';
-}
+function view_subpath( string $dirname, string $basename ): string {
+    $param = URL::param(0);
 
-/** 
- * caminho para um diretorio `partial/` dentro de um sub diretorio de rota da view 
- * o diretorio principal da view eh obtido pelo primeiro parametro/slug [0] da URL
- * 
- * a funcao forca para que $basename seja um arquivo seja .php
- * 
- * Portanto parametro/argumento $basename pode soh conter o nome base do arquivo, e  
- *  extendido para mais sub diretorios preenchendo como um $fillpath se preciso
- */
-function view_partial_path( string $basename ): string {
-    return DASH_DIR . 'view/' . URL::param(0) . '/partial/' . $basename . '.php';
+    return DASH_DIR . "view/{$param}/{$dirname}/{$basename}.php";
 }
-
-/**
- * Essa funcao eh uma adicional para quando view_param_path() e view_partial_path() nao serem ideais
- * Descricao:
- * **Essa funcao nao usa a rota como base para o nome do diretorio principal da view/
- * caminho para arquivo em diretorio dentro de um sub diretorio de view
- * - Essa funcao exige dois parametros/argumentos:
- * - - $subdir   | nome do diretorio filho direto de view/
- * - - $basename | nome base do arquivo que eh um .php
- * - - $ext      | extensao de arquivo opcional (somente por visual limpo). Padrao: .php
- * 
- * Os parametros/argumentos Nao devem ser usados para extender/preencher caminhos
- * para isso use dashboard_view_path()
- */
-function view_subx_path( string $subdir, string $basename, string $ext = '.php' ): string {
-    return DASH_DIR . 'view/' . $subdir . '/' . $basename . $ext;
-}
-
 
 
 

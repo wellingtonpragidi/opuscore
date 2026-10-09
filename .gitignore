@@ -18,6 +18,7 @@ sitemap.xml
 
 
 templates/*
+!templates/.gitkeep
 !templates/oldbegin/
 
 /uploads/*

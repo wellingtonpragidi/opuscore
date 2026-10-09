@@ -71,7 +71,10 @@ if( $_POST['action'] === 'insert' ) {
 
 }
 
+
 $bind->ID = URL::int('id') ?: INPUT::int('target_id');
+
+
 
 if( $_POST['action'] === 'update' ) {
 
@@ -81,6 +84,9 @@ if( $_POST['action'] === 'update' ) {
     }
     
     $bind->title = $bind->name; 
+
+    $slug = INPUT::GET('slug');
+    $bind->slug = Ensure::slug($slug);
 
     if( Validate::hasImageFeatured() ) {
         if( $image->exists($bind) ) {
@@ -100,9 +106,19 @@ if( $_POST['action'] === 'update' ) {
 
         $image->insert( $bind );
     }
-    
 
+
+    $old_slug = $category->slug($bind->ID);
+    
 	if( $category->update($bind) ) {
+
+        if( $old_slug !== $bind->slug ) {
+            $article->update_category_segments($bind->ID);
+
+            # alerta provisorio
+            alert('warning', 'segment de articles atualizados');
+        }
+
         
         $image->update_title($bind);
         
@@ -112,7 +128,7 @@ if( $_POST['action'] === 'update' ) {
     }
 	else {
 
-		alert( 'warning', 'Nenhuma linha afetada' );
+		alert( 'warning', 'Nenhuma alteração foi feita.' );
     }
 
 }

@@ -1,9 +1,6 @@
 <?php
 declare( strict_types = 1 );
-/**
- * 
- * @subpackage Core\Init
- */
+
 /**
  * Arquivo de inicializacao do sistema
  * Esse eh o 3º arquivo a ser carregado pelo sistema, e o 1º do core /dist 
@@ -30,7 +27,10 @@ declare( strict_types = 1 );
  * - Inclusao de boots: autoload de classes e requires recursivo
  * - Gerenciamento de Sessoes: Configura e inicia a sessao PHP com um nome exclusivo baseado no dominio/caminho, e ajusta parametros de seguranca e duracao dos cookies de sessao.
  * - Implementacao de manipulador de excecoes
+ * 
+ * @subpackage Core\Init
  */
+
 
 
 # definicoes para diretorios absolutos
@@ -133,32 +133,6 @@ declare( strict_types = 1 );
 
 
 
-# definicoes e configuracoes de erros
-# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
-    /**
-     * O valor da constant DISPLAY_ERRORS eh alterado no arquivo config.php
-     * 
-     * @link https://www.php.net/manual/pt_BR/function.error-reporting.php
-     * @link https://www.php.net/manual/pt_BR/function.ini-set.php
-     * 
-     * @see https://opuscore.dev/constants/controle-de-exibicao-de-erros
-     */
-    ini_set( 'display_errors', DISPLAY_ERRORS ? 1 : 0 );
-    ini_set( 'display_startup_errors', DISPLAY_ERRORS ? 1 : 0 );
-    error_reporting( DISPLAY_ERRORS ? E_ALL : 0 );
-
-    # OpusException
-    define( 'EXCEPTION_DETAILS', DISPLAY_ERRORS ); 
-
-    # PHPMailer
-    define( 'MAIL_ERROR_INFO', DISPLAY_ERRORS ); 
-    define( 'MAIL_SMTP_DEBUG', false ); # ->SMTPDebug = 2;
-
-# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
-
-
-
-
 
 # buffer e content-type inicial...
 # —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
@@ -174,9 +148,163 @@ declare( strict_types = 1 );
 
 
 
+
+# definicoes e configuracoes de erros
 # —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
-    $isFile    = fn($file) => $file->isFile() && $file->getExtension() === 'php';
-    $pathFile  = fn($file) => str_replace( "\\", "/", $file->getRealPath() );
+    /**
+     * O valor da constant DISPLAY_ERRORS eh alterado no arquivo config.php
+     * 
+     * @link https://www.php.net/manual/pt_BR/function.error-reporting.php
+     * @link https://www.php.net/manual/pt_BR/function.ini-set.php
+     * 
+     * @see https://opuscore.dev/constants/controle-de-exibicao-de-erros
+     */
+
+    # Determina do error_reporting e display_errors do ini_set
+    if( DISPLAY_ERRORS === 'ALL' ) {
+        $display_errors  = 1;
+        $reporting_level = E_ALL;
+    } 
+    else if( DISPLAY_ERRORS === true ) {
+        $display_errors  = 1;
+        $reporting_level = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED;
+    }
+    else {
+        $display_errors  = 0;
+        $reporting_level = 0;
+    }
+
+    ini_set( 'display_errors', $display_errors );
+    ini_set( 'display_startup_errors', $display_errors );
+    error_reporting( $reporting_level );
+
+
+
+    define( 'ERROR_REPORTING', (bool) $display_errors );
+
+
+
+
+    # detalhes de aviso e erro da classe OpusException
+    define( 'EXCEPTION_DETAILS', ERROR_REPORTING ); 
+
+    # erros e aviso da classe PHPMailer
+    define( 'MAIL_ERROR_INFO', ERROR_REPORTING ); 
+    define( 'MAIL_SMTP_DEBUG', false ); # ->SMTPDebug = 2;
+
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
+
+
+
+# exception handler
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— 
+     /**
+     * Manipulador de excecoes
+     *
+     * Captura excecoes do tipo `Throwable`. Se a excecao for uma `OException`,
+     * trata-a de forma personalizada (avisos ou erros fatais com limpeza de buffer)
+     * 
+     * Tratamento de erros para outras excecoes com HTML e CSS proprio melhorando a leitura
+     */
+
+    # ERROR, PARSE, (TypeError ParseError)
+    set_exception_handler( function(Throwable $e): void {
+        # se for erro fatal limpa tudo e exibe pagina de erro
+        while( ob_get_level() ) {
+
+            ob_end_clean();
+        }
+
+
+        # garante o cabeçalho 500 para o navegador/cliente HTTP
+        if( ! headers_sent() ) {
+
+            header('HTTP/1.1 500 Internal Server Error');
+        }
+
+
+        # trata excecoes customizadas OpusException
+        if( $e instanceof OpusException ) {
+
+            # se for aviso leve tenta/exibe a mensagem sem limpar buffer
+            if( strpos($e->getType(), 'e-warning') !== false ) {
+                echo $e->warning();
+                return;
+            }
+
+            echo $e->error();
+            exit;
+        }
+
+        # se DISPLAY_ERRORS estiver habilitado (Ambiente Dev):
+        if( ERROR_REPORTING ) {
+            html_error_handler( $e );
+            exit;
+        }
+
+        # se DISPLAY_ERRORS estiver desabilitado (Producao)
+        # nao exibe NENHUM detalhe tecnico para o usuario final
+        int_server_error_500();
+        exit;
+
+    });
+
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
+
+
+
+
+# error handler
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
+
+    if( ERROR_REPORTING ) {
+        # WARNING, NOTICE, DEPRECATED
+        set_error_handler( function(
+            int $severity, string $message, string $file, int $line): bool {
+
+            # Respeita o operador de silencio @ (ex: @file_get_contents)
+            if( ! (error_reporting() & $severity) ) {
+
+                return false;
+            }
+
+            # Mapeiamento do nome dos tipos de "erro"
+            $type = match ($severity) {
+                E_WARNING, E_USER_WARNING       => 'WARNING',
+                E_NOTICE, E_USER_NOTICE         => 'NOTICE',
+                E_DEPRECATED, E_USER_DEPRECATED => 'DEPRECATED',
+                default                         => 'NOTICE'
+            };
+
+            # Renderiza um box inline escuro no proprio ponto onde o aviso ocorreu
+            echo <<<HTML
+            <div 
+                style="background:#161b22; color:#e6edf3; margin:15px; padding:10px 14px;
+                font-family:monospace; font-size:15px; line-height:1.8;
+                border:1px solid #30363d; border-left:4px solid#d29922; border-radius:4px; 
+                box-shadow:0 2px 4px rgba(0, 0, 0, 0.25);"
+            >
+                ⚠️ <b style="color:#d29922;">[{$type}]</b> {$message}<br>
+                <span style="color:#8b949e; font-size:14px;">{$file} na linha <b>{$line}</b></span>
+            </div>
+            HTML;
+
+
+            # Retornar true impedindo que o script pare e esconde o texto cru do PHP
+            return true;
+        });
+    }
+
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
+
+
+
+
+
+# autoboot
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
+    $isFile   = fn($file) => $file->isFile() && $file->getExtension() === 'php';
+    $pathFile = fn($file) => str_replace( "\\", "/", $file->getRealPath() );
 
 
     require DIST_DIR . 'boots/dist.php';
@@ -222,13 +350,7 @@ declare( strict_types = 1 );
 
     define( 'HIGH_ENTROPY', 1 );
 
-
-
-    $settings = Provider::include_file_vars(STORAGE_DIR . 'settings.php');
-    define( 'SYSTEM_EMAIL_ADDRESS', ($settings['email']['address'] ?? '') );
-
 # —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
-
 
 
 
@@ -291,32 +413,135 @@ declare( strict_types = 1 );
 
 
 
-# exception-s
-# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— 
-     /*
-     * Manipulador de excecoes
-     *
-     * Captura excecoes do tipo `Throwable`. Se a excecao for uma `OException`,
-     * trata-a de forma personalizada (avisos ou erros fatais com limpeza de buffer).
-     * Para outras excecoes, permite que o PHP continue o fluxo padrao de tratamento.
-     */
-    set_exception_handler( function( Throwable $e ): void {
-        if( $e instanceof OpusException ) {
-            # se for aviso leve exibe a mensagem sem limpar buffer
-            if( strpos($e->getType(), 'e-warning') !== false ) {
-                echo $e->warning();
-                return;
-            }
 
-            # se for erro fatal limpa tudo e exibe pagina de erro
-            while( ob_get_level() ) {
-                ob_end_clean();
-            }
+# helpers : exception handler `set_exception_handler()`
+# —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——
 
-            echo $e->error();
-            exit;
+    function html_error_handler( Throwable $e ): void {
+        $typerror = get_class( $e );
+        $message  = htmlspecialchars( $e->getMessage() );
+        $file     = htmlspecialchars( $e->getFile() );
+        $line     = $e->getLine();
+        $trace    = htmlspecialchars( $e->getTraceAsString() );
+
+        $style_css = '<style>' . css_error_handler() . '</style>';
+
+        $v = VERSION;
+
+        # Renderiza uma tela limpa, escura e formatada
+        echo <<<HTML
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <title>Erro do sistema ({$typerror})</title>
+            {$style_css}
+        </head>
+        <body>
+            <div id="error-card">
+                <div id="error-title"><b>{$typerror}</b> {$message}</div>
+                <div id="error-file">
+                    <b>Arquivo:</b> {$file} na linha <span>{$line}</span>
+                </div>
+                
+                <div id="trace-header">Stack Trace:</div>
+                <pre id="trace">{$trace}</pre>
+            </div>
+            <div id="error-footer">Opus Core {$v}</div>
+        </body>
+        </html>
+        HTML;
+    }
+
+
+    function css_error_handler(): string {
+        return <<<CSS
+        body { 
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+            font-family: monospace; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px;
+            position: relative;
         }
-        throw $e; # e pra outras excecoes, (se nao for OpusException), deixa o php estourar
-    });
+        #error-card { 
+            background: #161b22; 
+            border: 1px solid #30363d;
+            border-left: 6px solid #f85149; 
+            border-radius: 6px; 
+            padding: 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+        }
+        #error-title { 
+            color: #f85149; 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-top: 0; 
+            word-break: break-word;
+        }
+        #error-file { 
+            color: #8b949e; 
+            background: #21262d; 
+            padding: 8px 12px; 
+            border-radius: 4px; 
+            font-size: 13px; 
+            margin: 15px 0; 
+        }
+        #error-file span { 
+            color: #58a6ff; 
+        }
+        #trace-header { 
+            color: #79c0ff; 
+            font-size: 14px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            margin-bottom: 8px; 
+            border-bottom: 1px solid #21262d; 
+            padding-bottom: 4px; 
+        }
+        pre#trace { 
+            background: #0d1117; 
+            padding: 15px; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            color: #e6edf3; 
+            border: 1px solid #21262d; 
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+        }
+        #error-footer {
+            position: absolute;
+            bottom: 6px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        CSS;
+    }
+
+
+    function int_server_error_500(): void {
+        $v = VERSION;
+        echo <<<HTML
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <title>Erro 500</title>
+        </head>
+        <body style="background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;margin:0;padding:20px;">
+            <div style="margin:160px auto 0;text-align:center;">
+                <h1>Há algum problema neste site</h1>
+                O servidor retornou o erro <span style="color:#f85149;">500</span> Internal Server Error
+            </div>
+            <div style="position:absolute;bottom:6px;right:10px;font-size:12px;color:rgba(255,255,255,.4)">Opus Core {$v}</div>
+        </body>
+        </html>
+        HTML;
+    }
 
 # —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— —— ——

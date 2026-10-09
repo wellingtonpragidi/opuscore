@@ -5,10 +5,14 @@ const comments = {
 
     init() {
         this.comment();
-        // this.reply();
+        this.reply();
     },
     
     comment() {
+        if( ! this.form ) {
+            return;
+        }
+        
         this.form.addEventListener( 'submit', event => {
         	event.preventDefault();
 

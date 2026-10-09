@@ -1,9 +1,16 @@
 <?php
 declare( strict_types = 1 );
+
+
+
 /**
- * 
- * @usage article.php
+ * @see https://opuscore.dev/functions/shares
  */
+function shares( array $args = [] ): string {
+    require annex_path('shares.php');
+
+    return $shares;
+}
 
 
 /**
@@ -32,7 +39,6 @@ function article_categories( string $separator = ', ' ): string {
 
 /**
  * 
- * @todo Essa funcao ainda não funciona com a URL de articles hierarquica configurada
  * @see https://opuscore.dev/functions/articles_relateds
  */
 function articles_relateds( array $args = [] ): string {

@@ -4,14 +4,15 @@ if( INPUT::formSubmitted() ) {
     require dashboard_path('controller/menu.php');
 }
 
+
 /*-- STATE ------------------------------------------------------- --*/
-require view_partial_path('state');
+require view_subpath('partial', 'state');
 
 ?>
 <section id="menu-manager" class="menu-wrapper">
 
     <!-- MENUS ---------------------------------------------- (storage/menu.php) -->
-    <?php require view_partial_path('identify') ?>
+    <?php require view_subpath('partial', 'identify') ?>
 
 
     <!-- ITEMS -------------------------------------------------------------- -->
@@ -27,7 +28,7 @@ require view_partial_path('state');
 
 
             <!-- ACTIONS ------------------------------------- ( Adicionar ao menu ) -->
-            <?php require view_partial_path('actions') ?>
+            <?php require view_subpath('partial', 'actions') ?>
 
 
             <!-- TREE -------------------------------------------------------------- -->
@@ -46,4 +47,4 @@ require view_partial_path('state');
 
 <!-- CACHE -------------------------------------------------------------- -->
 <?php 
-require view_partial_path('cache');
+require view_subpath('partial', 'cache');

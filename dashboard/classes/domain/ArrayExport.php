@@ -18,6 +18,11 @@ declare( strict_types = 1 );
 
 class ArrayExport {
 
+    /**
+     * altera parcialmente um array existente
+     * faz merge
+     * preserva chaves que nao vieram na atualizacao
+    */
     public static function apply( 
         string $array_name, array $array_data, string $local ): bool {
 
@@ -41,7 +46,12 @@ class ArrayExport {
         return self::write( $file, $vars );
     }
 
-
+    /**
+     * substitui o conteudo das variaveis fornecidas
+     * nao preserva a estrutura antiga
+     * 
+     * Util para deleter um array ou atualizar estrutura antiga por completo
+    */
     public static function rewrite( array $vars, string $file ): bool {
 
         return self::write( $file, $vars );

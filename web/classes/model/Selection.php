@@ -39,15 +39,15 @@ class Selection extends Model {
 
 
     private string $SELECT = "
-        p.ID, 
-        p.title, 
-        p.author, 
-        p.content, 
-        p.summary, 
-        p.created, 
-        p.updated, 
-        p.slug, 
-        p.segment, 
+        a.ID, 
+        a.title, 
+        a.author, 
+        a.content, 
+        a.summary, 
+        a.created, 
+        a.updated, 
+        a.slug, 
+        a.segment, 
         m.attachment
     "; 
 
@@ -107,12 +107,12 @@ class Selection extends Model {
 
         $cmd = $this->conn->prepare("
             SELECT $this->SELECT
-            FROM articles p 
+            FROM articles a 
 
             LEFT JOIN medias m 
-                ON m.related_type = ? AND m.related_id = p.ID 
+                ON m.related_type = ? AND m.related_id = a.ID 
 
-            WHERE p.status = ? 
+            WHERE a.status = ? 
             
             $ORDER_BY LIMIT ?, ?
         ");
@@ -134,13 +134,13 @@ class Selection extends Model {
         $ORDER_BY = $this->ORDER_BY();
         $cmd = $this->conn->prepare("
             SELECT $this->SELECT
-            FROM articles p 
+            FROM articles a 
 
             LEFT JOIN medias m 
-                ON m.related_type = ? AND m.related_id = p.ID 
+                ON m.related_type = ? AND m.related_id = a.ID 
 
-            WHERE ( p.title LIKE ? OR p.summary LIKE ? ) 
-                AND p.status = ? 
+            WHERE ( a.title LIKE ? OR a.summary LIKE ? ) 
+                AND a.status = ? 
 
             $ORDER_BY LIMIT ?, ?
         ");
@@ -171,36 +171,39 @@ class Selection extends Model {
 
         $cmd = $this->conn->prepare("
             SELECT $this->SELECT 
-            FROM articles p 
+            FROM articles a 
 
             LEFT JOIN medias m 
-                ON m.related_type = 'article' AND m.related_id = p.ID 
+                ON m.related_type = ? AND m.related_id = a.ID 
 
             JOIN relations r 
-                ON p.ID = r.type_id 
+                ON a.ID = r.type_id 
             
             JOIN categories c 
                 ON c.ID = r.category_id 
 
-            WHERE c.segment = ? AND c.type = ? 
+            WHERE c.segment = ? 
+                AND c.type = ? 
                 AND r.type   = ? 
-                AND p.status = ? 
+                AND a.status = ? 
 
             $ORDER_BY LIMIT ?, ?
         ");
 
         if( is_feed_async() ) {
             $cmd->execute([ 
+                'article', # m.related_type 
                 URL::GET('cat'), # segment da URL
-                'article', 
-                'article', 
-                1, 
+                'article', # c.type
+                'article', # r.type
+                1, # status
                 $this->offset,
                 $this->limit,
             ]);
         } 
         else {
             $cmd->execute([ 
+                'article', 
                 $this->category->segment(),
                 'article', 
                 'article', 
@@ -219,12 +222,12 @@ class Selection extends Model {
     private function single(): ?SeekPreparer {
         $cmd = $this->conn->prepare("
             SELECT $this->SELECT 
-            FROM articles p 
+            FROM articles a 
 
             LEFT JOIN medias m 
-                ON m.related_type = ? AND m.related_id = p.ID 
+                ON m.related_type = ? AND m.related_id = a.ID 
 
-            WHERE p.segment = ? AND p.status = ?
+            WHERE a.segment = ? AND a.status = ?
         ");
 
         $cmd->execute([ 'article', URL::pathname(), 1 ]);
@@ -241,16 +244,16 @@ class Selection extends Model {
      */
     private function ORDER_BY(): string {
         # padrao 
-        $orderby = "ORDER BY p.created DESC";
+        $orderby = "ORDER BY a.created DESC";
 
         $order = [
-            'ID DESC'      => 'p.ID DESC',
-            'ID ASC'       => 'p.ID ASC',
-            'updated DESC' => 'p.updated DESC',
-            'updated ASC'  => 'p.updated ASC',
-            'title DESC'   => 'p.title DESC',
-            'title ASC'    => 'p.title ASC',
-            'created ASC'  => 'p.created ASC',
+            'ID DESC'      => 'a.ID DESC',
+            'ID ASC'       => 'a.ID ASC',
+            'updated DESC' => 'a.updated DESC',
+            'updated ASC'  => 'a.updated ASC',
+            'title DESC'   => 'a.title DESC',
+            'title ASC'    => 'a.title ASC',
+            'created ASC'  => 'a.created ASC',
             'random'       => 'RAND()'
         ];
 
@@ -279,43 +282,5 @@ class Selection extends Model {
 
         return $orderby;
     }
-    /**
-     * Exibe lista de articles, sem contexto, apenas por tipo
-     * 
-     * Metodo utilitario para exibir lista de articles de um determinado tipo.
-     * 
-     * @param array $args parametros opcionais
-     * @return array
-     */
-    public function display( $args = [] ): array {
-        $TYPE  = isset( $args['type'] ) ? $args['type'] : 'article';
-        $cmd = $this->conn->prepare("
-            SELECT $this->SELECT 
-            FROM articles AS p LEFT JOIN medias AS m 
-            ON m.related_type = 'article' AND m.related_id = p.ID 
-            WHERE p.status = 1 
-            ORDER BY p.ID DESC LIMIT ?, ?
-        ");
-        $cmd->execute([ $TYPE, $this->pagination->article_paginate(), articles_per_page() ]);
-        $list = [];
-        while( $row = $cmd->fetch(PDO::FETCH_ASSOC) ) {
-            $bind = new Assign;
-
-            $bind->ID         = $row["ID"];
-            $bind->title      = $row["title"];
-            $bind->author     = $row["author"];
-            $bind->content    = $row["content"];
-            $bind->summary    = $row["summary"];
-            $bind->created    = $row["created"];
-            $bind->updated    = $row["updated"];
-            $bind->slug       = $row["slug"];
-            $bind->segment    = $row["segment"];
-            $bind->attachment = json_decode($row["attachment"] ?? '');
-            $bind->URL        = URL::root($bind->segment ?? '');
-
-            $list[] = $bind;
-        }
-
-        return $list;
-    }
+    
 }

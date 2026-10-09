@@ -13,7 +13,7 @@ if( $admin->logged_role() !== 1 ) {
             require dashboard_path('controller/category.php');
         }
         ?>
-		<form method="POST" action="<?php URL::current() ?>" enctype="multipart/form-data">
+		<form method="POST" action="<?php URL::current() ?>" enctype="multipart/form-data" data-dirty>
 			<label for="title">Nome</label>
 			<input 
                 id="title" type="text" name="title" 

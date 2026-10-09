@@ -21,7 +21,7 @@ else {
 <p><small>Essas são imagens usadas em compartilhamento de redes sociais como twitter e facebook quando não há nenhuma imagem destacada na página.</small></p>
 <p><small>O sistema não faz o redimensionamento, corte e conversão dessa imagem. O tamanho recomendado para a imagem é de no mínimo 600x340 pixels, com a extensão <u>.png</u></small></p>
 
-<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data" data-dirty>
     <div id="poster_reader" class="upload readers">
         <input id="card" class="files_reader media_reader" type="file" name="upload" accept=".png" />
         <label for="card" class="btn lg"><?= $filelabel ?></label>

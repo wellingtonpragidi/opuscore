@@ -79,7 +79,7 @@ class Connection {
 
             error_log( "Falha na comunicacao com o banco de dados: ( {$e->getMessage()} )" );
 
-            $errorMessage = DISPLAY_ERRORS ? "( {$e->getMessage()} )" : '';
+            $errorMessage = ERROR_REPORTING ? "( {$e->getMessage()} )" : '';
             throw new OpusException( 
                 "<b>Falha na comunicação com o banco de dados: </b>{$errorMessage}", 
                 'error', 503

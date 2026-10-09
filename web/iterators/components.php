@@ -1,15 +1,15 @@
 <?php
 declare( strict_types = 1 );
 /**
- * "side" faz parte dos components de templates
- * As funcoes nesse arquivo sao mais usadas em laterais de um template, muito parecido com widgets
- * mas nao podem ser chamados de widgets, pois nao sao bem isso
+ * Components de templates
+ * As funcoes nesse arquivo sao mais utilizadas em laterais (sidebars) de um template, 
+ * muito parecido com widgets, mas nao sao.
  * 
- * Existem mais funcoes de components, como shares, relateds (com estrutura HTML em bloco) etc
+ * Existem mais funcoes de components, como: 
+ *  • shares() — annexes/article.php
+ *  • articles_relateds() — annexes/article.php
+ *    site_logo() - presentations.php
  * 
- * @todo nomenclatura ainda nao decidida, por esses motivos:
- * pode haver defeitos em templates por mudancas em padroes HTML como valores de atributos class
- * menos provavel, mas pode haver quebra por necessidade de mudar nome de funcoes 
  * 
  * @system     Opus Core — Sistema Gerenciador Web
  * @author     Wellington Pragidi

@@ -184,7 +184,7 @@ class Article extends Model {
      * 2. Monta cadeia de categorias, percorre a hierarquia subindo do filho ate a raiz
      *    Exemplo: [21, 10, 5]
      *
-     * 3. Consulta articles relacionados, buscando articles nas categorias da cadeia e exclui o article atual
+     * 3. Consulta articles relacionados, buscando artigos nas categorias da cadeia e exclui o artigo atual
      *    Usa ORDER BY FIELD() para priorizar categorias mais proximas
      * -  FIELD() define prioridade manual de ordenacao
      *    Primeiro mesma categoria, depois categorias pai, depois categorias mais acima e sucessivamente

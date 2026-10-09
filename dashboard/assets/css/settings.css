@@ -143,6 +143,9 @@
 	border-left: none;
 }
 #settings-urls .bar {
+    display: inline-block;
+    position: relative;
+    top: -5px;
 	flex: 0 0 20px;
 	max-width: 20px;
 	font-family: 'SrcCode', monospace;

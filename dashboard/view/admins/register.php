@@ -7,7 +7,7 @@ if( INPUT::formSubmitted() ) {
 $active_role = _POST::has('role') ? _POST::int('role') : 3;
 $selected    = fn($n) => ($n === $active_role) ? 'selected' : '';
 ?>
-<form class="flexbox mb10 cn_80" method="POST" action="<?php URL::current() ?>">
+<form class="flexbox mb10 cn_80" method="POST" action="<?php URL::current() ?>" data-dirty>
 	<div class="cn_50 pr10">
         <label for="name" class="sr">Nome</label>
 		<input 

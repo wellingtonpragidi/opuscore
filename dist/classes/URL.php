@@ -120,6 +120,32 @@ class URL {
     }
 
     /**
+     * ...
+     */
+    public static function query( array $keys ): bool {
+        # chaves "proibidas" ('not')
+        if( isset($keys['not']) ) {
+            foreach( (array) $keys['not'] as $notKey ) {
+                if( isset($_GET[$notKey]) ) {
+                    return false;
+                }
+            }
+        }
+
+        # chaves "obrigatorias" ('has')
+        if( isset($keys['has']) ) {
+            foreach( (array) $keys['has'] as $hasKey ) {
+                if( ! isset($_GET[$hasKey]) ) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+    
+
+    /**
      * Recupera o valor de um parametro especifico da superglobal $_GET.
      *
      * @param $key Nome do parametro a ser recuperado.

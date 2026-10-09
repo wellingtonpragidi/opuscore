@@ -212,7 +212,7 @@ function recaptcha(): void {
 
 function exception( string $message, ?string $origin = null ): void {
 
-    $isdebug = defined('DISPLAY_ERRORS') || DISPLAY_ERRORS;
+    $isdebug = defined('ERROR_REPORTING') || ERROR_REPORTING;
     
     if( is_XHR() && $isdebug === false ) {
         return;

@@ -91,7 +91,9 @@ function get_summary( int $length = 180, string $hellip = '&hellip;' ): string {
 }
 
 
-
+/**
+ * @see https://opuscore.dev/functions/author
+ */
 function author(): void {
     echo Seek::author();
 }
@@ -230,8 +232,7 @@ function get_featured_image_url( $scope = 'larger' ): ?string {
 
 
 /**
- * @see https://opuscore.dev/functions/article_picture_per_screen
- * @see https://opuscore.dev/functions/page_picture_per_screen
+ * @see https://opuscore.dev/functions/picture_per_screen
  **/
 function picture_per_screen( string $change_alt = '' ): void {
     $minor  = Seek::attachment_data('minor');
@@ -244,6 +245,7 @@ function picture_per_screen( string $change_alt = '' ): void {
 
     $alt = $change_alt ?: get_title();
     $alt = Ensure::attr( $alt );
+
     $attrs = "alt=\"{$alt}\" {$minor['dimension']}";
 
     echo <<<HTML
@@ -253,21 +255,4 @@ function picture_per_screen( string $change_alt = '' ): void {
         <img src="{$minor['URL']}" {$attrs} />
     </picture>
     HTML;
-}
-
-
-
-/**
- * @see https://opuscore.dev/functions/title_attr
- * @deprecated use escattr(get_title())
- */
-function title_attr(): void {
-    echo get_title_attr();
-}
-/**
- * @see https://opuscore.dev/functions/get_title_attr
- * @deprecated use escattr(get_title())
- */
-function get_title_attr(): string {
-    return Ensure::attr( Seek::title() );
 }

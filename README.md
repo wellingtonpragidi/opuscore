@@ -53,12 +53,10 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 
 
 ## Requisitos
-- PHP 8.1+ (Testado com PHP 8.3)
+- PHP 8.1+
 - MySQL 8.0+ ou MariaDB 10.5+
-- Apache/Nginx:
-    - O Opus Core é utilizado atualmente em ambiente Apache.
-    - Compatibilidade com Nginx ainda não foi oficialmente testada.
-- Em **produção**, HTTPS é considerado requisito devido à segurança e compatibilidade com recursos modernos da web.
+- Apache || Nginx
+- Em **produção** utilizando Apache, HTTPS é considerado requisito
 
 Extensões PHP necessárias:
 - PDO
@@ -95,6 +93,7 @@ O administrador provisório pode ser usado em ambiente de desenvolvimento. Apena
 ## Estrutura do sistema
 - `/dashboard` → painel de administração
 - `/dist` → núcleo compartilhado
+- `/install` → contém o arquivo `scheme.sql`
 - `/storage` → dados armazenados em arquivos e cachê
 - `/templates` → diretório base de templates
 - `/uploads` → arquivos carregados por administradores e usuários

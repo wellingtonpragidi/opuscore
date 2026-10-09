@@ -23,41 +23,82 @@ class Article extends Model {
      * ou todos os registros com paginacao como padrao.
      */
     public function select(): array {
-        $pagination = new Pagination( Count::articles(), per_page('articles') );
+        $query_id = URL::int('id');
 
-        $columns = URL::has('id') 
-            ? 'p.*' 
-            : 'p.' . implode( ', p.', ['ID', 'title', 'created', 'updated', 'slug', 'status'] );
+        $count = URL::has('by') 
+            ? Count::articles_by_category($query_id) 
+            : Count::articles();
+
+        $pagination = new Pagination( $count, per_page('articles') );
+
+        $columns = URL::query(['not' => 'by', 'has' => 'id']) 
+            ? 'a.*' 
+            : 'a.' . implode( ', a.', [
+                'ID', 'title', 'created', 'updated', 'slug', 'segment', 'status'
+            ] );
 
         $placeholder = "
             SELECT {$columns}, m.attachment
-            FROM articles p 
+            FROM articles a 
 
             LEFT JOIN medias m 
-                ON m.related_id = p.ID 
+                ON m.related_id = a.ID 
                 AND m.related_type = ?
         ";
-        # registro com base no parametro ID da URL
-        if( URL::has('id') ) {
-            $sql = "$placeholder WHERE p.ID = ?";
 
-            $params = [ 'article', URL::int('id') ];
+        # registro com base no parametro ID da URL
+        if( URL::param(1) === 'update' ) {
+            $sql = "$placeholder WHERE a.ID = ?";
+
+            $params = [ 'article', $query_id ];
         }
-        # registros de pesquisa por titulo   'segment'
+
+        # registros de pesquisa por titulo e resumo
         else if( URL::has('q') ) {
             $q = '%' . URL::GET('q') . '%';
 
-            $sql = "$placeholder WHERE (p.title LIKE ? OR p.summary LIKE ?) ORDER BY p.ID DESC";
+            $sql = "$placeholder WHERE (a.title LIKE ? OR a.summary LIKE ?) ORDER BY a.ID DESC";
 
             $params = [ 'article', $q, $q ];
         }
-        # selecao de todos os registros (padrao) com paginacao
-        else {
-            $sql = "$placeholder ORDER BY p.ID DESC LIMIT ?, ?";
+
+        # listagem de artigos por categoria
+        else if( URL::has('by') ) {
+            # SELECT a.ID, a.title, a.created, a.updated, a.slug, a.status, m.attachment
+            $sql = "
+                SELECT {$columns}, m.attachment 
+                    FROM articles a 
+
+                LEFT JOIN medias m 
+                    ON m.related_type = ? 
+                    AND m.related_id = a.ID 
+
+                JOIN relations r 
+                    ON r.type_id = a.ID 
+                
+                JOIN categories c 
+                    ON r.category_id = c.ID 
+
+                WHERE c.ID = ? AND r.type = ? 
+                ORDER BY a.ID DESC LIMIT ?, ?
+            ";
 
             $params = [
                 'article',
-                $pagination->offset(),
+                $query_id,
+                'article',
+                paginator()->offset(),
+                per_page('articles')
+            ];
+        }
+
+        # selecao de todos os registros (padrao) com paginacao
+        else {
+            $sql = "{$placeholder} ORDER BY a.ID DESC LIMIT ?, ?";
+
+            $params = [
+                'article',
+                paginator()->offset(),
                 per_page('articles')
             ];
         }
@@ -100,7 +141,6 @@ class Article extends Model {
 
         return $list;
     }
-
 
 
     public function insert( Assign $bind ): bool {
@@ -163,6 +203,63 @@ class Article extends Model {
         $cat = $cmd->fetch( PDO::FETCH_ASSOC );
 
         return $cat['slug'] . '/' . $bind->slug;
+    }
+
+
+    public function update_category_segments( int $catID ): bool {
+        $cmd = $this->conn->prepare("
+            SELECT DISTINCT type_id FROM relations 
+            
+            WHERE type = ? AND category_id = ?
+        ");
+
+        $cmd->execute([ 'article', $catID ]);
+
+        while( $row = $cmd->fetch(PDO::FETCH_ASSOC) ) {
+
+            $article_id = (int) $row['type_id'];
+
+            # Busca categorias relacionadas ao artigo
+            $categories = $this->conn->prepare("
+                SELECT category_id
+                FROM relations
+                WHERE type = ? 
+                AND type_id = ?
+            ");
+
+            $categories->execute([ 'article', $article_id ]);
+
+            $checked = [];
+
+            while( $category = $categories->fetch(PDO::FETCH_ASSOC) ) {
+
+                $checked[] = (int) $category['category_id'];
+            }
+
+            if( empty($checked) ) {
+                continue;
+            }
+
+            $bind = new Assign;
+
+            $bind->slug = $this->field( 'slug', $article_id );
+            $bind->html->checked = $checked;
+
+            $segment = $this->build_segment($bind);
+
+            $update = $this->conn->prepare("
+                UPDATE articles
+                SET segment = ?
+                WHERE ID = ?
+            ");
+
+            $update->execute([
+                $segment,
+                $article_id
+            ]);
+        }
+
+        return true;
     }
 
 
@@ -269,21 +366,21 @@ class Article extends Model {
     }
 
     # Verifica se a categoria esta vinculada ao artigo atual.
-    private function checked( int $category_id ): string {
+    private function checked( int $catID ): string {
         $cmd = $this->conn->prepare("
             SELECT r.category_id 
                 FROM relations r
 
-            JOIN articles p 
-                ON p.ID = r.type_id
+            JOIN articles a 
+                ON a.ID = r.type_id
 
-            WHERE p.ID = ?
+            WHERE a.ID = ?
         ");
         $cmd->execute([ URL::int('id') ]);
 
         $checked = '';
         while( $row = $cmd->fetch(PDO::FETCH_ASSOC) ) {
-            $checked .= $row['category_id'] === $category_id ? 'checked' : '';
+            $checked .= $row['category_id'] === $catID ? 'checked' : '';
         }
 
         return $checked;
@@ -319,7 +416,6 @@ class Article extends Model {
         }
 
         return self::$cache[$article_id][$column] ?? null;
-
     }
 
 }

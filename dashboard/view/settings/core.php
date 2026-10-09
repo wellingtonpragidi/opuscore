@@ -18,7 +18,7 @@ $values = function(): array {
 };
 ?>
 <hr class="w60">
-<form class="flexbox w60 mt20" method="POST" action="<?= URL::current() ?>">
+<form class="flexbox w60 mt20" method="POST" action="<?= URL::current() ?>" data-dirty>
 	<span class="cn_30 mt5"><label>Título do site:</label></span>
     <input class="cn_70" type="text" name="site_title" value="<?= $_POST['site_title'] ?? site_title() ?>">
 

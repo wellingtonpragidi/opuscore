@@ -95,6 +95,7 @@ function is_page_insert(): bool {
 }
 
 function is_page(): bool {
+    $pathname ??= URL::pathname();
     return URL::pathname() === 'pages/update' && URL::has('id');
 }
 # --------------------------------------- ---

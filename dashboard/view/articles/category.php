@@ -4,7 +4,13 @@ if( INPUT::formSubmitted() ) {
     require dashboard_path('controller/category.php');
 }
 ?>
-<form id="category" method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data">
+<form 
+    id="category" 
+    method="POST" 
+    action="<?= URL::current() ?>" 
+    enctype="multipart/form-data" 
+    data-dirty
+>
 	<?php foreach( select_categories() as $show ) : ?>
 		<div class="article">
 		    <label for="title" class="screen_reader">Nome</label>
@@ -48,15 +54,27 @@ if( INPUT::formSubmitted() ) {
     			    </div>
 			    <?php endif; ?>
 			</div>
+
+            <div class="section section-slug">
+            	<label for="edit-slug" class="title">Slug</label>
+                <p>
+                    <input 
+                        id="edit-slug" class="sm" type="text" 
+                        name="slug" value="<?= $show->slug ?>" 
+                    />
+                </p>
+			</div>
+
             <div class="section section-delete">
-            	<div class="title mt40 mb5">
+                <div class="title mt40 mb5">
                     <button onclick="javascript: return confirm(`Vai mesmo deletar esta categoria?\n\nNão será possível caso essa categoria possua sucessores.`)" 
                         class="input_false link delete txt_right ml mt40" 
                         name="action" value="delete">
                         Excluir Categoria
                     </button>
-			    </div>
-			</div>
+                </div>
+            </div>
+
 			<div class="section info">
 				<div class="title mt40 mb5"></div>
 			    <p>Publicado em: <?= chronos_format($show->created) ?></p>
@@ -68,7 +86,6 @@ if( INPUT::formSubmitted() ) {
                 </p>
 			    
 			    <input type="hidden" name="date" value="<?= $show->created ?>" />
-			    <input type="hidden" name="slug" value="<?= Ensure::slug($show->name) ?>" />
 
                 <input type="hidden" id="target_id" name="target_id" value="<?= $show->ID ?>" />
                 <input 

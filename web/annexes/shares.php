@@ -13,7 +13,7 @@ declare( strict_types = 1 );
  * function shares( array $args = [] ): string | /iterators/essents.php (proxima a linha 500)
  * 
  * @see https://opuscore.dev/functions/shares
- * */
+ */
 
 $except = is_array($args['except'] ?? null) ? $args['except'] : [];
 

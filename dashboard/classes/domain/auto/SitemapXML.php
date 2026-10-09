@@ -203,7 +203,7 @@ class SitemapXML {
             $lastmod = new DateTime( $date, $this->tzSystem );
         } 
         catch( Exception $e ) {
-            if( DISPLAY_ERRORS ) {
+            if( ERROR_REPORTING ) {
                 throw new Exception(
                     "Erro no parâmetro de entrada do DateTime na classe SitemapXML: " . 
                     $e->getMessage()

@@ -2,37 +2,38 @@
     id="admin-update" 
     class="ml20 mb10 w50 floatleft" 
     method="POST" 
-    action="<?= URL::current() ?>"
+    action="<?= URL::current() ?>" 
+    data-dirty 
 >
 	<?php 
     foreach( select_admin() as $show ) :
 
 
-        require view_param_path( 'updates/name' );
+        require view_subpath( 'updates', 'name' );
         
 
             echo '<hr class="hl">';
 
 
-        require view_param_path( 'updates/email' );
+        require view_subpath( 'updates', 'email' );
 
 
             echo '<hr class="hl">';
 
 
-        require view_param_path( 'updates/status' );
+        require view_subpath( 'updates', 'status' );
 
 
             echo '<hr class="hl">';
 
 
-        require view_param_path('updates/role');
+        require view_subpath('updates', 'role');
 
 
             echo '<hr class="hl">';
 
 
-        require view_param_path('updates/pswd');
+        require view_subpath('updates', 'pswd');
 
 
 ?>
@@ -47,7 +48,7 @@
     <?php 
     if( $auth->is_authorized() ) :
 
-        require view_param_path('updates/delete');
+        require view_subpath('updates', 'delete');
 
     endif; 
     ?>

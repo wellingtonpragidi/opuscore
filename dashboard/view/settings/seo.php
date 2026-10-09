@@ -1,4 +1,4 @@
-<form class="w70 px10 mt30" method="POST" action="<?= URL::current() ?>">
+<form class="w70 px10 mt30" method="POST" action="<?= URL::current() ?>" data-dirty>
 	<?php
 	if( INPUT::formSubmitted() ) {
 		require dashboard_path('controller/settings/seo.php');
@@ -13,20 +13,42 @@
 
 	<hr />
 
-	<div class="flexbox">
-		<?= $alert['google_verification'] ?? null ?>
-		<span class="cn_20 mt10"><label for="g">Google</label></span>
-		<input id="g" class="cn_60 mh40" type="text" name="google_verification" value="<?= $ensure('google_verification') ?>" />
-		<button type="submit" class="btn cn_20" name="action" value="google_action">SALVAR</button>
-		<p class="cn_100 mt5 fs15 mb0 op08" style="padding-left: 20%"><a href="https://search.google.com/search-console" target="_blank" rel="noopener">https://search.google.com/search-console</a></p>
+	<div class="verification">
+        <div class="flexbox" style="align-items: flex-start;">
+    		<?= $alert['google_verification'] ?? null ?>
+    		<span class="cn_20 mt10"><label for="g">Google</label></span>
+    		<input 
+                id="g" class="cn_65 mh40" 
+                type="text" name="google_verification" 
+                value="<?= $ensure('google_verification') ?>" 
+            />
+    		<button type="submit" class="btn lg cn_15" name="action" value="google_action">
+                SALVAR
+            </button>
+    		
+            <p class="cn_100 mt5 fs15 mb0 op08" style="padding-left: 20%">
+                <a href="https://search.google.com/search-console" target="_blank" rel="noopener">https://search.google.com/search-console</a>
+            </p>
+        </div>
 
-		<hr class="cn_100">
-
-		<?= $alert['bing_verification'] ?? null ?>
-		<span class="cn_20 mt10"><label for="b">Bing</label></span>
-		<input id="b" class="cn_60 mh40" type="text" name="bing_verification" value="<?= $ensure('bing_verification') ?>" />
-		<button type="submit" class="btn cn_20" name="action" value="bing_action">SALVAR</button>
-		<p class="cn_100 mt5 fs15 mb0 op08" style="padding-left: 20%"><a href="https://www.bing.com/webmasters/" target="_blank" rel="noopener">https://www.bing.com/webmasters/</a></p>
+    	<hr />
+        
+        <div class="flexbox" style="align-items: flex-start;">
+    		<?= $alert['bing_verification'] ?? null ?>
+    		<span class="cn_20 mt10"><label for="b">Bing</label></span>
+    		<input 
+                id="b" class="cn_65 mh40" 
+                type="text" name="bing_verification" 
+                value="<?= $ensure('bing_verification') ?>" 
+            />
+    		<button type="submit" class="btn lg cn_15" name="action" value="bing_action">
+                SALVAR
+            </button>
+    		
+            <p class="cn_100 mt5 fs15 mb0 op08" style="padding-left: 20%">
+                <a href="https://www.bing.com/webmasters/" target="_blank" rel="noopener">https://www.bing.com/webmasters/</a>
+            </p>
+        </div>
 	</div>
 
 	<hr />

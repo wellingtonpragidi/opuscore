@@ -1,5 +1,5 @@
 <?php
-$display_errors = DISPLAY_ERRORS ? 'true' : 'false';
+$display_errors = ERROR_REPORTING ? 'true' : 'false';
 $has_upgrade    = Upgrade::has() ? 'true' : 'false';
 
 $menu_name = $_GET['key'] ?? $_COOKIE['last_menu'] ?? null;

@@ -1,9 +1,20 @@
-<div class="clean">
-    <div class="w50 mb10 floatleft">
-        <p class="ml10"><?= Count::selects() ?></p>
+<div class="mb10">
+    <span class="ml10"><?= Count::selects() ?></span>
+</div>
+
+<div class="flexbox">
+    <div class="cn_33 pr5"></div>
+
+    <div class="cn_33 px5">
+        <label for="category" class="sr">Categoria</label>
+        <select id="category" name="category">
+            <option value="0" selected>Todas</option>
+            <?php echo $category->select_option() ?>
+        </select>
     </div>
-    <div class="w50 mb10 floatright">
-        <form class="search w400 floatright" method="GET" action="<?= URL::current() ?>">
+
+    <div class="cn_33 pl5">
+        <form class="search" method="GET" action="<?= URL::current() ?>">
             <input 
                 type="search" placeholder="Procurar por registro de articles" 
                 name="q" value="<?= Ensure::attr(URL::GET('q')) ?>" 
@@ -12,12 +23,14 @@
         </form>
     </div>
 </div>
+
 <?php
 
 if( INPUT::formSubmitted() ) {
     require annex_path('deps/controller.php');
     require dashboard_path('controller/article.php');
 }
+
 
 ?>
 <table>
@@ -66,5 +79,4 @@ if( INPUT::formSubmitted() ) {
     <?php endforeach; ?>
 </table>
 <?php
-$pagination = new Pagination( Count::articles(), per_page('articles') );
-echo $pagination->render();
+echo paginator()->render();

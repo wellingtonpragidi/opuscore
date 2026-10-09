@@ -33,7 +33,43 @@ class AutoUpdater {
         $this->homepage_check_update();
 
         $this->sitemap->rewrite();
-        $this->htaccess->rewrite();    
+        $this->htaccess->rewrite();
+
+        $this->specific_version(); 
+    }
+
+    private function specific_version(): bool {
+        $file = STORAGE_DIR . 'settings.php';
+
+        $vars = Provider::include_file_vars($file);
+        if(
+            isset( $vars['email'] ) && 
+            isset(
+                $vars['email']['port'], 
+                $vars['email']['host'], 
+                $vars['email']['user'], 
+                $vars['email']['pswd'], 
+                $vars['email']['address']
+            )
+        ) 
+        {
+   
+            $vars['email'] = [
+                'smtp' => [
+                    'port'    => (int) smtp_port(),
+                    'host'    => smtp_host(),
+                    'user'    => smtp_user(),
+                    'pswd'    => smtp_pswd(),
+                    'address' => smtp_address()
+                ],
+                'dest'     => email_dest(),
+                'reply_to' => email_reply_to()
+            ];
+
+            return ArrayExport::rewrite($vars, $file) ?: false;
+        }
+
+       return false;
     }
 
 	/** 

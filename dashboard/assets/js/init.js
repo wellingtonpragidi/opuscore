@@ -85,6 +85,7 @@ window.OpusCore = {
             .replace('js/', '() : js/')
                       
     },
+
     debug( ...args ) {
         if( this.display_log ) {
             let caller = this.caller(); // Ex: "js/routes/menus/menu.js:163:26"
@@ -119,4 +120,38 @@ window.OpusCore = {
     | pelo motor do JS, tornando `OpusCore.config undefined`
     |---------------------------------------------------------------------- */
     // config: OpusCore.config,
+
+
+    dirtyForm: document.querySelector('form[data-dirty]'),
+
+    checkDirty() {
+        if( ! this.dirtyForm || this.dirtyForm.dataset.dirty === 'false' ) {
+            return;
+        }
+
+        let changed = false;
+
+        this.dirtyForm.addEventListener('input', function() {
+            changed = true;
+        });
+
+        this.dirtyForm.addEventListener('change', function() {
+            changed = true;
+        });
+
+        this.dirtyForm.addEventListener('submit', function() {
+            changed = false;
+        });
+
+        window.addEventListener('beforeunload', function(event) {
+            if( ! changed ) {
+                return;
+            }
+
+            event.preventDefault();
+            event.returnValue = '';
+        });
+    }
 };
+
+OpusCore.checkDirty();

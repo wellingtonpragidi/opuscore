@@ -76,25 +76,7 @@ function select_statistics(): array {
 function valid_class_method( 
     string $class, string $method, mixed $args = null ): array {
 
-    /*if( ! class_exists($class) ) {
-    	if( DISPLAY_ERRORS ) {
-	        throw new OpusException("Classe <code class=\"class-name\">{$class}</code> não encontrada.");
-	    }
-
-	    return [];
-    }*/
-
     $class = Container::instance()->make( $class );
-
-    /*if( ! method_exists($class, $method) ) {
-    	if( DISPLAY_ERRORS ) {
-	        throw new OpusException(
-	        	"Método <code class=\"class-name\">{$method}</code> não encontrado na classe <code class=\"class-name\">{$class}</code>."
-	        );
-	    }
-
-	    return [];
-    }*/
 
     $select = $class->$method( $args ); # Chama o metodo na instancia da classe.
 
@@ -157,4 +139,13 @@ function media_navigation( int $id, string $direction, bool $html = true ): stri
             </a>
         ";
     }
+}
+
+
+function paginator(): Pagination {
+    $count = URL::has('by') 
+        ? Count::articles_by_category( URL::int('id') ) 
+        : Count::articles();
+
+    return new Pagination( $count, per_page('articles') );
 }

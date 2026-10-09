@@ -2,11 +2,11 @@
 declare( strict_types = 1 );
 
 /**
- * arquivos so com funcoes condicionais 
+ * arquivos com funcoes condicionais 
  * 
- * autenticacoes
- * rotas
- * assincrono
+ *  • autenticacoes
+ *  • rotas
+ *  • assincrono
  * 
  * 
  */
@@ -18,7 +18,7 @@ declare( strict_types = 1 );
 
 /**
  * # administrador logado e autenticado
- * @link https://opuscore.dev/functions/is_admin
+ * @see https://opuscore.dev/functions/is_admin
  **/
 function is_admin(): bool {
     $container = Container::instance();
@@ -49,7 +49,7 @@ function is_user_self(): bool {
  # --------------------------------------------------------------------------
 
 /**
- * @link https://opuscore.dev/functions/is_user 
+ * @see https://opuscore.dev/functions/is_user 
  **/
 function is_user(): bool {
     return Router::case() === 'user';
@@ -57,7 +57,7 @@ function is_user(): bool {
 
 
 /**
- * @link https://opuscore.dev/functions/is_home
+ * @see https://opuscore.dev/functions/is_home
 */
 function is_home(): bool {
     return Router::case() === 'home';
@@ -65,7 +65,7 @@ function is_home(): bool {
 
 
 /**
- * @link https://opuscore.dev/functions/is_query 
+ * @see https://opuscore.dev/functions/is_query 
  **/
 function is_query(): bool {
     $router_case = Router::case();
@@ -73,9 +73,7 @@ function is_query(): bool {
 }
 
 
-/**
- * @link https://opuscore.dev/functions/is_home_or_query
-*/
+
 function is_home_or_query(): bool {
     return URL::param(0) === '' || ( URL::param(0) === '' && URL::GET('q') );
 }
@@ -83,8 +81,10 @@ function is_home_or_query(): bool {
 
 /**
  * Para criar condicional de todas as paginas ou uma unica pagina passado pelo slug da mesma
+ * 
+ * @todo :
  * @param $slug | Cuidado ao usar! O slug pode nao ser o mesmo que o titulo da pagina sanitizado
- * @link https://opuscore.dev/functions/is_page
+ * @see https://opuscore.dev/functions/is_page
 */
 function is_page( string $slug = '' ): bool {
     $is_router_case = Router::case() === 'page';
@@ -126,7 +126,7 @@ function is_policy_pages(): bool {
 
 
 /**
- * @link https://opuscore.dev/functions/is_article
+ * @see https://opuscore.dev/functions/is_article
 */
 function is_article( string $segment = '' ): bool {
     $is_router_case = Router::case() === 'article';
@@ -139,7 +139,7 @@ function is_article( string $segment = '' ): bool {
 }
 
 /**
- * @link https://opuscore.dev/functions/is_articles
+ * @see https://opuscore.dev/functions/is_articles
 */
 function is_articles(): bool {
     return Router::case() === 'articles';
@@ -150,14 +150,14 @@ function is_articles(): bool {
  * 1. Se "parametro [0] da URL", que corresponde ao slug apos dominio/ for identico a category_base()
  * 2. Se 1.(da lista acima) for true e "parametro $slug da passado" for identico ao ultimo "segmento (parametro) da URL"
  * @param $slug | slug da categoria atual ( que corresponde ao ultimo "parametro da URL" )
- * @link https://opuscore.dev/functions/is_category
+ * @see https://opuscore.dev/functions/is_category
  */
 function is_category(): bool {
     return Router::case() === 'category';
 }
 
 /**
- * @link https://opuscore.dev/functions/is_categories
+ * @see https://opuscore.dev/functions/is_categories
  */
 function is_categories(): bool {
     return Router::case() === 'categories';
@@ -166,7 +166,7 @@ function is_categories(): bool {
 
 
 /**
- * @link https://opuscore.dev/functions/is_listing
+ * @see https://opuscore.dev/functions/is_listing
 */
 function is_listing(): bool {
     return Router::is_articles_list();
@@ -174,7 +174,7 @@ function is_listing(): bool {
 
 
 /**
- * @link https://opuscore.dev/functions/is_404 
+ * @see https://opuscore.dev/functions/is_404 
  **/
 function is_404(): bool {
     return Router::case() === '404';
@@ -184,9 +184,12 @@ function is_404(): bool {
 
 
  # -------------------------------------------------------------------------- 
- #  ASSINCRONOS :
+ #  ASYNC
  # --------------------------------------------------------------------------
 
+/**
+ * @see https://opuscore.dev/functions/is_feed_async 
+ */
 function is_feed_async(): bool {
     return URL::GET('route') === '/feed-async/' && URL::has('req') && URL::has('src');
 }

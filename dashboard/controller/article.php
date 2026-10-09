@@ -8,9 +8,9 @@ $bind = new Assign;
 $bind->ID    = URL::int('id') ?: INPUT::int('target_id');
 $bind->title = INPUT::GET('title');
 
-$articleslug = INPUT::GET('slug') ?: $bind->title;
+$slug       = INPUT::GET('slug') ?: $bind->title;
 # converte a entrada para slug independente de onde ela tenha vindo
-$bind->slug = Ensure::slug($articleslug);
+$bind->slug = Ensure::slug($slug);
 
 $bind->type  = INPUT::GET('target_type');
 

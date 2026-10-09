@@ -33,7 +33,7 @@ if( is_article() && has_resource('comment_area') ) {
 else {
 
     function comment_area(): void {
-        if( DISPLAY_ERRORS ) {
+        if( ERROR_REPORTING ) {
             trigger_error(
                 'comment_area() foi chamada, mas o recurso "comment_area" não foi registrado.',
                 E_USER_WARNING
@@ -42,5 +42,5 @@ else {
         }
     }
 }
-# Um 3º caso: Se 'comment_area' foi registrado e nao chamou funcao o sistema vai carregar comment.php e todo o relacionado a area de comentarios sem necessidade
-# Nao da erro, mas e um pequeno disperdicio de recurso
+# Um 3º caso: Se 'comment_area' foi registrado e nao chamou funcao, o sistema vai carregar comment.php e todo o relacionado a area de comentarios sem necessidade
+# Nao da erro, mas e um pequeno disperdicio de recurso sem estar utilizando

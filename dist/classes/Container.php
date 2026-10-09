@@ -239,16 +239,4 @@ class Container {
         return $scopes;
     }
 
-    public static function commentscope(): array {
-        $container = self::instance();
-
-        return [
-            'auth'     => $container->make('Auth'),
-            'comment'  => $container->make('Comment'),
-            'image'    => $container->make('Image'),
-            'article'     => $container->make('Article'),
-            'user'     => $container->make('User'),
-        ];
-    }
-
 }

@@ -176,8 +176,8 @@ class JavaScript {
         return $js;
     }
 
-    public function article_update(): string {
-        return $this->sys->append_script( 'routes/article-update', null );
+    public function articles( string $basename ): string {
+        return $this->sys->append_script( "routes/articles/{$basename}", null );
     }
 
     public function settings( array $settings ): string {
@@ -198,12 +198,9 @@ class JavaScript {
     #
     # para arquivos com codigos que dependem de `dist.js`
     #
-    public function admin_register(): string {
-        return $this->sys->append_script("routes/admins/register", 0);
-    }
-    #
-    public function admin_update(): string {
-        return $this->sys->append_script("routes/admins/update", 0);
+
+    public function admins( string $basename ): string {
+        return $this->sys->append_script( "routes/admins/{$basename}", 0 );
     }
 
     /**
@@ -245,16 +242,21 @@ class Emitter {
             $output .= $this->js->home( statistics() );
         }
 
-        else if( is_update() ) { 
-            # rotas de atualizacoes para documentos especificos [page, article, context] 
-            if( IS_DOCUMENTS_CONTENTS ) {
-                # Carrega o editor
+        else if( $this->slug[0] === 'contexts' || $this->slug[0] === 'pages' ) {
+
+            if( $this->slug[1] === 'update' ) {
                 $output .= $this->js->editors();
             }
-            
-            # Eh especificamente uma rota de artigo unico: articles/update/?id
-            if( $this->slug[0] === 'articles' ) {
-                $output .= $this->js->article_update();
+        }
+        
+        else if( $this->slug[0] === 'articles' ) {
+
+            if( $this->slug[1] === '' || $this->slug[1] === 'by-category' ) {
+                $output .= $this->js->articles('select');
+            }
+            else if( $this->slug[1] === 'update' ) {
+                $output .= $this->js->editors();
+                $output .= $this->js->articles('update');
             }
         }
 
@@ -275,13 +277,15 @@ class Emitter {
         # toda rota recebe o arquivo dist.js
         $output .= $this->js->dist();
 
-        # mais verificacoes condicionais de rota, so que agora apos, pois dependem de `dist.js`
+        # mais verificacoes condicionais de rota, so que agora apos, pois:
+        # dependem de `dist.js`
         if( $this->slug[0] === 'admins' ) {
+
             if( $this->slug[1] === 'register' ) {
-               $output .= $this->js->admin_register();
+               $output .= $this->js->admins('register');
             }
-            else if( $this->slug[1] === 'update' && URL::has('id') ) {
-               $output .= $this->js->admin_update();
+            else if( $this->slug[1] === 'update' ) {
+               $output .= $this->js->admins('update');
             }
         }
 
@@ -296,17 +300,26 @@ class Emitter {
         }
 
         return $this->js->settings( [
-            # 'basename'   => URL::param(1) === '', # titulo site & formatos de data
-            # 'basename'   => URL::param(1) === 'email',
-            'image-sizes'  => URL::param(1) === 'media',
-            # 'basename'   => URL::param(1) === 'options',
-            # 'basename'   => URL::param(1) === 'reading',
-            # 'basename'   => URL::param(1) === 'seo',
-            # 'basename'   => URL::param(1) === 'socialnet',
-            # 'basename'   => URL::param(1) === 'urls',
+            # 'basename'   => $this->slug[1] === '', # titulo site & formatos de data
+            # 'basename'   => $this->slug[1] === 'email',
+            'image-sizes'  => $this->slug[1] === 'media',
+            # 'basename'   => $this->slug[1] === 'options',
+            # 'basename'   => $this->slug[1] === 'reading',
+            # 'basename'   => $this->slug[1] === 'seo',
+            # 'basename'   => $this->slug[1] === 'socialnet',
+            # 'basename'   => $this->slug[1] === 'urls',
         ] );
     }
 
+    private function needs_editor(): bool {
+        if( ! in_array($this->slug[0], ['contexts', 'pages', 'articles']) ) {
+            return false;
+        }
+
+        return $this->slug[1] === 'update';
+    }
+
+        
 }
 
 

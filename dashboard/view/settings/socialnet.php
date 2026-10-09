@@ -5,7 +5,7 @@ if( INPUT::formSubmitted() ) {
 
 $value = fn($key) => $_POST[$key] ?? socialnet($key);
 ?>
-<form class="flexbox w70 px20" method="POST" action="<?= URL::current() ?>">
+<form class="flexbox w70 px20" method="POST" action="<?= URL::current() ?>" data-dirty>
 	<hr class="cn_100" />
 
 	<span class="cn_30 mt10"><label for="whatssapp">WhatsApp</label></span>

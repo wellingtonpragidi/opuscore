@@ -1,4 +1,4 @@
-<form class="flexbox w70 px20" method="POST" action="<?= URL::current() ?>">
+<form class="flexbox w70 px20" method="POST" action="<?= URL::current() ?>" data-dirty>
 
 <?php 
 	if( INPUT::formSubmitted() ) {

@@ -14,7 +14,7 @@ else {
 
 <p><small>O Ícone do site (favicon) é a imagem que se vê nas abas dos navegadores, nas barras de favoritos, nas pesquisas dos mecanismos de busca e nos aplicativos. <br>A imagem deve ser quadrado e ter pelo menos 512x512 píxeis, com a extensão <u>.png</u>.<br>O sistema gerará 8 tamanhos de ícones .png o .ico e o arquivo manifest para PWA.</small></p>
 
-<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= URL::current() ?>" enctype="multipart/form-data" data-dirty>
     <div id="favicon_reader" class="upload readers">
         <input id="icon" class="files_reader media_reader" type="file" name="favicon" accept=".png" />
         <label for="icon" class="btn lg"><?= $filelabel ?></label>

@@ -1,7 +1,7 @@
 <?php
 declare( strict_types = 1 );
 /**
- * Fornece metodos de higienizacao para areas publicas (Output) "/web/ e /templates/"
+ * Fornece metodos de higienizacao (Output)
  * 
  * @system     Opus Core — Sistema Gerenciador Web
  * @author     Wellington Pragidi

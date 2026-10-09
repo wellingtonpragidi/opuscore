@@ -104,7 +104,12 @@
 							</a>
 						</td>
 						<td>
-							<xsl:value-of select="concat(substring(sitemap:lastmod,0,11),concat(' ', substring(sitemap:lastmod,12,5)))"/>
+							<xsl:value-of 
+                                select="concat(
+                                    substring(sitemap:lastmod, 0, 11), 
+                                    concat( ' ', substring(sitemap:lastmod, 12, 5) )
+                                )" 
+                            />
 						</td>
 					</tr>
 				</xsl:for-each>
