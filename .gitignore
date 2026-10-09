@@ -10,16 +10,19 @@ manifest.json
 robots.txt
 sitemap.xml
 
+
 /storage/*
 !/storage/contexts/
-!/storage/contexts/context-increment.txt
+/storage/contexts/*
 !/storage/menus.php
 !/storage/settings.php
+!/storage/contexts/context-increment.txt
 
 
 templates/*
 !templates/.gitkeep
 !templates/oldbegin/
+
 
 /uploads/*
 !/uploads/.gitkeep
