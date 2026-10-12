@@ -42,6 +42,7 @@ $router_titles = [
 	'pages/insert' => 'Adicionar página',
 	'pages/update' => 'Atualizar página',
 
+    'articles'            => 'Artigos',
 	'articles/insert'     => 'Adicionar artigo',
 	'articles/update'     => 'Atualizar artigo',
 	'articles/categories' => 'Categorias',

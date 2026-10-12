@@ -146,7 +146,7 @@ class Provider {
         $link = '';
         if( isset($args['link']) ) {
             $link = '<p>
-                <a href=\"' . $args['link'] . '\" target="_blank" rel="noopener">'
+                <a href="' . $args['link'] . '" target="_blank" rel="noopener">'
                     . $args['link'] . 
                 '</a>
             </p>';

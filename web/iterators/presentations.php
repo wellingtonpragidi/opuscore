@@ -131,6 +131,7 @@ function category_title( array $args = [] ): void {
 
 /**
  * @see https://opuscore.dev/functions/category_description
+ * @changed v1.3
  */
 function category_description( array $args = [] ): void {
     $dscpt = Container::instance()->make('Category')->content();
@@ -143,12 +144,21 @@ function category_description( array $args = [] ): void {
 
     $attributes = $args['attrs'] ?? ['id' => 'category-description'];
 
+    $image_featured = ($args['image'] ?? null) ?: ['display' => true, 'scope' => 'plain'];
+
+    $image = '';
+    if( $image_featured['display'] ) {
+        $image = Image::get_featured([ 'scope' => 'plain' ]);
+    }
+
     $attrs = '';
     foreach( $attributes as $key => $value ) {
         $attrs .= " {$key}=\"{$value}\"";
     }
 
-    echo '<' . $tag . $attrs . '>' . $dscpt . '</' . $tag . '>';
+    $description = $image . $dscpt;
+
+    echo '<' . $tag . $attrs . '>' . $description . '</' . $tag . '>';
 }
 
 

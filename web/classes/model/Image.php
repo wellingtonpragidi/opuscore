@@ -392,4 +392,42 @@ class Image {
         return $cmd->rowCount() > 0;
     }
 
+
+        /**
+     * $scope : 'avatar' || 'profile'
+     */
+    public static function user( ?int $auth_id, string $scope, string $render = 'html' ): string { 
+        $cmd = self::$db->prepare("
+            SELECT attachment FROM medias 
+            WHERE related_type = ? AND related_id = ? 
+            LIMIT 1
+        ");
+
+        $cmd->execute([ 'user', $auth_id ]);
+
+        $attachment = Ensure::object( $cmd->fetchColumn() );
+
+        $path = $attachment->{$scope}->path ?? null;
+
+        $size      = user_pic_sz($scope);
+        $dimension = 'width="' . $size . '" height="' . $size . '"';
+
+        if( $attachment === '{}' || $path === null ) {
+            return "<img 
+                src=\"" . dist_thumbnail('user.svg') . "\" 
+                alt=\"" . self::$alt . "\" 
+                {$dimension} 
+                class=\"noimage\"
+            />";
+        }
+
+        $url = upload_url( $path . '?v=' . ($attachment->version ?? 0) );
+
+        if( $render === 'url' ) {
+            return $url;
+        }
+
+        return "<img src=\"{$url}\" alt=\"" . self::$alt . "\" {$dimension} />";
+    }
+
 }

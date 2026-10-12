@@ -63,7 +63,7 @@ class Hook {
      * Chama todas as funcoes registradas para um gancho de acao.
      * Pode ser chamado multiplas vezes por requisicao.
      */
-    public static function call_action( string $name, mixed ...$args ): void {
+    public static function call_action( string $name, array $args = [] ): void {
         if( isset(self::$actions[$name]) ) {
 
             foreach( self::$actions[$name] as $call ) {
@@ -94,7 +94,7 @@ class Hook {
      * O valor e passado sequencialmente por cada funcao de filtro,
      * e o resultado de um filtro e a entrada para o proximo.
      */
-    public static function call_filter( string $name, mixed $value, ...$args ): mixed {
+    public static function call_filter( string $name, mixed $value, array $args = [] ): mixed {
         if( isset(self::$filters[$name]) ) {
 
             foreach( self::$filters[$name] as $call ) {
@@ -180,7 +180,7 @@ class Hook {
      * Chama as funcoes registradas para um gancho de acao apenas uma vez por requisicao.
      * Apos a execucao bloqueia novas chamadas para este gancho e novos registros de acoes.
      */
-    public static function call_action_once( string $name, ...$args ): void {
+    public static function call_action_once( string $name, array $args = [] ): void {
         if( isset(self::$executed_tags[$name]) ) {
             throw new OpusException("O gancho '{$name}' já foi executado e não pode ser chamado novamente.");
         }

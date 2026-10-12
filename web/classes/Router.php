@@ -255,7 +255,7 @@ class Router {
     public function title( ?string $rule = null ): string {
         if( $this->title_hook !== '' && Hook::has_filter($this->title_hook) ) {
 
-            $title = Hook::call_filter( $this->title_hook, $this->title, $rule );
+            $title = Hook::call_filter( $this->title_hook, $this->title, [$rule] );
         }
 
         else {

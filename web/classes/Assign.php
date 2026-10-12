@@ -172,7 +172,7 @@ class Assign {
     private string $email;
 
     # Senha (password)
-    private string $pswd;
+    private ?string $pswd;
 
     # Token de seguranca para validacoes
     private ?string $token;

@@ -27,7 +27,7 @@ function cat_summary( object $show, int $length = 240, string $hellip = '&hellip
 }
 
 function cat_class( object $show, string $moreClass = '' ): string {
-    $value = ($moreClass !== '')
+    $value = ($moreClass === '')
         ? $show->html->class 
         : $moreClass . ' ' . $show->html->class;
 

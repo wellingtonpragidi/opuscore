@@ -112,7 +112,7 @@ class Upgrade {
         }
 
         # 1. Baixar o pacote ZIP
-        if( ! self::download_zip($zip_file_name) ) {
+        if( self::download_zip($zip_file_name) !== true ) {
             return 'Falha no download do arquivo ZIP.';
         }
 
@@ -158,7 +158,7 @@ class Upgrade {
                 continue;
             }
             if( ! is_dir($entry) ) {
-                if( $zip->extractTo(DIR, $entry) ) {
+                if( $zip->extractTo(rtrim(DIR, '/'), $entry) ) {
                     $log['atualizados'][] = $entry;
                 } 
                 else {
