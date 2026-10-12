@@ -53,7 +53,6 @@ Sem extremismos: cada abordagem existe por utilidade prática.
 
 
 ## Requisitos
-<<<<<<< HEAD
 - PHP 8.1+
 - MySQL 8.0+ ou MariaDB 10.5+
 - Apache || Nginx
