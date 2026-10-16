@@ -18,7 +18,7 @@
         <article>
             <a href="<?= cat_url($cat) ?>">
 
-                <?= cat_image($cat, 3) ?>
+                <?= cat_image($cat) ?>
 
                 <h2><?= $cat->name ?></h2>
 
